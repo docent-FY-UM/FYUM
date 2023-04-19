@@ -1,5 +1,5 @@
 - 제목 : 브랜치 명과 동일하게 생성하기
-  ex) FE-feat/4_login
+  ex) merge: FE-feat/4_login
   (확인 후 지워주세요)
 
 ## 🔎 작업 내용
