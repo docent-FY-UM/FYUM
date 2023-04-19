@@ -5,7 +5,7 @@ import { ReactComponent as LogoIc } from "../../../assets/icon/logoIc.svg";
 import { ReactComponent as MenuIc } from "../../../assets/icon/menuIc.svg";
 
 export const HeaderContainer = styled.div<{ headercolor: string }>`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: ${(props) => props.headercolor};
 

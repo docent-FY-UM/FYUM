@@ -3,7 +3,7 @@ import { black, white } from "../../styles/colors";
 
 export const BackgroundStyle = styled.div`
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: ${black};
 `;
 

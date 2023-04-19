@@ -1,4 +1,10 @@
-import { BackgroundStyle, FontStyle } from "./styles";
+import {
+  BackgroundStyle,
+  FontStyle,
+  InvisibleHeader,
+  CloseIcStyle,
+  MenuContainer,
+} from "./styles";
 
 interface MenuProps {
   isMenuOpen: boolean;
@@ -6,11 +12,21 @@ interface MenuProps {
 }
 
 const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       {isMenuOpen === true && (
         <BackgroundStyle>
-          <FontStyle>나는메뉴!!!</FontStyle>
+          <InvisibleHeader>
+            <CloseIcStyle onClick={closeMenu} />
+          </InvisibleHeader>
+
+          <MenuContainer>
+            <FontStyle>나는메뉴!!!</FontStyle>
+          </MenuContainer>
         </BackgroundStyle>
       )}
     </>
