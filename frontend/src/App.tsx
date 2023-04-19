@@ -16,9 +16,12 @@ import {
   IntroPage,
 } from "../src/pages/index";
 
+import Header from "./components/common/Header";
+
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/main" element={<MainPage />} />
