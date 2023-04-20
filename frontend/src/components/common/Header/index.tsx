@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Menu from "../Menu";
 
-import { HeaderContainer, LogoIcStyle, MenuIcStyle } from "./styles";
+import {
+  HeaderContainer,
+  InvisibleBox,
+  LogoIcStyle,
+  MenuIcStyle,
+} from "./styles";
 
 const Header = () => {
+  const navigate = useNavigate();
   let currentUrl = window.location.pathname;
 
   const [headerColor, setHeaderColor] = useState("transparent");
@@ -16,18 +23,25 @@ const Header = () => {
       setHeaderColor("black");
     } else if (currentUrl.includes("/artlist")) {
       setIconColor("black");
+    } else {
+      setHeaderColor("white");
+      setIconColor("white");
     }
-  }, []);
+  }, [currentUrl]);
 
   const openMenu = () => {
     setIsMenuOpen(true);
-    console.log("메뉴 열림?", isMenuOpen);
+  };
+
+  const HandleLogoClick = () => {
+    navigate("/main");
   };
 
   return (
     <>
       <HeaderContainer headercolor={headerColor}>
-        <LogoIcStyle iconcolor={iconColor} />
+        {currentUrl === "/main" && <InvisibleBox />}
+        <LogoIcStyle iconcolor={iconColor} onClick={HandleLogoClick} />
         <MenuIcStyle iconcolor={iconColor} onClick={openMenu} />
       </HeaderContainer>
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
