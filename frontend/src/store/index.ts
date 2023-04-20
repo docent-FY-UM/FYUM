@@ -1,6 +1,7 @@
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import authReducer from "./authSlice";
+import modalReducer from "./modalSlice";
 
 // 스토어 통합관련(리듀서들, 사가들)
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -10,7 +11,10 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 // 관리하는 슬라이스들
 
 // rootReducers by using combineReducers
-const rootReducers = combineReducers({ auth: authReducer });
+const rootReducers = combineReducers({
+  auth: authReducer,
+  modal: modalReducer,
+});
 
 // rootSaga
 function* rootSaga() {
@@ -33,6 +37,8 @@ sagaMiddleware.run(rootSaga);
 
 // 외부에서 쓰려고
 export default store;
+
+export type RootState = ReturnType<typeof rootReducers>;
 
 // react-redux 라이브러리를 깔면
 // 귀찮게 subscribe 함수 쓸 필요없음

@@ -17,11 +17,13 @@ import {
 } from "../src/pages/index";
 
 import Header from "./components/common/Header";
+import Modal from "./components/common/Modal";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Modal />
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/main" element={<MainPage />} />
