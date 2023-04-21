@@ -24,7 +24,7 @@ const Header = () => {
     } else if (currentUrl.includes("/artlist")) {
       setIconColor("black");
     } else {
-      setHeaderColor("white");
+      setHeaderColor("transparent");
       setIconColor("white");
     }
   }, [currentUrl]);
@@ -40,11 +40,12 @@ const Header = () => {
   return (
     <>
       <HeaderContainer headercolor={headerColor}>
-        {currentUrl === "/main" && <InvisibleBox />}
         <LogoIcStyle iconcolor={iconColor} onClick={HandleLogoClick} />
         <MenuIcStyle iconcolor={iconColor} onClick={openMenu} />
       </HeaderContainer>
+
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      {currentUrl === "/main" && <InvisibleBox />}
     </>
   );
 };

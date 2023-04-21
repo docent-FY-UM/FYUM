@@ -1,18 +1,12 @@
 import { BackgroundStyle, FontStyle } from "../styles";
+import { CarouselContainer } from "./styles";
 
 const FirstMain = () => {
   return (
     <BackgroundStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
-      <FontStyle>첫번째 메인페이지</FontStyle>
+      <CarouselContainer>
+        <FontStyle>첫번째 메인페이지</FontStyle>
+      </CarouselContainer>
     </BackgroundStyle>
   );
 };

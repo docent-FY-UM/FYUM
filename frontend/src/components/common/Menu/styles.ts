@@ -92,10 +92,26 @@ export const MenuListContainer = styled.div`
   justify-content: space-evenly;
   margin-right: 80px;
   max-height: 100%;
+  opacity: 0;
+
+  animation: menuListFadeIn 0.8s ease-out forwards;
+  animation-delay: 0.25s;
+
+  @keyframes menuListFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 
   @media (max-width: 768px) {
     justify-content: center;
     margin-right: none;
+    animation-delay: 0s;
   }
 `;
 

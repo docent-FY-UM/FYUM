@@ -17,9 +17,9 @@ export const HeaderContainer = styled.div<{ headercolor: string }>`
 `;
 
 export const InvisibleBox = styled.div`
-  height: 60px;
+  height: 80px;
+  width: 100%;
   visibility: hidden;
-  position: absolute;
 `;
 
 export const LogoIcStyle = styled(LogoIc)<{ iconcolor: string }>`
