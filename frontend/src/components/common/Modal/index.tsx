@@ -34,7 +34,7 @@ const Modal = () => {
             <ModalContents>{content}</ModalContents>
             <ModalFooter>
               <ModalBtn onClick={closeModal}>취소</ModalBtn>
-              <ModalYesBtn onClick={callback}>삭제</ModalYesBtn>
+              <ModalYesBtn onClick={callback}>확인</ModalYesBtn>
             </ModalFooter>
           </ModalContainer>
         </ModalDimmer>
