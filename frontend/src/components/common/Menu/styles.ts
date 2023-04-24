@@ -35,6 +35,7 @@ export const MenuGridItems = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  gap: 10%;
 
   @media (max-width: 768px) {
     grid-column: 2 / span 4;
@@ -42,7 +43,8 @@ export const MenuGridItems = styled.div`
 `;
 
 export const SelectedImgStyle = styled.img<{ angle: string }>`
-  max-width: 100%;
+  width: 35%;
+  min-width: 35%;
   max-height: 100%;
   z-index: 1;
   border: 2px solid;
@@ -67,7 +69,9 @@ export const SelectedImgStyle = styled.img<{ angle: string }>`
 `;
 
 export const PreviousImgStyle = styled.img<{ angle: string }>`
-  max-width: 100%;
+  width: 35%;
+  min-width: 35%;
+  min-height: 100%;
   max-height: 100%;
   border: 2px solid;
 
@@ -90,7 +94,7 @@ export const MenuListContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin-right: 80px;
+  margin-right: 10%;
   max-height: 100%;
   opacity: 0;
 
@@ -109,7 +113,7 @@ export const MenuListContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    justify-content: center;
+    justify-content: start;
     margin-right: none;
     animation-delay: 0s;
   }
@@ -118,6 +122,7 @@ export const MenuListContainer = styled.div`
 export const MenuListFontStyle = styled.div`
   p {
     font-weight: 700;
+    /* font-size: 2.7vw; */
     font-size: 40px;
     color: ${white};
 

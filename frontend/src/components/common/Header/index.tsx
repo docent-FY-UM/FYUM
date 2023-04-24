@@ -27,6 +27,7 @@ const Header = () => {
       setHeaderColor("transparent");
       setIconColor("white");
     }
+
   }, [currentUrl]);
 
   const openMenu = () => {
@@ -41,11 +42,13 @@ const Header = () => {
     <>
       <HeaderContainer headercolor={headerColor}>
         <LogoIcStyle iconcolor={iconColor} onClick={HandleLogoClick} />
-        <MenuIcStyle iconcolor={iconColor} onClick={openMenu} />
+        {currentUrl !== "/" && currentUrl !== "/login" && (
+          <MenuIcStyle iconcolor={iconColor} onClick={openMenu} />
+        )}
       </HeaderContainer>
 
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      {currentUrl === "/main" && <InvisibleBox />}
+      {/* {currentUrl === "/main" && <InvisibleBox />} */}
     </>
   );
 };

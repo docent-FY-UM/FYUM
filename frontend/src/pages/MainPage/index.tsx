@@ -9,7 +9,6 @@ import {
 const MainPage = () => {
   return (
     <div>
-      <FirstMain />
       <SecondMain />
       <ThirdMain />
       <FourthMain />
