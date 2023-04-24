@@ -1,4 +1,5 @@
+import Intro from "../../components/Intro";
 const IntroPage = () => {
-  return <div></div>;
+  return <Intro></Intro>;
 };
 export default IntroPage;
