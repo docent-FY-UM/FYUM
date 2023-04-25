@@ -2,6 +2,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import authReducer from "./authSlice";
 import modalReducer from "./modalSlice";
+import userReducer from "./userSlice";
 
 // 스토어 통합관련(리듀서들, 사가들)
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -14,6 +15,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 const rootReducers = combineReducers({
   auth: authReducer,
   modal: modalReducer,
+  user: userReducer,
 });
 
 // rootSaga

@@ -14,7 +14,8 @@ import {
   SurveyPage,
   WishListPage,
   IntroPage,
-  TestPage,
+  KakaoHandle,
+  TestPage
 } from "../src/pages/index";
 
 import Header from "./components/common/Header";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<IntroPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/oauth" element={<KakaoHandle />} />
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/recommend" element={<RecommendationPage />} />
         <Route path="/exhibition" element={<ExhibitionPage />} />

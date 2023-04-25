@@ -12,6 +12,7 @@ import RecommendationPage from "./RecommendationPage";
 import SurveyPage from "./SurveyPage";
 import WishListPage from "./WishListPage";
 import IntroPage from "./IntroPage";
+import KakaoHandle from "../components/auth/KakaoHandle";
 import TestPage from "./TestPage";
 
 export {
@@ -29,5 +30,6 @@ export {
   SurveyPage,
   WishListPage,
   IntroPage,
-  TestPage,
+  KakaoHandle,
+  TestPage
 };
