@@ -16,6 +16,7 @@ import lombok.Getter;
 @Getter
 @Entity
 public class Painter extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")
@@ -27,6 +28,6 @@ public class Painter extends BaseEntity {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "painter", fetch = FetchType.LAZY)
-    private List<Masterpiece> masterpiece= new ArrayList<>();
+    private List<Masterpiece> masterpiece = new ArrayList<>();
 
 }

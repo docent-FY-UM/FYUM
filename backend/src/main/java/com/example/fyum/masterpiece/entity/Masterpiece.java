@@ -5,16 +5,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
 
 @Getter
-@DiscriminatorValue("Masterpiece")
+@DiscriminatorValue("MP")
 @Entity
 public class Masterpiece extends Painting {
+
     private String titleKr;
     private String titleOrigin;
     private String paintedAt;

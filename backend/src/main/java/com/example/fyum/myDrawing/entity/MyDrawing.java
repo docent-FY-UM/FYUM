@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Entity
-@DiscriminatorValue("MyDrawings")
+@DiscriminatorValue("MD")
 public class MyDrawing extends Painting {
     private String title;
     private String curation;

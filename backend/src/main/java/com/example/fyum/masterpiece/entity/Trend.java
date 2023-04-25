@@ -16,11 +16,13 @@ import lombok.Getter;
 @Getter
 @Entity
 public class Trend extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")
     private int id;
-    private String trend;
+    private String trendKr;
+    private String trendOrigin;
     private String description;
     private String imgSrc;
 

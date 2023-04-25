@@ -16,11 +16,13 @@ import lombok.Getter;
 @Getter
 @Entity
 public class Theme extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")
     private int id;
-    private String theme;
+    private String themeKr;
+    private String themeOrigin;
     private String imgSrc;
 
     @JsonManagedReference
