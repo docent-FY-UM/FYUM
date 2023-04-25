@@ -15,7 +15,8 @@ import {
   WishListPage,
   IntroPage,
   KakaoHandle,
-  TestPage
+  TestPage,
+  Unity,
 } from "../src/pages/index";
 
 import Header from "./components/common/Header";
@@ -45,6 +46,7 @@ function App() {
 
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage></TestPage>} />
+        <Route path="/unity" element={<Unity></Unity>} />
       </Routes>
     </BrowserRouter>
   );
