@@ -83,9 +83,9 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
                   </p>
                   <p
                     onMouseEnter={() => handleHoverEvent(menuImg3)}
-                    onClick={() => handleClickEvent("masterpiece")}
+                    onClick={() => handleClickEvent("collection")}
                   >
-                    Masterpiece.
+                    Collection.
                   </p>
                   <p
                     onMouseEnter={() => handleHoverEvent(menuImg4)}

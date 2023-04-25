@@ -48,9 +48,9 @@ export const LogoIcStyle = styled(LogoIc)<{ iconcolor: string }>`
 `;
 
 export const MenuIcStyle = styled(MenuIc)<{ iconcolor: string }>`
-  width: 40px;
+  width: 30px;
   height: 40px;
-  margin-right: 30px;
+  margin-right: 40px;
   margin-top: 15px;
   stroke: ${(props) => props.iconcolor};
 

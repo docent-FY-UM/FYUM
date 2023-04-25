@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { pink, white } from "../../../styles/colors";
 
 export const Main2Img1Style = styled.img`
-  width: 43%;
+  width: 52%;
   min-width: 300px;
-  height: 75%;
+  height: 60%;
   top: 13%;
 
   position: absolute;
@@ -13,18 +13,18 @@ export const Main2Img1Style = styled.img`
   @media (max-width: 768px) {
     position: static;
     width: 100%;
-    height: 75%;
+    height: 70%;
     padding-top: 0px;
   }
 `;
 
 export const Main2Img2Style = styled.img`
-  width: 62%;
+  width: 50%;
   min-width: 400px;
-  height: 50%;
+  height: 65%;
 
   position: absolute;
-  bottom: 25%;
+  bottom: 8%;
   right: 0;
 
   @media (max-width: 768px) {
@@ -38,14 +38,14 @@ export const FontStyle = styled.div`
   &.exp {
     font-weight: 300;
     font-size: 24px;
-    line-height: 30px;
+    line-height: 25px;
     writing-mode: vertical-rl;
     position: absolute;
     right: 5%;
     top: 13%;
 
     @media (max-width: 768px) {
-      top: 12.5%;
+      top: 15%;
       right: 15%;
     }
   }
@@ -54,9 +54,8 @@ export const FontStyle = styled.div`
     font-weight: 700;
     font-size: 6.7vw;
     position: absolute;
-    bottom: 8.5%;
+    bottom: 5.5%;
     z-index: 3;
-    right: 0;
 
     @media (max-width: 768px) {
       position: static;

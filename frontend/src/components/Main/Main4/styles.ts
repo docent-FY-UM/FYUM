@@ -4,27 +4,28 @@ import { pink, white } from "../../../styles/colors";
 export const Main2Img1Style = styled.img`
   width: 43%;
   min-width: 300px;
-  height: 75%;
+  height: 78%;
   top: 13%;
 
   position: absolute;
-  z-index: 2;
 
   @media (max-width: 768px) {
     position: static;
     width: 100%;
-    height: 75%;
+    height: 78%;
     padding-top: 0px;
   }
 `;
 
 export const Main2Img2Style = styled.img`
-  width: 62%;
+  width: 58%;
   min-width: 400px;
-  height: 50%;
+  height: 53%;
+
+  z-index: 2;
 
   position: absolute;
-  bottom: 25%;
+  bottom: 23%;
   right: 0;
 
   @media (max-width: 768px) {
@@ -45,16 +46,16 @@ export const FontStyle = styled.div`
     top: 13%;
 
     @media (max-width: 768px) {
-      top: 12.5%;
+      top: 11%;
       right: 15%;
     }
   }
 
   &.title {
     font-weight: 700;
-    font-size: 6.7vw;
+    font-size: 6.4vw;
     position: absolute;
-    bottom: 8.5%;
+    bottom: 6%;
     z-index: 3;
     right: 0;
 
@@ -70,7 +71,7 @@ export const FontStyle = styled.div`
     line-height: 47px;
     position: absolute;
     right: 0px;
-    top: 16%;
+    top: 15%;
     display: flex;
     align-items: center;
     justify-content: end;
