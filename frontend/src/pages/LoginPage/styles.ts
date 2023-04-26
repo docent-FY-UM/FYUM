@@ -18,7 +18,7 @@ export const BackgroundImgStyle = styled.img.attrs({
   object-fit: fill;
   filter: brightness(40%);
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     object-fit: cover;
   }
 `;
@@ -31,7 +31,7 @@ export const LoginContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     width: 60vw;
     top: 55%;
   }
@@ -43,7 +43,7 @@ export const LoginTitleFontStyle = styled.p`
   margin: 0;
   padding: 0;
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     font-size: 15vw;
   }
 `;
@@ -53,7 +53,7 @@ export const HrStyle = styled.hr`
   border: 0.2vh ${white} solid;
   margin-bottom: 5vh;
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     border: 0.1vh ${white} solid;
     width: 80%;
     margin-bottom: 30vh;
@@ -71,7 +71,7 @@ export const KakaoBtn = styled.img.attrs({
     height: 100%;
   }
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     width: 60vw;
     margin-top: 60%;
   }

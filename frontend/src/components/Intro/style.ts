@@ -12,7 +12,7 @@ export const IntroDiv = styled.img.attrs({
   position: absolute;
   z-index: -1;
   filter: brightness(40%);
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     object-fit: cover;
   }
 `;
@@ -25,7 +25,7 @@ export const TextDiv = styled.div`
   position: fixed;
   bottom: 0px;
 
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     top: 27%;
     text-align: center;
     left: -4%;
@@ -36,7 +36,7 @@ export const LogoText = styled.div`
   font-weight: 700;
   font-size: 8vw;
   margin-bottom: -3%;
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     margin-bottom: 0%;
 
     text-align: center;
@@ -50,7 +50,7 @@ export const IntroText = styled.div`
   color: ${white};
   font-weight: 700;
   font-size: 3.4vw;
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     text-align: center;
     margin: -5%;
     font-size: 2vw;
@@ -58,7 +58,7 @@ export const IntroText = styled.div`
 `;
 export const MobileText = styled.div`
   display: none;
-  @media (max-width: 412px) {
+  @media (max-width: 768px) {
     display: inline-block;
     color: ${white};
     position: absolute;

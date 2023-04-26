@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, black, mainColor, grey } from "../../../styles/colors";
+import { white, mainColor } from "../../../styles/colors";
 
 interface BtnStyleProps {
   language?: string | undefined;
@@ -19,7 +19,7 @@ export const BtnStyle = styled.button<BtnStyleProps>`
     border: 5px solid ${white};
     height: 110px;
 
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 2.45 + "px" : "auto")};
       border: 3px solid ${white};
       height: 45px;
@@ -31,7 +31,7 @@ export const BtnStyle = styled.button<BtnStyleProps>`
     border-radius: 17px;
     height: 90px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 2.1 + "px" : "auto")};
       height: 43px;
       border: 2.38px solid ${white};
@@ -43,7 +43,7 @@ export const BtnStyle = styled.button<BtnStyleProps>`
     border-radius: 10px;
     height: 40px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 1.5 + "px" : "auto")};
       height: 30px;
     }
@@ -54,7 +54,7 @@ export const BtnStyle = styled.button<BtnStyleProps>`
     border-radius: 10px;
     height: 55px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 1.6 + "px" : "auto")};
       height: 40px;
     }
@@ -69,27 +69,27 @@ export const BtnText = styled.span<BtnStyleProps>`
   &.Btn_square {
     font-size: 30px;
 
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       font-size: 13px;
     }
   }
   &.Btn_transparent {
     font-size: 36px;
 
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       font-size: 16px;
     }
   }
   &.Btn_attachment {
     font-size: 15px;
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       font-size: 9px;
     }
   }
   &.Btn_upload {
     font-size: 20px;
 
-    @media screen and (max-width: 746px) {
+    @media screen and (max-width: 768px) {
       font-size: 14px;
     }
   }

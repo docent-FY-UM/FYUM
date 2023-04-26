@@ -7,7 +7,7 @@ import GalleryPage from "./GalleryPage";
 import ListPage from "./ListPage";
 import LoginPage from "./LoginPage";
 import MainPage from "./MainPage";
-import MasterpiecePage from "./MasterpiecePage";
+import CollectionPage from "./CollectionPage";
 import RecommendationPage from "./RecommendationPage";
 import SurveyPage from "./SurveyPage";
 import WishListPage from "./WishListPage";
@@ -26,7 +26,7 @@ export {
   ListPage,
   LoginPage,
   MainPage,
-  MasterpiecePage,
+  CollectionPage,
   RecommendationPage,
   SurveyPage,
   WishListPage,
