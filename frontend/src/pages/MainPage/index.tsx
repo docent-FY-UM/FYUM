@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   FirstMain,
   SecondMain,
@@ -11,6 +11,10 @@ import { RefContainer } from "./styles";
 const MainPage = () => {
   const outerDivRef = useRef<HTMLDivElement>(null);
   const plusHeight = 5; // 오차범위
+  const [isAnimation, setIsAnimation] = useState(false);
+  const [secondAni, setSecondAni] = useState(false);
+  const [thirdAni, setThirdAni] = useState(false);
+  const [fourthAni, setFourthAni] = useState(false);
 
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
@@ -28,49 +32,43 @@ const MainPage = () => {
               top: pageHeight + plusHeight,
               behavior: "smooth",
             });
+            setSecondAni(true);
           } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
             // 현재 2페이지
             outerDivRef.current.scrollTo({
               top: pageHeight * 2 + plusHeight,
               behavior: "smooth",
             });
+            setThirdAni(true);
           } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 3) {
             // 현재 3페이지
             outerDivRef.current.scrollTo({
-              top: pageHeight * 3 + plusHeight,
+              top: pageHeight * 3 + plusHeight * 2,
               behavior: "smooth",
             });
-          } else {
-            // 현재 4페이지
-            outerDivRef.current.scrollTo({
-              top: pageHeight * 4 + plusHeight,
-              behavior: "smooth",
-            });
+            setFourthAni(true);
           }
         } else {
           // 스크롤 올릴 때
           if (scrollTop >= 0 && scrollTop < pageHeight) {
-            //현재 1페이지
-            outerDivRef.current.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
             //현재 2페이지
             outerDivRef.current.scrollTo({
               top: 0,
               behavior: "smooth",
             });
-          } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 3) {
+          } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
             //현재 3페이지
             outerDivRef.current.scrollTo({
-              top: 0,
+              top: pageHeight - plusHeight,
               behavior: "smooth",
             });
-          } else {
-            // 현재 4페이지
+          } else if (
+            scrollTop >= pageHeight &&
+            scrollTop < pageHeight * 3 + plusHeight * 2
+          ) {
+            //현재 4페이지
             outerDivRef.current.scrollTo({
-              top: 0,
+              top: pageHeight * 2 - plusHeight * 3,
               behavior: "smooth",
             });
           }
@@ -88,10 +86,10 @@ const MainPage = () => {
 
   return (
     <RefContainer ref={outerDivRef}>
-      <FirstMain />
-      <SecondMain />
-      <ThirdMain />
-      <FourthMain />
+      <FirstMain isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
+      <SecondMain isAnimation={secondAni} setIsAnimation={setSecondAni} />
+      <ThirdMain isAnimation={thirdAni} setIsAnimation={setThirdAni} />
+      <FourthMain isAnimation={fourthAni} setIsAnimation={setFourthAni} />
     </RefContainer>
   );
 };

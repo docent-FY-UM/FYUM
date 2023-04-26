@@ -102,10 +102,13 @@ export const ModalBtn = styled.div`
   font-size: 16px;
   line-height: 25px;
   margin-top: 20px;
-  :hover {
-    opacity: 50%;
-    transition: 0.5s;
-    cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 50%;
+      transition: 0.5s;
+      cursor: pointer;
+    }
   }
 `;
 

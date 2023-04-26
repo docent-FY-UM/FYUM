@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { pink, white } from "../../../styles/colors";
 
-export const Main2Img1Style = styled.img`
+export const Main3Img1Container = styled.div<{ isanimation: string }>`
   width: 52%;
   min-width: 300px;
   height: 60%;
@@ -9,6 +9,15 @@ export const Main2Img1Style = styled.img`
 
   position: absolute;
   z-index: 2;
+  overflow: hidden;
+
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      animation: scale-in-hor-right 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+    `}
 
   @media (max-width: 768px) {
     position: static;
@@ -18,7 +27,7 @@ export const Main2Img1Style = styled.img`
   }
 `;
 
-export const Main2Img2Style = styled.img`
+export const Main3Img2Container = styled.div<{ isanimation: string }>`
   width: 50%;
   min-width: 400px;
   height: 65%;
@@ -26,13 +35,22 @@ export const Main2Img2Style = styled.img`
   position: absolute;
   bottom: 8%;
   right: 0;
+  overflow: hidden;
+
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      animation: scale-in-hor-left 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+    `}
 
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
-export const FontStyle = styled.div`
+export const FontStyle = styled.div<{ isanimation?: string }>`
   color: white;
 
   &.exp {
@@ -43,6 +61,14 @@ export const FontStyle = styled.div`
     position: absolute;
     right: 5%;
     top: 13%;
+
+    ${({ isanimation }) =>
+      isanimation === "true" &&
+      css`
+        animation: scale-in-ver-top 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+        animation-delay: 0.4s;
+        opacity: 0;
+      `}
 
     @media (max-width: 768px) {
       top: 15%;
@@ -56,6 +82,14 @@ export const FontStyle = styled.div`
     position: absolute;
     bottom: 5.5%;
     z-index: 3;
+
+    ${({ isanimation }) =>
+      isanimation === "true" &&
+      css`
+        animation: scale-in-hor-left 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+        animation-delay: 1s;
+        opacity: 0;
+      `}
 
     @media (max-width: 768px) {
       position: static;
@@ -74,12 +108,10 @@ export const FontStyle = styled.div`
     align-items: center;
     justify-content: end;
 
-    &:hover {
-      cursor: pointer;
-      color: ${pink[200]};
-
-      &:not(:hover) {
-        color: ${white};
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        color: ${pink[200]};
       }
     }
 

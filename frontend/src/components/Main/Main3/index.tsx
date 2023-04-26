@@ -1,18 +1,21 @@
 import { useNavigate } from "react-router-dom";
 
+import { AniProps } from "..";
+
 import {
   BackgroundStyle,
   MainGridContainer,
   MainGridItems,
   MainGridFontItem,
   RightArrowIcStyle,
+  MainImgStyle,
 } from "../styles";
-import { Main2Img1Style, Main2Img2Style, FontStyle } from "./styles";
+import { Main3Img1Container, Main3Img2Container, FontStyle } from "./styles";
 
 import main3Img1 from "../../../assets/images/main3Img1.png";
 import main3Img2 from "../../../assets/images/main3Img2.png";
 
-const ThirdMain = () => {
+const ThirdMain = ({ isAnimation }: AniProps) => {
   const navigate = useNavigate();
 
   const handleClickView = () => {
@@ -23,7 +26,7 @@ const ThirdMain = () => {
     <BackgroundStyle>
       <MainGridContainer>
         <MainGridFontItem>
-          <FontStyle className="exp">
+          <FontStyle className="exp" isanimation={isAnimation.toString()}>
             Appreciating masterpieces <br /> by painter/trend/theme
           </FontStyle>
         </MainGridFontItem>
@@ -32,9 +35,14 @@ const ThirdMain = () => {
             view
             <RightArrowIcStyle />
           </FontStyle>
-          <Main2Img1Style src={main3Img1} />
-          <FontStyle className="title">Collection.</FontStyle>
-          <Main2Img2Style src={main3Img2} />
+          <Main3Img1Container isanimation={isAnimation.toString()}>
+            <MainImgStyle src={main3Img1} />
+          </Main3Img1Container>
+
+          <FontStyle className="title" isanimation={isAnimation.toString()}>Collection.</FontStyle>
+          <Main3Img2Container isanimation={isAnimation.toString()}>
+            <MainImgStyle src={main3Img2} />
+          </Main3Img2Container>
         </MainGridItems>
       </MainGridContainer>
     </BackgroundStyle>

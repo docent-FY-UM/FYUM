@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { AniProps } from "..";
 
 import {
   BackgroundStyle,
@@ -6,13 +7,14 @@ import {
   MainGridItems,
   MainGridFontItem,
   RightArrowIcStyle,
+  MainImgStyle,
 } from "../styles";
-import { Main2Img1Style, Main2Img2Style, FontStyle } from "./styles";
+import { Main4Img1Container, Main4Img2Container, FontStyle } from "./styles";
 
 import main4Img1 from "../../../assets/images/main4Img1.png";
 import main4Img2 from "../../../assets/images/main4Img2.png";
 
-const FourthMain = () => {
+const FourthMain = ({ isAnimation }: AniProps) => {
   const navigate = useNavigate();
 
   const handleClickView = () => {
@@ -23,16 +25,21 @@ const FourthMain = () => {
     <BackgroundStyle>
       <MainGridContainer>
         <MainGridFontItem>
-          <FontStyle className="exp">View My Collection</FontStyle>
+          <FontStyle className="exp" isanimation={isAnimation.toString()}>View My Collection</FontStyle>
         </MainGridFontItem>
         <MainGridItems>
           <FontStyle className="view" onClick={handleClickView}>
             view
             <RightArrowIcStyle />
           </FontStyle>
-          <Main2Img1Style src={main4Img2} />
-          <FontStyle className="title">My Gallery.</FontStyle>
-          <Main2Img2Style src={main4Img1} />
+          <Main4Img1Container isanimation={isAnimation.toString()}>
+            <MainImgStyle src={main4Img2} />
+          </Main4Img1Container>
+
+          <FontStyle className="title" isanimation={isAnimation.toString()}>My Gallery.</FontStyle>
+          <Main4Img2Container isanimation={isAnimation.toString()}>
+            <MainImgStyle src={main4Img1} />
+          </Main4Img2Container>
         </MainGridItems>
       </MainGridContainer>
     </BackgroundStyle>

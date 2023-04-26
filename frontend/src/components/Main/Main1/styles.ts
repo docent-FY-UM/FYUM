@@ -1,32 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { pink, white } from "../../../styles/colors";
 
-export const Main1Img1Style = styled.img`
-  width: 35%;
-  min-width: 300px;
-  height: 60%;
-  top: 13.5%;
-
-  position: absolute;
-  z-index: 2;
-
-  transition: transform 0.2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  @media (max-width: 768px) {
-    position: static;
-    width: 100%;
-    height: 70%;
-    padding-top: 0px;
-  }
-`;
-
-////
-
-export const Main1Img1Container = styled.div`
+export const Main1Img1Container = styled.div<{ isanimation: string }>`
   width: 35%;
   min-width: 300px;
   height: 60%;
@@ -36,44 +11,36 @@ export const Main1Img1Container = styled.div`
   z-index: 2;
   overflow: hidden;
 
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      animation: scale-in-hor-left 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    `}
+
+  @keyframes scale-in-hor-left {
+    0% {
+      transform: scaleX(0);
+      transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(1);
+      transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }
+
   @media (max-width: 768px) {
     position: static;
     width: 100%;
     height: 70%;
     padding-top: 0px;
   }
-
-  animation: fadeIn1 1s ease-out forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-
-  @keyframes fadeIn1 {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 `;
 
-export const Main1Img1Style2 = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-
-  transition: transform 0.2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-////
-
-export const Main1Img2Style = styled.img`
+export const Main1Img2Container = styled.div<{ isanimation: string }>`
   width: 70%;
   min-width: 400px;
   height: 55%;
@@ -81,13 +48,33 @@ export const Main1Img2Style = styled.img`
   position: absolute;
   bottom: 15%;
   right: 0;
+  overflow: hidden;
+
+  ${({ isanimation }) =>
+    isanimation === "true" &&
+    css`
+      animation: scale-in-center 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    `}
+
+  @keyframes scale-in-center {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
-export const FontStyle = styled.div`
+export const FontStyle = styled.div<{ isanimation?: string }>`
   color: white;
 
   &.exp {
@@ -98,6 +85,27 @@ export const FontStyle = styled.div`
     position: absolute;
     right: 5%;
     padding-top: 20px;
+
+    ${({ isanimation }) =>
+      isanimation === "true" &&
+      css`
+        animation: scale-in-ver-top 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+        animation-delay: 0.2s;
+        opacity: 0;
+      `}
+
+    @keyframes scale-in-ver-top {
+      0% {
+        transform: scaleY(0);
+        transform-origin: 0% 0%;
+        opacity: 1;
+      }
+      100% {
+        transform: scaleY(1);
+        transform-origin: 0% 0%;
+        opacity: 1;
+      }
+    }
 
     @media (max-width: 768px) {
       top: 11%;
@@ -111,6 +119,14 @@ export const FontStyle = styled.div`
     position: absolute;
     bottom: 6%;
     z-index: 3;
+
+    ${({ isanimation }) =>
+      isanimation === "true" &&
+      css`
+        animation: scale-in-hor-left 1s cubic-bezier(0.4, 0.4, 0.3, 1) forwards;
+        animation-delay: 0.8s;
+        opacity: 0;
+      `}
 
     @media (max-width: 768px) {
       position: static;
@@ -129,17 +145,15 @@ export const FontStyle = styled.div`
     align-items: center;
     justify-content: end;
 
-    &:hover {
-      cursor: pointer;
-      color: ${pink[200]};
-
-      &:not(:hover) {
-        color: ${white};
-      }
-    }
-
     @media (max-width: 768px) {
       position: static;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+        color: ${pink[200]};
+      }
     }
   }
 `;
