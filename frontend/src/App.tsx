@@ -9,7 +9,7 @@ import {
   ListPage,
   LoginPage,
   MainPage,
-  MasterpiecePage,
+  CollectionPage,
   RecommendationPage,
   SurveyPage,
   WishListPage,
@@ -35,7 +35,7 @@ function App() {
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/recommend" element={<RecommendationPage />} />
         <Route path="/exhibition" element={<ExhibitionPage />} />
-        <Route path="/masterpiece" element={<MasterpiecePage />} />
+        <Route path="/collection" element={<CollectionPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/exhibitionlist" element={<ExhibitionListPage />} />
         <Route path="/wishlist" element={<WishListPage />} />
