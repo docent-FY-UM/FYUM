@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeUserNickNm, changeAccessToken } from "../../../store/userSlice";
 
 import {
   BackgroundStyle,
@@ -26,6 +28,8 @@ interface MenuProps {
 
 const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [selectedImg, setSelectedImg] = useState(menuImg1);
   const [previousImg, setPreviousImg] = useState(menuImg5);
   const [selectedImgAngle, setSelectedImgAngle] = useState("-3deg");
@@ -47,7 +51,11 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
 
   const handleLogout = () => {
     setIsMenuOpen(false);
-    // 로그아웃 로직 작성
+    localStorage.removeItem("token");
+    alert("로그아웃 되었습니다 :)");
+    navigate("/");
+    dispatch(changeAccessToken(""));
+    dispatch(changeUserNickNm(""));
   };
 
   const closeMenu = () => {
