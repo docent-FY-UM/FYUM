@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { black, white } from "../../styles/colors";
-import { ReactComponent as LeftArrowIc } from "../../assets/icon/leftArrowIc.svg";
 import { ReactComponent as EmptyFrame } from "../../assets/icon/empty_frame.svg";
 import { ReactComponent as EmptyBookmark } from "../../assets/icon/empty_bookmark.svg";
 import { ReactComponent as FullFrame } from "../../assets/icon/full_frame.svg";
@@ -13,7 +12,7 @@ interface BackgroundImgProps {
 
 export const DetailContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: relative;
   background-color: ${black};
   overflow-x: hidden;
@@ -58,25 +57,6 @@ export const Content = styled.p`
   color: ${white};
 `;
 
-export const GoBackBtn = styled.div`
-  display: flex;
-  margin-top: 10%;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-export const LeftArrowIcStyle = styled(LeftArrowIc)`
-  width: 4vw;
-  fill: ${white};
-`;
-
-export const GoBackBtnContent = styled.p`
-  font-size: 1.5vw;
-  color: ${white};
-  padding-bottom: 0.2%;
-`;
-
 export const DescriptionBtn = styled.div`
   position: absolute;
   bottom: 1vw;
@@ -95,7 +75,8 @@ export const DescriptionBtn = styled.div`
 export const DescriptionP = styled.p`
   color: ${white};
   font-size: 1.5vw;
-  font-weight: 700;
+  font-family: "SUIT";
+  font-weight: 800;
 `;
 
 export const MarkContainer = styled.div`
