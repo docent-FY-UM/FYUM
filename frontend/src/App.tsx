@@ -15,6 +15,7 @@ import {
   WishListPage,
   IntroPage,
   KakaoHandle,
+  MyDrawingsPage,
   TestPage,
   Unity,
 } from "../src/pages/index";
@@ -43,6 +44,7 @@ function App() {
         <Route path="/list/:id" element={<ListPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/drawing" element={<DrawingPage />} />
+        <Route path="/my-drawigs" element={<MyDrawingsPage/>}/>
 
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage></TestPage>} />

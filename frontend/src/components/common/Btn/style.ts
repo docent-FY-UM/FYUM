@@ -4,6 +4,7 @@ import { white, mainColor } from "../../../styles/colors";
 interface BtnStyleProps {
   language?: string | undefined;
   width?: number | undefined;
+  widthM?: number | undefined;
 }
 
 export const BtnStyle = styled.button<BtnStyleProps>`
@@ -16,13 +17,13 @@ export const BtnStyle = styled.button<BtnStyleProps>`
   &.Btn_square {
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.71);
-    border: 5px solid ${white};
-    height: 110px;
+    border: 3.5px solid ${white};
+    padding: 18px 40px;
 
     @media screen and (max-width: 768px) {
-      width: ${(props) => (props.width ? props.width / 2.45 + "px" : "auto")};
+      width: ${(props) => (props.widthM ? props.widthM + "px" : "auto")};
       border: 3px solid ${white};
-      height: 45px;
+      padding: 18px 0 18px 0;
     }
   }
   &.Btn_transparent {
@@ -67,10 +68,10 @@ export const BtnText = styled.span<BtnStyleProps>`
   font-weight: 700;
 
   &.Btn_square {
-    font-size: 30px;
+    font-size: 18px;
 
     @media screen and (max-width: 768px) {
-      font-size: 13px;
+      font-size: 20px;
     }
   }
   &.Btn_transparent {

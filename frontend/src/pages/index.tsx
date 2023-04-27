@@ -13,6 +13,7 @@ import SurveyPage from "./SurveyPage";
 import WishListPage from "./WishListPage";
 import IntroPage from "./IntroPage";
 import KakaoHandle from "../components/auth/KakaoHandle";
+import MyDrawingsPage from "./MyDrawingsPage";
 import TestPage from "./TestPage";
 import Unity from "./TestPage/UnityPage";
 
@@ -32,6 +33,7 @@ export {
   WishListPage,
   IntroPage,
   KakaoHandle,
+  MyDrawingsPage,
   TestPage,
   Unity,
 };
