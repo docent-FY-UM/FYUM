@@ -22,7 +22,7 @@ export const Main2Img1Container = styled.div<{ isanimation: string }>`
   @media (max-width: 768px) {
     position: static;
     width: 100%;
-    height: 75%;
+    height: 50%;
     padding-top: 0px;
   }
 `;
@@ -84,7 +84,8 @@ export const FontStyle = styled.div<{ isanimation?: string }>`
       `}
 
     @media (max-width: 768px) {
-      top: 12.5%;
+      font-size: 20px;
+      top: 25%;
       right: 15%;
     }
   }
@@ -135,7 +136,6 @@ export const FontStyle = styled.div<{ isanimation?: string }>`
     align-items: center;
     justify-content: end;
 
-    
     @media (hover: hover) {
       &:hover {
         cursor: pointer;
@@ -146,6 +146,5 @@ export const FontStyle = styled.div<{ isanimation?: string }>`
     @media (max-width: 768px) {
       position: static;
     }
-    
   }
 `;

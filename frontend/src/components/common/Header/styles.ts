@@ -22,10 +22,10 @@ export const HeaderContainer = styled.div<{ headercolor: string }>`
 `;
 
 export const InvisibleBox = styled.div`
-  height: 80px;
-  width: 100%;
-  visibility: hidden;
-  z-index: 99;
+  @media (max-width: 768px) {
+    height: 80px;
+    visibility: hidden;
+  }
 `;
 
 export const LogoIcStyle = styled(LogoIc)<{ iconcolor: string }>`

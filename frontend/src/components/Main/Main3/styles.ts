@@ -22,7 +22,7 @@ export const Main3Img1Container = styled.div<{ isanimation: string }>`
   @media (max-width: 768px) {
     position: static;
     width: 100%;
-    height: 70%;
+    height: 45%;
     padding-top: 0px;
   }
 `;
@@ -71,7 +71,8 @@ export const FontStyle = styled.div<{ isanimation?: string }>`
       `}
 
     @media (max-width: 768px) {
-      top: 15%;
+      font-size: 20px;
+      top: 27.5%;
       right: 15%;
     }
   }

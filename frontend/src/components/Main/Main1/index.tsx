@@ -16,7 +16,6 @@ import { FontStyle, Main1Img1Container, Main1Img2Container } from "./styles";
 import main1Img1 from "../../../assets/images/main1Img1.png";
 import main1Img2 from "../../../assets/images/main1Img2.png";
 
-
 const FirstMain = ({ isAnimation, setIsAnimation }: AniProps) => {
   useEffect(() => {
     setIsAnimation(true);

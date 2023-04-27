@@ -13,8 +13,8 @@ export const BackgroundStyle = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: grid;
-    grid-template-rows: repeat(10, 1fr);
+    /* display: grid;
+    grid-template-rows: repeat(10, 1fr); */
   }
 `;
 
@@ -85,6 +85,7 @@ export const MainGridContainer = styled.div`
 `;
 
 export const MainGridItems = styled.div`
+  height: 100vh;
   grid-column: 2 / span 4;
   position: relative;
 
@@ -105,9 +106,11 @@ export const MainGridFontItem = styled.div`
   z-index: 1;
 
   @media (max-width: 768px) {
+    padding-top: 0px;
     grid-column: 2 / span 1;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 `;
 

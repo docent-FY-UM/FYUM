@@ -20,14 +20,13 @@ const Header = () => {
 
   useEffect(() => {
     if (currentUrl.includes("/main")) {
-      setHeaderColor("black");
+      // setHeaderColor("black");
     } else if (currentUrl.includes("/artlist")) {
       setIconColor("black");
     } else {
       setHeaderColor("transparent");
       setIconColor("white");
     }
-
   }, [currentUrl]);
 
   const openMenu = () => {
