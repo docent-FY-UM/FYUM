@@ -1,4 +1,6 @@
+import List from "../../components/List";
+
 const ListPage = () => {
-  return <div></div>;
+  return <List></List>;
 };
 export default ListPage;

@@ -25,7 +25,7 @@ const Collection = () => {
           <PainterNoBackContainer></PainterNoBackContainer>
         </PainterContainer>
       </Link>
-      <Link to="/list/arttrend">
+      <Link to="/list/art-trend">
         <ArtTrendContainer>
           <ArtTrendNoBackContainer></ArtTrendNoBackContainer>
           <ArtTrendText>

@@ -52,7 +52,7 @@ export const IntroText = styled.div`
   font-size: 3.4vw;
   @media (max-width: 768px) {
     text-align: center;
-    margin: -5%;
+    margin: -3%;
     font-size: 2vw;
   }
 `;
