@@ -1,15 +1,17 @@
 package com.example.fyum.config;
 
 import java.util.Arrays;
+import com.example.fyum.member.service.MemberService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -18,48 +20,37 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final MemberService memberService;
+
+    @Value("${jwt.key}")
+    private String key;
+
+    private final ObjectMapper objectMapper;
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/**").permitAll()
-            .antMatchers("/api/test").permitAll()
-            .antMatchers("/api/oauth2/**").permitAll()
-            .antMatchers("/login/oauth2/code/kakao").permitAll()
-            .antMatchers("/favicon.ico").permitAll()
-            .anyRequest().authenticated();
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .httpBasic().disable()
+                .csrf().disable()
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
+                .authorizeRequests()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/members/oauth/token").permitAll()
+                .anyRequest().authenticated()
 
-        http
-            .httpBasic().disable()
-            .cors().configurationSource(corsConfigurationSource())
-            .and()
-            .csrf().disable()
-            .formLogin().disable()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
-//        http.oauth2Login()
-//            .authorizationEndpoint()
-//            .baseUri("/api/oauth2/authorization")
-//            .and()
-//            .userInfoEndpoint() // 필수
-//            .userService(principalOAuth2UserService)
-//            .and()
-//            .successHandler(oAuth2AuthenticationSuccessHandler);
-//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-//        http.exceptionHandling()
-//            .authenticationEntryPoint((request, response, authException) -> {
-//                authException.printStackTrace();
-//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                response.getWriter().print(authException.getMessage());
-//            })
-//            .accessDeniedHandler((request, response, accessDeniedException) -> {
-//                accessDeniedException.printStackTrace();
-//                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-//                response.getWriter().print(accessDeniedException.getMessage());
-//            });
-        return http.build();
+                .and()
+                .addFilterBefore(new JwtFilter(memberService, key), UsernamePasswordAuthenticationFilter.class)
 
+                .build();
     }
 
     @Bean
@@ -68,6 +59,7 @@ public class SecurityConfig {
         configuration.addAllowedOriginPattern("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
+        configuration.addExposedHeader("*");
         configuration.setAllowedHeaders(Arrays.asList(
             "Accept",
             "Accept-Language",
@@ -81,11 +73,5 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean
-    AuthenticationManager authenticationManager(
-        AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-
 }
+
