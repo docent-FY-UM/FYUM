@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import PainterImg from "../../assets/images/earing.png";
+import PainterImg from "../../assets/images/gogh.png";
 import ArtTrendImg from "../../assets/images/sonofman.png";
-import ThemeImg from "../../assets/images/monalisa.png";
-import PainterNoBackImg from "../../assets/images/earingNoBackground.png";
+import ThemeImg from "../../assets/images/earing.png";
+import PainterNoBackImg from "../../assets/images/goghNoBackground.png";
 import ArtTrendNoBackImg from "../../assets/images/sonofmanNoBackground.png";
-import ThemeNoBackImg from "../../assets/images/monalisaNoBackground.png";
+import ThemeNoBackImg from "../../assets/images/earingNoBackground.png";
 import { white } from "../../styles/colors";
 
 export const CollectionContainer = styled.div`
@@ -49,10 +49,11 @@ export const PainterNoBackContainer = styled.div`
     background-image: url(${PainterNoBackImg});
     background-repeat: no-repeat;
     background-size: contain;
-    width: 40%;
+    width: 35%;
     height: 80%;
     bottom: 0px;
-    right: 0px;
+    right: 40px;
+    min-width: 195px;
   }
 `;
 
@@ -89,6 +90,7 @@ export const ArtTrendNoBackContainer = styled.div`
     height: 80%;
     bottom: 0px;
     left: 10%;
+    min-width: 103px;
   }
 `;
 
@@ -123,6 +125,7 @@ export const ThemeNoBackContainer = styled.div`
     height: 80%;
     bottom: 0px;
     right: 0px;
+    min-width: 100px;
   }
 `;
 
@@ -142,6 +145,7 @@ export const PainterText = styled.div`
   @media (max-width: 768px) {
     bottom: 25%;
     left: 15%;
+    z-index: 2;
   }
 `;
 
