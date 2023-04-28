@@ -1,6 +1,7 @@
 package com.example.fyum.masterpiece.controller;
 
 import com.example.fyum.masterpiece.dto.CategoryDto;
+import com.example.fyum.masterpiece.dto.MasterpieceDto;
 import com.example.fyum.masterpiece.service.MasterpieceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,7 +41,7 @@ public class MasterpieceController {
 
     // 테마 목록
     @GetMapping("/themes")
-    public ResponseEntity<?> getThemes(
+    public ResponseEntity<Page<CategoryDto>> getThemes(
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
         Page<CategoryDto> themes = masterpieceService.getThemes(page);
@@ -73,9 +74,10 @@ public class MasterpieceController {
 
     // 작품 상세 정보
     @GetMapping("/detail/{paintingId}")
-    public ResponseEntity<?> getMasterpieceDetail(
+    public ResponseEntity<MasterpieceDto> getMasterpieceDetail(
         @PathVariable int paintingId) {           // 유저 정보 필요 : 찜, 전시회 상태 반환
-        return null;
+        MasterpieceDto painting = masterpieceService.getDetail(paintingId);
+        return new ResponseEntity<>(painting, HttpStatus.OK);
     }
 
 
