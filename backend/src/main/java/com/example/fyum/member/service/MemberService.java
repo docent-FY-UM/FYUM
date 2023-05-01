@@ -9,6 +9,8 @@ import com.example.fyum.exhibition.entity.Exhibition;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
+import com.example.fyum.recommend.entity.Recommend;
+import com.example.fyum.recommend.repository.RecommendRepository;
 import com.example.fyum.utils.JwtUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +34,8 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final ExhibitionRepository exhibitionRepository;
+
+    private final RecommendRepository recommendRepository;
 
     @Value("${kakao.client_id}")
     private String client_id;
@@ -126,6 +130,11 @@ public class MemberService {
                     .member(member)
                     .build();
             exhibitionRepository.save(exhibition);
+
+            Recommend recommend = Recommend.builder()
+                    .member(member)
+                    .build();
+            recommendRepository.save(recommend);
         }
 
         return createToken(member);

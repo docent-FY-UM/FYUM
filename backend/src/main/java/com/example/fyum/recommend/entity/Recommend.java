@@ -3,6 +3,7 @@ package com.example.fyum.recommend.entity;
 import com.example.fyum.config.Painting;
 import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.member.entity.Member;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 public class Recommend {
 
     @Id
