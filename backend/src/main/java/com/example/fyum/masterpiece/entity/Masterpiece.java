@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @DiscriminatorValue("MP")
 @Entity
+@NoArgsConstructor
 public class Masterpiece extends Painting {
 
     private String titleKr;
