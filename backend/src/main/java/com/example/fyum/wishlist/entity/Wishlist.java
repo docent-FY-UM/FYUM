@@ -1,18 +1,19 @@
 package com.example.fyum.wishlist.entity;
 
-import com.example.fyum.config.Painting;
+
+import com.example.fyum.masterpiece.entity.Masterpiece;
+
 import com.example.fyum.member.entity.Member;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
+
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 public class Wishlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,14 @@ public class Wishlist {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Painting painting;
+    @JoinColumn(name="painting_id")
+    private Masterpiece masterpiece;
+
+    @Builder
+    public Wishlist(Member member , Masterpiece masterpiece) {
+        this.member = member;
+        this.masterpiece = masterpiece;
+    }
 
 
 }
