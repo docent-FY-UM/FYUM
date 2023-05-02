@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { customAxios } from "../../store/customAxios";
 import {
   DetailContainer,
   BackgroundImg,
@@ -40,9 +41,6 @@ interface detailInfo {
 }
 
 const DetailPage = () => {
-  // 토큰 불러오기
-  const accessToken = localStorage.getItem("token");
-
   const [description, setDescription] = useState(true);
   const [frame, setFrame] = useState(false);
   const [bookmark, setBookmark] = useState(false);
@@ -79,22 +77,21 @@ const DetailPage = () => {
     setBookmark(!bookmark);
   };
 
-  const baseURL = process.env.REACT_APP_API_BASE_URL;
+  const getDetail = async () => {
+    try {
+      const res = await customAxios.get("paintings/detail/30");
+      setData(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(baseURL + "/api/paintings/detail/21", {
-        headers: {
-          Authorization: accessToken,
-        },
-      })
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
+    getDetail();
   }, []);
 
   const imgURL = data.imgSrc;
 
-  // console.log(data);
   return (
     <DetailContainer>
       <BackgroundImg
