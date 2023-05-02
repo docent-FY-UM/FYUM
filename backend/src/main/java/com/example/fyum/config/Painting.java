@@ -11,11 +11,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="DTYPE")
+@NoArgsConstructor
 public class Painting extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
