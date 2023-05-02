@@ -33,6 +33,9 @@ public class MyDrawingService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    @Value("${perfixS3}")
+    private String perfix;
+
     public MyDrawingResponseDto saveMyDrawing(MyDrawingRequestDto dto, String kakaoId){
 
         Member member = memberRepository.findByKakaoId(kakaoId);
@@ -60,12 +63,12 @@ public class MyDrawingService {
         // S3 객체 업로드 요청 전송
         amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
-        myDrawing.setImgSrc("https://testjae2.s3.ap-northeast-2.amazonaws.com/"+filename);
+        myDrawing.setImgSrc(perfix+filename);
         int pId = myDrawingRepository.save(myDrawing).getId();
 
         MyDrawingResponseDto resdto = new MyDrawingResponseDto();
         resdto.setPaintingId(pId);
-        resdto.setImgSrc("https://testjae2.s3.ap-northeast-2.amazonaws.com/"+filename);
+        resdto.setImgSrc(perfix+filename);
 
         return resdto;
 
