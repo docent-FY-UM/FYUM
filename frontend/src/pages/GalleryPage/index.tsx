@@ -24,7 +24,7 @@ const GalleryPage = () => {
     {
       className: "mydrawings",
       text: "MY DRAWINGS",
-      nav: "my-drawigs",
+      nav: "my-drawings",
     },
     {
       className: "wish",

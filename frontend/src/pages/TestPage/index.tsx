@@ -1,5 +1,6 @@
 import Btn from "../../components/common/Btn";
 import useModal from "../../components/utils/useModal";
+import Form from "../../components/common/form";
 
 const TestPage = () => {
   const { openModal } = useModal();
@@ -31,6 +32,15 @@ const TestPage = () => {
       >
         모달버튼!
       </button>
+      <button
+        onClick={() => {
+          openModal({ type: "mydrawing", title: "안뇽", content: "안뇨뇨뇽" });
+        }}
+      >
+        큰모달버튼!
+      </button>
+      <h2>form 테스트</h2>
+      <Form />
     </div>
   );
 };

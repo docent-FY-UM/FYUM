@@ -12,10 +12,10 @@ export const ModalDimmer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 99999;
 `;
 
-// 작은 모달
+// 모달
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,53 +24,40 @@ export const ModalContainer = styled.div`
   background-color: white;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  z-index: 9999;
+  z-index: 999999;
+
+  span {
+    font-family: "SUIT";
+    font-weight: 700;
+    font-size: 15px;
+  }
 
   &.barrier {
     min-height: 150px;
     height: auto;
     justify-content: space-between;
   }
+
+  &.mydrawing {
+    height: 500px;
+  }
 `;
 
 export const ModalTitle = styled.div`
-  padding: 1.4rem 1.4rem 1.4rem 1.4rem;
+  padding: 1.4rem;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   display: inline-flex;
   align-items: center;
-`;
 
-export const ModalCourseTitle = styled.div`
-  padding: 0.8rem 1.4rem 4.2rem 1.4rem;
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 20px;
-`;
-
-export const ModalCourseContainer = styled.div`
-  width: 380px;
-  height: 280px;
-  overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: ${grey[100]};
-    border-radius: 14px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${grey[300]};
-    border-radius: 14px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: ${grey[200]};
+  &.mydrawing {
+    padding: 1.2rem 1.4rem 1rem 1.4rem;
+    border-bottom: 1px solid ${grey[200]};
   }
 `;
+
+
 
 export const ModalContents = styled.div`
   padding-left: 1.4rem;

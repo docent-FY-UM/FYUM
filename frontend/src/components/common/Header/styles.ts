@@ -14,7 +14,7 @@ export const HeaderContainer = styled.div<{ headercolor: string }>`
   align-items: center;
 
   position: fixed;
-  z-index: 99999;
+  z-index: 99998;
 
   @media (max-width: 768px) {
     background-color: ${(props) => props.headercolor};

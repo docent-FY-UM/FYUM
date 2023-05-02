@@ -6,6 +6,7 @@ import {
   ModalDimmer,
   ModalContainer,
   ModalTitle,
+
   ModalContents,
   ModalFooter,
   ModalBtn,
@@ -30,12 +31,29 @@ const Modal = () => {
       {isOpen && type === "default" && (
         <ModalDimmer>
           <ModalContainer>
-            <ModalTitle>{title}</ModalTitle>
-            <ModalContents>{content}</ModalContents>
+            <ModalTitle>
+              <span>{title}</span>
+            </ModalTitle>
+            <ModalContents>
+              <span>{content}</span>
+            </ModalContents>
             <ModalFooter>
-              <ModalBtn onClick={closeModal}>취소</ModalBtn>
-              <ModalYesBtn onClick={callback}>확인</ModalYesBtn>
+              <ModalBtn onClick={closeModal}>
+                <span>취소</span>
+              </ModalBtn>
+              <ModalYesBtn onClick={callback}>
+                <span>확인</span>
+              </ModalYesBtn>
             </ModalFooter>
+          </ModalContainer>
+        </ModalDimmer>
+      )}
+
+      {isOpen && type === "mydrawing" && (
+        <ModalDimmer>
+          <ModalContainer className="mydrawing">
+            <ModalTitle className="mydrawing"><span>{title}</span></ModalTitle>
+      
           </ModalContainer>
         </ModalDimmer>
       )}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import backImg from "../../assets/images/galleryPageImg.png";
 
 export const BackgroundContainer = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   overflow-y: hidden;
 `;
