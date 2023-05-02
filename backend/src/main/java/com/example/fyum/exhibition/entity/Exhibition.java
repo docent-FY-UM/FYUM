@@ -18,6 +18,7 @@ import lombok.*;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Exhibition extends BaseEntity {
