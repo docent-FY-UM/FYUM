@@ -54,9 +54,12 @@ public class MasterpieceController {
 
     // 테마별 작품 리스트
     @GetMapping("/themes/{themeId}")
-    public ResponseEntity<?> getMasterpiecesByTheme(@PathVariable int themeId,
+    public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByTheme(
+        @PathVariable int themeId,
         @RequestParam(required = false, defaultValue = "1") int page) {
-        return null;
+        page--;
+        Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByTheme(themeId, page);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // 사조 목록
@@ -70,9 +73,12 @@ public class MasterpieceController {
 
     // 사조별 작품 리스트
     @GetMapping("/trends/{trendId}")
-    public ResponseEntity<?> getMasterpiecesByTrend(@PathVariable int trendId,
+    public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByTrend(
+        @PathVariable int trendId,
         @RequestParam(required = false, defaultValue = "1") int page) {
-        return null;
+        page--;
+        Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByTrend(trendId, page);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // 작품 상세 정보
