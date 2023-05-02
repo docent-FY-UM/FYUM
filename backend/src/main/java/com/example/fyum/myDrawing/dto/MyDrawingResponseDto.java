@@ -1,5 +1,10 @@
 package com.example.fyum.myDrawing.dto;
 
-public class MyDrawingResponseDto {
+import lombok.Data;
 
+@Data
+public class MyDrawingResponseDto {
+    int paintingId;
+
+    String imgSrc;
 }

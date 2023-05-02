@@ -134,6 +134,8 @@ public class MemberService {
             Recommend recommend = Recommend.builder()
                     .member(member)
                     .build();
+//            Recommend recommend = new Recommend();
+//            recommend.setMember(member);
             recommendRepository.save(recommend);
         }
 

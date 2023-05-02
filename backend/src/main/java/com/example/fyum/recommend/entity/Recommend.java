@@ -5,13 +5,16 @@ import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
 @Entity
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor
 public class Recommend {
 
     @Id
@@ -42,6 +45,8 @@ public class Recommend {
     private Masterpiece painting9;
     @ManyToOne(fetch = FetchType.LAZY)
     private Masterpiece painting10;
-
-
+    @Builder
+    public Recommend(Member member){
+        this.member = member;
+    }
 }
