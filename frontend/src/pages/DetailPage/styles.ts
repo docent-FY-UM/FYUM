@@ -4,6 +4,7 @@ import { ReactComponent as EmptyFrame } from "../../assets/icon/empty_frame.svg"
 import { ReactComponent as EmptyBookmark } from "../../assets/icon/empty_bookmark.svg";
 import { ReactComponent as FullFrame } from "../../assets/icon/full_frame.svg";
 import { ReactComponent as FullBookmark } from "../../assets/icon/full_bookmark.svg";
+import { ReactComponent as Speaker } from "../../assets/icon/speaker.svg";
 
 interface BackgroundImgProps {
   src: string;
@@ -34,9 +35,10 @@ export const BackgroundImg = styled.img<BackgroundImgProps>`
 
 export const ContentContainer = styled.div`
   position: fixed;
-  width: 60%;
-  top: 5%;
-  left: 15%;
+  width: 80%;
+  top: 10%;
+  left: 14%;
+  height: calc(100vh - 60%);
 
   @media (max-width: 768px) {
     margin-top: 15%;
@@ -46,46 +48,120 @@ export const ContentContainer = styled.div`
   }
 `;
 
-export const Title = styled.p`
-  font-size: 5vw;
+export const TitleOrigin = styled.p<{ len: number }>`
+  font-size: ${(props) => (props.len > 30 ? "2.6vw" : "4vw")};
+  font-family: "Kim jung chul Myungjo";
+  font-weight: 700;
   color: ${white};
-  margin-bottom: 5%;
+  margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    font-size: 6vw;
+    margin-bottom: 5%;
+  }
+`;
+
+export const TitleKr = styled.p`
+  font-size: 1.6vw;
+  font-family: "SUIT";
+  font-weight: 500;
+  color: ${white};
+  margin-top: 0;
+  margin-bottom: 1%;
+
+  @media (max-width: 768px) {
+    font-size: 6vw;
+    margin-bottom: 5%;
+  }
+`;
+export const DetailContent = styled.p`
+  font-size: 1.1vw;
+  font-family: "SUIT";
+  color: ${white};
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 6vw;
+    margin-bottom: 5%;
+  }
+`;
+
+export const DetailDiv = styled.div`
+  margin-bottom: 3%;
+`;
+
+export const ContentDiv = styled.div`
+  width: 90%;
+  height: 60%;
+  overflow-y: auto;
+  font-family: "SUIT";
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+  }
+
+  @media (max-width: 768px) {
+    height: 180%;
+  }
 `;
 
 export const Content = styled.p`
   font-size: 1vw;
+  font-family: "SUIT";
+  font-weight: 100;
   color: ${white};
+  line-height: 160%;
+  margin: 0;
+  padding-right: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.5vw;
+    line-height: 180%;
+  }
+`;
+
+export const SpeakerImg = styled(Speaker)`
+  width: 3vw;
+  fill: ${white};
 `;
 
 export const DescriptionBtn = styled.div`
   position: absolute;
   bottom: 1vw;
-  left: 1.5vw;
+  left: 2vw;
 
   &:hover {
     cursor: pointer;
   }
 
   @media (max-width: 768px) {
-    left: 3vw;
+    left: 7vw;
     bottom: 1.5vh;
   }
 `;
 
 export const DescriptionP = styled.p`
   color: ${white};
-  font-size: 1.5vw;
   font-family: "SUIT";
+  font-size: 1.5vw;
   font-weight: 800;
 `;
 
 export const MarkContainer = styled.div`
   position: absolute;
   bottom: 3vh;
-  right: 3vw;
+  right: 2.6vw;
 
   @media (max-width: 768px) {
     bottom: 0.1vh;
+    right: 5vw;
   }
 `;
 
