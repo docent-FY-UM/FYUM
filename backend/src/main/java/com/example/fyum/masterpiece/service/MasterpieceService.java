@@ -2,6 +2,7 @@ package com.example.fyum.masterpiece.service;
 
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
+import com.example.fyum.masterpiece.dto.MasterpieceListDto;
 import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.masterpiece.entity.Painter;
 import com.example.fyum.masterpiece.entity.Theme;
@@ -28,24 +29,30 @@ public class MasterpieceService {
 
 
     public Page<CategoryDto> getPainters(int page) {
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(page, 10);
         Page<Painter> painters = painterRepository.findAll(pageable);
         return painters.map(CategoryDto::new);
     }
 
-    public Painter getMasterpiecesByPainter(int painterId, int page) {
-        Optional<Painter> painter = painterRepository.findById(painterId);
-        return painter.orElse(null);
+    public Page<MasterpieceListDto> getMasterpiecesByPainter(int painterId, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        Optional<Painter> optionalPainter = painterRepository.findById(painterId);
+        if (optionalPainter.isEmpty()) {
+            return null;
+        }
+        Painter painter = optionalPainter.get();
+        Page<Masterpiece> result = masterpieceRepository.findAllByPainter(painter, pageable);
+        return result.map(MasterpieceListDto::new);
     }
 
     public Page<CategoryDto> getThemes(int page) {
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(page, 10);
         Page<Theme> themes = themeRepository.findAll(pageable);
         return themes.map(CategoryDto::new);
     }
 
     public Page<CategoryDto> getTrends(int page) {
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(page, 10);
         Page<Trend> trends = trendRepository.findAll(pageable);
         return trends.map(CategoryDto::new);
     }

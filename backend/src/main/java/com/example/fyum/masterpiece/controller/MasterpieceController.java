@@ -2,6 +2,7 @@ package com.example.fyum.masterpiece.controller;
 
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
+import com.example.fyum.masterpiece.dto.MasterpieceListDto;
 import com.example.fyum.masterpiece.service.MasterpieceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,12 +32,14 @@ public class MasterpieceController {
 
     // 작가별 작품 리스트
     @GetMapping("/painters/{painterId}")
-    public ResponseEntity<?> getMasterpiecesByPainter(@PathVariable int painterId,
+    public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByPainter(
+        @PathVariable int painterId,
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
-        masterpieceService.getMasterpiecesByPainter(painterId, page);
+        Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByPainter(painterId,
+            page);
 
-        return null;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // 테마 목록
