@@ -1,19 +1,21 @@
 import useModal from "../../utils/useModal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store";
+import { registerActions } from "../../../store/registerSlice";
 
 import {
   ModalDimmer,
   ModalContainer,
   ModalTitle,
-
   ModalContents,
   ModalFooter,
   ModalBtn,
   ModalYesBtn,
+  CloseBtn,
 } from "./styles";
 
 const Modal = () => {
+  const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const { type, isOpen, title, content, callback } = useSelector(
@@ -25,6 +27,11 @@ const Modal = () => {
       callback: state.modal.callback,
     })
   );
+
+  const onClickClose = () => {
+    dispatch(registerActions.reset());
+    closeModal();
+  };
 
   return (
     <div>
@@ -52,8 +59,17 @@ const Modal = () => {
       {isOpen && type === "mydrawing" && (
         <ModalDimmer>
           <ModalContainer className="mydrawing">
-            <ModalTitle className="mydrawing"><span>{title}</span></ModalTitle>
-      
+            <ModalTitle className="mydrawing">
+              <span>{title}</span>
+              <CloseBtn
+                onClick={() => {
+                  onClickClose();
+                }}
+              />
+            </ModalTitle>
+            <ModalContents className="mydrawing">
+              <span>{content}</span>
+            </ModalContents>
           </ModalContainer>
         </ModalDimmer>
       )}

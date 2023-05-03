@@ -1,17 +1,16 @@
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+
+// 관리하는 슬라이스들
 import authReducer from "./authSlice";
 import modalReducer from "./modalSlice";
 import userReducer from "./userSlice";
 import listReducer from "./listSlice";
 import registerReducer from "./registerSlice"
 
-// 스토어 통합관련(리듀서들, 사가들)
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-
-// saga 관리
-
-// 관리하는 슬라이스들
+// 관리하는 saga
+import { registerSagas } from "./registerSagas";
 
 // rootReducers by using combineReducers
 const rootReducers = combineReducers({
@@ -24,7 +23,7 @@ const rootReducers = combineReducers({
 
 // rootSaga
 function* rootSaga() {
-  //   yield all();
+  yield all([...registerSagas]);
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -32,20 +31,16 @@ const middlewares = [sagaMiddleware];
 
 // Store 구성 -> configureStore
 // 여러가지 리듀서를 하나로 합칠 수 있음
-// 왜냐면 store는 리듀서 하나만 가져야되서 합침
+// store는 하나의 리듀서만을 가진다.
 const store = configureStore({
-  // 여러 슬라이서의 리듀서를 합침
   reducer: rootReducers,
   middleware: middlewares,
 });
 
+// 사가 실행
 sagaMiddleware.run(rootSaga);
 
-// 외부에서 쓰려고
+// 외부에서 store를 쓰기위해 export
 export default store;
 
 export type RootState = ReturnType<typeof rootReducers>;
-
-// react-redux 라이브러리를 깔면
-// 귀찮게 subscribe 함수 쓸 필요없음
-// import { createStore } from 'redux'

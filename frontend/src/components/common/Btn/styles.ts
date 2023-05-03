@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { white, mainColor } from "../../../styles/colors";
+import { white, mainColor, pink } from "../../../styles/colors";
 
 interface BtnStyleProps {
   language?: string | undefined;
@@ -26,41 +26,49 @@ export const BtnStyle = styled.button<BtnStyleProps>`
       padding: 18px 0 18px 0;
     }
   }
+
   &.Btn_transparent {
     background-color: transparent;
     border: 4px solid ${white};
     border-radius: 17px;
     height: 90px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
     @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 2.1 + "px" : "auto")};
       height: 43px;
       border: 2.38px solid ${white};
     }
   }
+
   &.Btn_attachment {
     background-color: ${mainColor};
     border: none;
     border-radius: 10px;
     height: 40px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @media screen and (max-width: 768px) {
-      width: ${(props) => (props.width ? props.width / 1.5 + "px" : "auto")};
-      height: 30px;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: ${pink[300]};
+      }
     }
   }
+
   &.Btn_upload {
     background-color: ${mainColor};
     border: none;
     border-radius: 10px;
     height: 55px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
     @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 1.6 + "px" : "auto")};
       height: 40px;
     }
   }
 `;
+
 export const BtnText = styled.span<BtnStyleProps>`
   color: ${white};
   font-family: ${({ language }) =>
@@ -74,6 +82,7 @@ export const BtnText = styled.span<BtnStyleProps>`
       font-size: 20px;
     }
   }
+
   &.Btn_transparent {
     font-size: 36px;
 
@@ -81,12 +90,13 @@ export const BtnText = styled.span<BtnStyleProps>`
       font-size: 16px;
     }
   }
+
   &.Btn_attachment {
+    font-family: ${({ language }) =>
+      language === "en" ? "Kim jung chul Myungjo" : "SUIT"};
     font-size: 15px;
-    @media screen and (max-width: 768px) {
-      font-size: 9px;
-    }
   }
+
   &.Btn_upload {
     font-size: 20px;
 

@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { registerActions } from "../../store/registerSlice";
+import useModal from "../../components/utils/useModal";
+import Form from "../../components/common/form";
 
 import {
   BackgroundContainer,
@@ -16,9 +20,13 @@ import DrawingApp from "../../components/Drawing";
 import Btn from "../../components/common/Btn";
 
 const DrawingPage = () => {
+  const dispatch = useDispatch();
+  const { openModal } = useModal();
+
   const [imgFile, setImgFile] = useState<File | undefined>();
   const [getCanvas, setGetCanvas] = useState<HTMLCanvasElement | null>();
   const [isDownloadClick, setIsDownloadClick] = useState(false);
+  const [isSaveClick, setIsSaveClick] = useState(false);
 
   // 이미지 파일 업로드
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,14 +44,23 @@ const DrawingPage = () => {
       if (isDownloadClick) {
         const downloadImg = document.createElement("a");
         downloadImg.href = url;
-        console.log(url)
         downloadImg.download = "myDrawing.png";
         downloadImg.click();
+        setIsDownloadClick(false);
+      }
+
+      if (isSaveClick) {
+        let [_, base64EncodedUrl] = url.split(",");
+        dispatch(registerActions.setMyDrawingImg(base64EncodedUrl));
+        openModal({
+          type: "mydrawing",
+          title: "전시회 목록에 저장하기",
+          content: <Form />,
+        });
+        setIsSaveClick(false);
       }
     }
-  }, [getCanvas, isDownloadClick]);
-
-
+  }, [getCanvas, isDownloadClick, isSaveClick]);
 
   return (
     <>
@@ -72,13 +89,18 @@ const DrawingPage = () => {
               text="내 기기에 저장"
               language="en"
               widthM={250}
-              onClick={()=>{setIsDownloadClick(true)}}
+              onClick={() => {
+                setIsDownloadClick(true);
+              }}
             />
             <Btn
               type="square"
               text="My Drawings에 저장"
               language="en"
               widthM={250}
+              onClick={() => {
+                setIsSaveClick(true);
+              }}
             />
           </BtnContainer>
         </CanvasBtnContainer>

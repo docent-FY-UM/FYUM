@@ -34,7 +34,7 @@ const TestPage = () => {
       </button>
       <button
         onClick={() => {
-          openModal({ type: "mydrawing", title: "안뇽", content: "안뇨뇨뇽" });
+          openModal({ type: "mydrawing", title: "안뇽", content: <Form /> });
         }}
       >
         큰모달버튼!

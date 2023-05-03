@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { grey, mainColor } from "../../../styles/colors";
 
+import { ReactComponent as CloseIc } from "../../../assets/icon/closeIc.svg";
+
 // 모달 화면을 어둡게 함
 export const ModalDimmer = styled.div`
   position: fixed;
@@ -39,7 +41,7 @@ export const ModalContainer = styled.div`
   }
 
   &.mydrawing {
-    height: 500px;
+    height: 600px;
   }
 `;
 
@@ -49,15 +51,18 @@ export const ModalTitle = styled.div`
   font-size: 16px;
   line-height: 20px;
   display: inline-flex;
+  justify-content: space-between;
   align-items: center;
 
   &.mydrawing {
     padding: 1.2rem 1.4rem 1rem 1.4rem;
     border-bottom: 1px solid ${grey[200]};
+
+    span {
+      color: ${grey[500]}
+    }
   }
 `;
-
-
 
 export const ModalContents = styled.div`
   padding-left: 1.4rem;
@@ -66,8 +71,8 @@ export const ModalContents = styled.div`
   line-height: 20px;
   color: ${grey[500]};
 
-  &.barrier {
-    padding-right: 1.4rem;
+  &.mydrawing {
+    padding: 1.4rem 2rem 1.4rem 2rem;
   }
 `;
 
@@ -101,4 +106,17 @@ export const ModalBtn = styled.div`
 
 export const ModalYesBtn = styled(ModalBtn)`
   color: ${mainColor};
+`;
+
+export const CloseBtn = styled(CloseIc)`
+  width: 15px;
+  height: 15px;
+  fill: ${grey[400]};
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      fill: ${mainColor};
+    }
+  }
 `;
