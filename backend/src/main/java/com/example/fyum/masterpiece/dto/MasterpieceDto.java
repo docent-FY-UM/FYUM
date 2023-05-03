@@ -34,7 +34,15 @@ public class MasterpieceDto {
         this.paintedAt = masterpiece.getPaintedAt();
         this.paintingType = masterpiece.getPaintingType();
         this.technique = masterpiece.getTechnique();
-        this.description = masterpiece.getDescription();
+        if (null != masterpiece.getDescription()) {
+            String originDesc = masterpiece.getDescription();
+            String[] desc = originDesc.split("[.]", 6);
+            StringBuilder shortDesc = new StringBuilder();
+            for (int i = 0; i < 5; i++) {
+                shortDesc.append(desc[i]).append(".");
+            }
+            this.description = shortDesc.toString();
+        }
         if (null != masterpiece.getPainter()) {
             Painter painter = masterpiece.getPainter();
             this.painterId = painter.getId();
