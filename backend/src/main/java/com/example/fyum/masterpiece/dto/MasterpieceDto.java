@@ -25,9 +25,8 @@ public class MasterpieceDto {
     private Boolean wishStatus;
     private Boolean exhibitionStatus;
 
-    public MasterpieceDto(Masterpiece masterpiece) {
-        Painter painter = masterpiece.getPainter();
 
+    public MasterpieceDto(Masterpiece masterpiece, Boolean wishStatus, Boolean exhibitionStatus) {
         this.paintingId = masterpiece.getId();
         this.imgSrc = masterpiece.getImgSrc();
         this.titleKr = masterpiece.getTitleKr();
@@ -36,13 +35,20 @@ public class MasterpieceDto {
         this.paintingType = masterpiece.getPaintingType();
         this.technique = masterpiece.getTechnique();
         this.description = masterpiece.getDescription();
-        this.painterId = painter.getId();
-        this.painterKr = painter.getPainterKr();
-        this.painterOrigin = painter.getPainterOrigin();
-//        this.trend = masterpiece.getTrend().getTrendKr();
-//        this.theme = masterpiece.getTheme().getThemeKr();
-//        this.wishStatus = wishStatus;
-//        this.exhibitionStatus = exhibitionStatus;
+        if (null != masterpiece.getPainter()) {
+            Painter painter = masterpiece.getPainter();
+            this.painterId = painter.getId();
+            this.painterKr = painter.getPainterKr();
+            this.painterOrigin = painter.getPainterOrigin();
+        }
+        if (null != masterpiece.getTrend()) {
+            this.trend = masterpiece.getTrend().getTrendKr();
+        }
+        if (null != masterpiece.getTheme()) {
+            this.theme = masterpiece.getTheme().getThemeKr();
+        }
+        this.wishStatus = wishStatus;
+        this.exhibitionStatus = exhibitionStatus;
     }
 
 }

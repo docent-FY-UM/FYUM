@@ -1,5 +1,6 @@
 package com.example.fyum.masterpiece.service;
 
+import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
 import com.example.fyum.masterpiece.dto.MasterpieceListDto;
@@ -11,6 +12,9 @@ import com.example.fyum.masterpiece.repository.MasterpieceRepository;
 import com.example.fyum.masterpiece.repository.PainterRepository;
 import com.example.fyum.masterpiece.repository.ThemeRepository;
 import com.example.fyum.masterpiece.repository.TrendRepository;
+import com.example.fyum.member.entity.Member;
+import com.example.fyum.member.repository.MemberRepository;
+import com.example.fyum.wishlist.repository.WishlistRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,6 +30,9 @@ public class MasterpieceService {
     private final PainterRepository painterRepository;
     private final ThemeRepository themeRepository;
     private final TrendRepository trendRepository;
+    private final MemberRepository memberRepository;
+    private final WishlistRepository wishlistRepository;
+    private final ExhibitionRepository exhibitionRepository;
 
 
     public Page<CategoryDto> getPainters(int page) {
@@ -57,9 +64,18 @@ public class MasterpieceService {
         return trends.map(CategoryDto::new);
     }
 
-    public MasterpieceDto getDetail(int paintingId) {
-        Optional<Masterpiece> masterpiece = masterpieceRepository.findById(paintingId);
-        return masterpiece.map(MasterpieceDto::new).orElse(null);
+    public MasterpieceDto getDetail(String kakaoId, int paintingId) {
+        Member member = memberRepository.findByKakaoId(kakaoId);
+        Optional<Masterpiece> masterpieceOptional = masterpieceRepository.findById(paintingId);
+        if (masterpieceOptional.isEmpty()) {
+            return null;
+        }
+        Masterpiece masterpiece = masterpieceOptional.get();
+        Boolean wishStatus = wishlistRepository.existsByMemberAndMasterpiece(member, masterpiece);
+        Boolean exhibitStatus = exhibitionRepository.existsByMemberIdAndPaintingIdx(
+            member, masterpiece);
+
+        return new MasterpieceDto(masterpiece, wishStatus, exhibitStatus);
     }
 
     public Page<MasterpieceListDto> getMasterpiecesByTheme(int themeId, int page) {
