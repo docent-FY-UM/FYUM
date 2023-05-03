@@ -1,4 +1,4 @@
-import { IntroDiv, TextDiv, LogoText, IntroText, MobileText } from "./style";
+import { IntroDiv, TextDiv, LogoText, IntroText, MobileText } from "./styles";
 const Intro = () => {
   return (
     <>

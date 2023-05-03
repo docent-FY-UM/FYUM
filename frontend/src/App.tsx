@@ -40,11 +40,11 @@ function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/exhibitionlist" element={<ExhibitionListPage />} />
         <Route path="/wishlist" element={<WishListPage />} />
-        <Route path="/artlist/:name" element={<ArtListPage />} />
+        <Route path="/artlist/:name/:id" element={<ArtListPage />} />
         <Route path="/list/:id" element={<ListPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/drawing" element={<DrawingPage />} />
-        <Route path="/my-drawings" element={<MyDrawingsPage/>}/>
+        <Route path="/my-drawigs" element={<MyDrawingsPage />} />
 
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage></TestPage>} />

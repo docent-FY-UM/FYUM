@@ -1,6 +1,5 @@
-import { BackgroundStyle } from "./styles";
-
+import ArtList from "../../components/ArtList";
 const ArtListPage = () => {
-  return <BackgroundStyle></BackgroundStyle>;
+  return <ArtList></ArtList>;
 };
 export default ArtListPage;

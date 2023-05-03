@@ -1,4 +1,4 @@
-import { BtnStyle, BtnText } from "./style";
+import { BtnStyle, BtnText } from "./styles";
 interface BtnProps {
   type?: string | undefined;
   text: string;
