@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { getDetailApi } from "../../store/api";
+import {
+  getDetailApi,
+  fullBookmarkApi,
+  emptyBookmarkApi,
+} from "../../store/api";
+import { useLocation } from "react-router-dom";
 import {
   DetailContainer,
   BackgroundImg,
@@ -10,6 +15,7 @@ import {
   DetailContent,
   ContentDiv,
   DetailDiv,
+  AbsoluteDiv,
   SpeakerImg,
   DescriptionBtn,
   DescriptionP,
@@ -40,6 +46,10 @@ interface detailInfo {
 }
 
 const DetailPage = () => {
+  const location = useLocation();
+
+  const paintingId = location.pathname.slice(8);
+
   const [description, setDescription] = useState(true);
   const [frame, setFrame] = useState(false);
   const [bookmark, setBookmark] = useState(false);
@@ -77,12 +87,29 @@ const DetailPage = () => {
   };
 
   useEffect(() => {
+    // 명화 상세 정보 받아오는 api
     const getDetailData = async () => {
-      const res = await getDetailApi();
+      const res = await getDetailApi(paintingId);
       setData(res.data);
+      setBookmark(res.data.wishStatus);
     };
     getDetailData();
   }, []);
+
+  // 찜하기 api
+  useEffect(() => {
+    if (bookmark === true) {
+      const fullBookmark = async () => {
+        await fullBookmarkApi(paintingId);
+      };
+      fullBookmark();
+    } else {
+      const emptyBookmark = async () => {
+        await emptyBookmarkApi(paintingId);
+      };
+      emptyBookmark();
+    }
+  }, [bookmark]);
 
   const imgURL = data.imgSrc;
 
@@ -99,17 +126,18 @@ const DetailPage = () => {
             {data.titleOrigin}
           </TitleOrigin>
           <TitleKr>{data.titleKr}</TitleKr>
-          <br />
-          <DetailDiv>
-            <DetailContent>{data.painterOrigin}</DetailContent>
-            <DetailContent>{data.paintedAt}</DetailContent>
-            <DetailContent>
-              {data.paintingType}, {data.technique}
-            </DetailContent>
-          </DetailDiv>
-          <ContentDiv>
-            <Content>{data.description}</Content>
-          </ContentDiv>
+          <AbsoluteDiv>
+            <DetailDiv>
+              <DetailContent>{data.painterOrigin}</DetailContent>
+              <DetailContent>{data.paintedAt}</DetailContent>
+              <DetailContent>
+                {data.paintingType}, {data.technique}
+              </DetailContent>
+            </DetailDiv>
+            <ContentDiv>
+              <Content>{data.description}</Content>
+            </ContentDiv>
+          </AbsoluteDiv>
           {/* <SpeakerImg /> */}
         </ContentContainer>
       ) : null}
