@@ -140,7 +140,7 @@ const List = () => {
     <ListContainer add={currentUrl[2]}>
       <ImageContainer>
         {listData.map((item: any) => (
-          <ImageStyle paintingId={item.id} onClick={() => goArtList(item.id)}>
+          <ImageStyle key={item.id} onClick={() => goArtList(item.id)}>
             {item.imgSrc ? (
               <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
             ) : (

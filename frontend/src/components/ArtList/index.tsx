@@ -44,13 +44,13 @@ const ArtList = () => {
 
   const goDetail = (id: number) => {
     alert("이동하게 하기" + id);
-    navigate(`/detail`);
+    navigate(`/detail/${id}`);
   };
   return (
     <ArtListContainer>
       <ImageContainer>
         {artListData.map((item: any) => (
-          <ImageStyle onClick={() => goDetail(item.id)}>
+          <ImageStyle key={item.paintingId} onClick={() => goDetail(item.id)}>
             {item.imgSrc ? (
               <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
             ) : (

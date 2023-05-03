@@ -31,7 +31,7 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const ImageStyle = styled.div<{ paintingId: number }>`
+export const ImageStyle = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
