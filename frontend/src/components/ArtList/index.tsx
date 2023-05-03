@@ -50,7 +50,10 @@ const ArtList = () => {
     <ArtListContainer>
       <ImageContainer>
         {artListData.map((item: any) => (
-          <ImageStyle key={item.paintingId} onClick={() => goDetail(item.id)}>
+          <ImageStyle
+            key={item.paintingId}
+            onClick={() => goDetail(item.paintingId)}
+          >
             {item.imgSrc ? (
               <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
             ) : (
