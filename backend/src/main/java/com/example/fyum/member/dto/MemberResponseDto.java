@@ -6,4 +6,6 @@ import lombok.Data;
 public class MemberResponseDto {
     private String nickname;
 
+    private Boolean survey;
+
 }

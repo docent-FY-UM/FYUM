@@ -41,6 +41,8 @@ public class MemberController {
         KakaoProfile kakaoProfile = memberService.showprofile(oauthToken.getAccess_token());
         MemberResponseDto memberResponseDto = new MemberResponseDto();
         memberResponseDto.setNickname(kakaoProfile.getProperties().getNickname());
+        System.out.print(kakaoProfile.getId());
+        memberResponseDto.setSurvey(memberService.isSurvey(String.valueOf(kakaoProfile.getId())));
 
         return new ResponseEntity<MemberResponseDto>(memberResponseDto,headers,HttpStatus.valueOf(200));
     }

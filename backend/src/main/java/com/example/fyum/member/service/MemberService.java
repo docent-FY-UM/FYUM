@@ -134,8 +134,7 @@ public class MemberService {
             Recommend recommend = Recommend.builder()
                     .member(member)
                     .build();
-//            Recommend recommend = new Recommend();
-//            recommend.setMember(member);
+
             recommendRepository.save(recommend);
         }
 
@@ -153,5 +152,19 @@ public class MemberService {
 
         return member;
     }
+
+    public Boolean isSurvey(String kakaoId){
+        Member member=memberRepository.findByKakaoId(kakaoId);
+        Recommend recommend = recommendRepository.findByMember(member);
+
+
+        if(recommend.getPainting1() == null){
+            return false;
+        }
+
+        return true;
+    }
+
+
 
 }
