@@ -2,7 +2,6 @@ import styled from "styled-components";
 import PainterBackImg from "../../assets/images/listPainterBackground.png";
 import ArtTrendBackImg from "../../assets/images/listArtTrendBackground.png";
 import ThemeBackImg from "../../assets/images/listThemeBackground.png";
-
 export const ListContainer = styled.div<{ add: string }>`
   height: 100%;
   width: 100%;
@@ -14,14 +13,14 @@ export const ListContainer = styled.div<{ add: string }>`
       : `url(${ThemeBackImg})`};
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<{ ref: any }>`
   align-items: center;
   display: flex;
   height: 80%;
   width: 100%;
   position: absolute;
   top: 12%;
-  overflow-y: auto;
+  overflow-y: scroll;
   margin: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -54,4 +53,8 @@ export const Temp = styled.div`
   color: pink;
   height: 100%;
   width: 100%;
+`;
+
+export const ListPageEnd = styled.div`
+  visibility: hidden;
 `;

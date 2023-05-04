@@ -7,7 +7,7 @@ export const ArtListContainer = styled.div`
   width: 100vw;
   background-image: url(${BackImg});
 `;
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<{ ref: any }>`
   align-items: center;
   display: flex;
   height: 80%;
@@ -16,21 +16,34 @@ export const ImageContainer = styled.div`
   top: 12%;
   overflow-y: auto;
   margin: auto;
+
   ::-webkit-scrollbar {
     display: none;
   }
   @media (max-width: 768px) {
-    display: inline-block;
+    display: block;
   }
 `;
 
 export const ImageStyle = styled.div`
-  height: 100%;
+  height: 60%;
   width: 100%;
   display: flex;
-  margin-left: 1%;
-  margin-right: 1%;
+  margin-left: 3%;
+  margin-right: 3%;
   cursor: pointer;
+  box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
+  position: relative;
+`;
+
+export const ImageTitleStyle = styled.div`
+  display: inline-block;
+  font-weight: 500;
+  font-size: 20px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 110%;
 `;
 
 export const Temp = styled.div`

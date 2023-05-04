@@ -6,6 +6,17 @@ interface DrawingQueryTypes {
   img: string;
 }
 
+interface ListQueryTypes {
+  listUrl: string;
+  page: number;
+}
+
+interface ArtListQueryTypes {
+  artListUrl: string;
+  urlType: string;
+  page: number;
+}
+
 // 상세정보 api
 export const getDetailApi = async (paintingId: string) => {
   try {
@@ -57,3 +68,17 @@ export const createDrawingApi = async ({
     description: contents,
     base64: img,
   });
+
+// list 페이지 api
+export const getListApi = async ({ listUrl, page }: ListQueryTypes) =>
+  await customAxios.get(`/paintings/${listUrl}/?page=${page + 1}`);
+
+// artList 페이지 api
+export const getArtListApi = async ({
+  artListUrl,
+  urlType,
+  page,
+}: ArtListQueryTypes) =>
+  await customAxios.get(
+    `/paintings/${artListUrl}/${urlType}/?page=${page + 1}`
+  );

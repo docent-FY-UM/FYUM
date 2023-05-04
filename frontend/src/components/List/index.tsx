@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, EventHandler } from "react";
 import { useNavigate } from "react-router-dom";
+import { useHorizontalScroll } from "../utils/useSideScroll";
 
 import {
   ListContainer,
@@ -7,13 +8,15 @@ import {
   Card,
   ImageStyle,
   Temp,
+  ListPageEnd,
 } from "./styles";
 import axios from "axios";
+import { getListApi } from "../../store/api";
 
 const List = () => {
   const navigate = useNavigate();
   const [listData, setListData] = useState([]); //받아온 데이터 저장
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const pageEnd: any = useRef(); //페이지 끝부분
 
@@ -40,20 +43,27 @@ const List = () => {
       ? "trends"
       : "themes";
 
-    const res: any = await axios.get(
-      `http://k8d203.p.ssafy.io:1234/api/paintings/${listUrl}/?page=1`,
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      }
-    );
+    const res = await getListApi({ listUrl, page });
     // .then((res) => {
     console.log(res);
     // });
 
     const data = await res.data.content;
-    setListData(data);
+    // setListData(data);
+    if (data.length === 0) {
+      if (page === 0) {
+        setListData(data); // 검색결과가 없는 경우
+      }
+    } else {
+      if (page > prevPage) {
+        setListData((prev) => [...prev, ...data] as any);
+        setPrevPage(page);
+      } else {
+        setListData(data);
+      }
+    }
+    setLoading(true);
+
     // if (data.length === 0) {
     //   if (page === 0) {
     //   }
@@ -135,19 +145,17 @@ const List = () => {
     alert("이동하게 하기" + id);
     navigate(`/artlist/${currentUrl[2]}/${id}`);
   };
+  const scrollRef = useHorizontalScroll();
 
   return (
     <ListContainer add={currentUrl[2]}>
-      <ImageContainer>
+      <ImageContainer ref={scrollRef}>
         {listData.map((item: any) => (
           <ImageStyle key={item.id} onClick={() => goArtList(item.id)}>
-            {item.imgSrc ? (
-              <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
-            ) : (
-              <Temp></Temp>
-            )}
+            {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
           </ImageStyle>
         ))}
+        <ListPageEnd ref={pageEnd}></ListPageEnd>
       </ImageContainer>
     </ListContainer>
   );
