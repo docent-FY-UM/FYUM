@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { black, white } from "../../styles/colors";
+import { ReactComponent as RightArrowIc } from "../../assets/icon/rightArrowIc.svg";
 
 interface artworkImgInfo {
   choosed: boolean;
@@ -20,7 +21,7 @@ export const SurveyContainer = styled.div`
   background-color: ${black};
 
   @media (max-width: 768px) {
-    top: 12vh;
+    top: 11vh;
   }
 `;
 
@@ -73,5 +74,35 @@ export const ArtworkImg = styled.img<artworkImgInfo>`
     &:active {
       filter: brightness(100%);
     }
+  }
+`;
+
+export const NextContainer = styled.div`
+  position: absolute;
+  display: flex;
+  bottom: -5%;
+  right: -9%;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    bottom: -20%;
+    right: -8%;
+  }
+`;
+
+export const NextText = styled.p`
+  margin: 0;
+  color: ${white};
+  font-size: 2vw;
+`;
+
+export const RightArrowIcStyle = styled(RightArrowIc)`
+  fill: ${white};
+  width: 3vw;
+  padding-top: 1vh;
+
+  @media (max-width: 768px) {
+    padding-top: 0;
+    width: 5vw;
   }
 `;

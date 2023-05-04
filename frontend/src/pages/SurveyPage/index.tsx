@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { surveySubmitApi } from "../../store/api";
 import {
   BackgroundContainer,
   SurveyContainer,
   SurveyTitle,
   GridContainer,
   ArtworkImg,
+  NextContainer,
+  NextText,
+  RightArrowIcStyle,
 } from "./styles";
 import art_1 from "../../assets/images/survey/1.jpg";
 import art_2 from "../../assets/images/survey/2.jpg";
@@ -18,6 +23,8 @@ import art_225 from "../../assets/images/survey/225.jpg";
 import art_238 from "../../assets/images/survey/238.jpg";
 
 const SurveyPage = () => {
+  const navigate = useNavigate();
+
   const [choosed, setChoosed] = useState<number[]>([]);
 
   const handleClick = (artworkNum: number) => {
@@ -36,6 +43,20 @@ const SurveyPage = () => {
     } else if (choosed.length > 2) {
       alert("2개의 그림만 선택해주세요");
     }
+  };
+
+  const sendSurveyData = async () => {
+    try {
+      await surveySubmitApi(choosed);
+      console.log("성공!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendSurvey = () => {
+    navigate("/recommend");
+    sendSurveyData();
   };
 
   console.log(choosed);
@@ -97,6 +118,10 @@ const SurveyPage = () => {
             choosed={choosed.includes(238)}
           />
         </GridContainer>
+        <NextContainer onClick={sendSurvey}>
+          <NextText>Submit&nbsp;&nbsp;</NextText>
+          <RightArrowIcStyle />
+        </NextContainer>
       </SurveyContainer>
     </BackgroundContainer>
   );
