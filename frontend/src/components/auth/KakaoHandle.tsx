@@ -5,12 +5,10 @@ import {
   changeSurvey,
 } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const KakaoHandle = () => {
   // dispatch/navigate 사용하기 위해 정의
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   let code = new URL(window.location.href).searchParams.get("code");
   const baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -24,10 +22,10 @@ const KakaoHandle = () => {
         dispatch(changeUserNickNm(res.data.nickname));
         dispatch(changeAccessToken(res.headers.authorization));
         dispatch(changeSurvey(res.data.survey));
-        navigate("/survey");
+        window.location.href = "/survey";
       } else {
         alert("로그인 에러가 발생했습니다. 다시 로그인해주세요!");
-        navigate("/login");
+        window.location.href = "/login";
       }
     })
     .catch((err) => console.log(err));
