@@ -13,13 +13,10 @@ export const customAxios = axios.create({
 
 // 응답을 가로채서 오류 처리
 customAxios.interceptors.response.use((response) => {
-  console.log("응답왓닝?", response);
   if (response.data.status === 403 || response.data.status === 402) {
-    console.log("토큰 말료", response);
     localStorage.removeItem("token");
     window.location.href = "/login";
   }
-
   return response;
 }
 );

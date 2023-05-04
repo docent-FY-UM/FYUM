@@ -8,9 +8,11 @@ import modalReducer from "./modalSlice";
 import userReducer from "./userSlice";
 import listReducer from "./listSlice";
 import registerReducer from "./registerSlice"
+import exhibitionListReducer from "./exhibitionListSlice";
 
 // 관리하는 saga
 import { registerSagas } from "./registerSagas";
+import { exhibitionListSagas } from "./exhibitionLisfSagas";
 
 // rootReducers by using combineReducers
 const rootReducers = combineReducers({
@@ -19,11 +21,12 @@ const rootReducers = combineReducers({
   user: userReducer,
   list: listReducer,
   register: registerReducer,
+  exhibitionList: exhibitionListReducer,
 });
 
 // rootSaga
 function* rootSaga() {
-  yield all([...registerSagas]);
+  yield all([...registerSagas, ...exhibitionListSagas]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

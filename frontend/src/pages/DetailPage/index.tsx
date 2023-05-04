@@ -129,23 +129,28 @@ const DetailPage = () => {
     if (frame === false) {
       const fullFrame = async () => {
         try {
-          await fullFrameApi(paintingId);
+          const res = await fullFrameApi(paintingId);
+          // 전시회 목록이 가득찼을 경우
+          if (res.data) {
+            alert("전시회 목록은 최대 10개까지 가능합니다.");
+            return;
+          }
+          setFrame(true);
         } catch (error) {
           console.log("전시회 저장 실패", error);
         }
       };
       fullFrame();
-      setFrame(true);
     } else {
       const emptyFrame = async () => {
         try {
           await emptyFrameApi(paintingId);
+          setFrame(false);
         } catch (error) {
           console.log("전시회 저장 취소 실패", error);
         }
       };
       emptyFrame();
-      setFrame(false);
     }
   };
 

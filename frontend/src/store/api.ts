@@ -48,14 +48,18 @@ export const getRecommendApi = async () =>
   await customAxios.get("recommends/recommends");
 
 // 전시회 저장 api
-export const fullFrameApi = async (paintingId: string) => {
-  await customAxios.post("exhibitions", {paintingId});
-};
+export const fullFrameApi = async (paintingId: string) => 
+  await customAxios.post("exhibitions", { paintingId });
+;
 
 // 전시회 저장 취소 api
-export const emptyFrameApi = async (paintingId: string) => {
-  await customAxios.put("exhibitions", {paintingId});
-};
+export const emptyFrameApi = async (paintingId: string) => 
+  await customAxios.put("exhibitions", { paintingId });
+;
+
+// 전시회 리스트 받아오기
+export const getExhibitionListApi = async () =>
+  await customAxios.get("exhibitions");
 
 // 그림 저장 api
 export const createDrawingApi = async ({
@@ -72,7 +76,6 @@ export const createDrawingApi = async ({
   return response;
 };
 
-
 // list 페이지 api
 export const getListApi = async ({ listUrl, page }: ListQueryTypes) =>
   await customAxios.get(`/paintings/${listUrl}/?page=${page + 1}`);
@@ -86,4 +89,3 @@ export const getArtListApi = async ({
   await customAxios.get(
     `/paintings/${artListUrl}/${urlType}/?page=${page + 1}`
   );
-

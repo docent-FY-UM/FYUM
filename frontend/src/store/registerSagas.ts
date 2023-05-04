@@ -28,7 +28,6 @@ function* onCreateDrawingStartAsync({ payload }: Action): Generator<any, void, a
     const response = yield call(createDrawingApi, payload)
     if (response.status === 200) {
         yield put(formRequestSuccess(response.data))
-        console.log("보내졌다!!!")
     }
   } catch (error: any) {
     yield put(formRequestError(error.response.data));
