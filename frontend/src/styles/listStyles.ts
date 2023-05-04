@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const ListBackgroundContainer = styled.div<{backgroundimg: string}>`
+export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   height: 100vh;
   width: 100vw;
-  background-image: url(${props => props.backgroundimg});
+  background-image: url(${(props) => props.backgroundimg});
 
   @media screen and (max-width: 768px) {
     overflow-y: visible;
@@ -32,4 +32,41 @@ export const ListTitleContainer = styled.div`
   @media screen and (max-width: 768px) {
     font-size: 36px;
   }
+`;
+export const ImageContainer = styled.div<{ ref: any }>`
+  align-items: center;
+  display: flex;
+  height: 80%;
+  width: 100%;
+  position: absolute;
+  top: 12%;
+  overflow-y: scroll;
+  margin: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    display: inline-block;
+  }
+`;
+
+export const ImageStyle = styled.div`
+  height: 60%;
+  width: 100%;
+  display: flex;
+  margin-left: 3%;
+  margin-right: 3%;
+  cursor: pointer;
+  box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
+  position: relative;
+`;
+
+export const ImageTitleStyle = styled.div`
+  display: inline-block;
+  font-weight: 500;
+  font-size: 20px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 110%;
 `;

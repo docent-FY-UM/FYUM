@@ -2,16 +2,12 @@ import { useState, useEffect, useRef, EventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 
-import {
-  ListContainer,
-  ImageContainer,
-  Card,
-  ImageStyle,
-  Temp,
-  ListPageEnd,
-} from "./styles";
+import { ListContainer, ListPageEnd } from "./styles";
+import { ImageStyle } from "../../styles/listStyles";
+
 import axios from "axios";
 import { getListApi } from "../../store/api";
+import { ListTitleContainer, ImageContainer } from "../../styles/listStyles";
 
 const List = () => {
   const navigate = useNavigate();
@@ -148,16 +144,19 @@ const List = () => {
   const scrollRef = useHorizontalScroll();
 
   return (
-    <ListContainer add={currentUrl[2]}>
-      <ImageContainer ref={scrollRef}>
-        {listData.map((item: any) => (
-          <ImageStyle key={item.id} onClick={() => goArtList(item.id)}>
-            {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
-          </ImageStyle>
-        ))}
-        <ListPageEnd ref={pageEnd}></ListPageEnd>
-      </ImageContainer>
-    </ListContainer>
+    <>
+      <ListContainer add={currentUrl[2]}>
+        <ListTitleContainer>{currentUrl[2]}</ListTitleContainer>
+        <ImageContainer ref={scrollRef}>
+          {listData.map((item: any) => (
+            <ImageStyle key={item.id} onClick={() => goArtList(item.id)}>
+              {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
+            </ImageStyle>
+          ))}
+          <ListPageEnd ref={pageEnd}></ListPageEnd>
+        </ImageContainer>
+      </ListContainer>
+    </>
   );
 };
 export default List;

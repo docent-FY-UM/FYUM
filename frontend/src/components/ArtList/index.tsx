@@ -1,17 +1,15 @@
-import {
-  ArtListContainer,
-  ImageContainer,
-  ImageStyle,
-  Temp,
-  ImageTitleStyle,
-} from "./styles";
+import { ArtListContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, useRef, EventHandler } from "react";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 import { ListPageEnd } from "../List/styles";
 import { getArtListApi } from "../../store/api";
-
+import {
+  ImageStyle,
+  ImageContainer,
+  ImageTitleStyle,
+} from "../../styles/listStyles";
 const ArtList = () => {
   const navigate = useNavigate();
   const [artListData, setArtListData] = useState([]);
