@@ -1,5 +1,9 @@
 import axios from "axios";
-import { changeUserNickNm, changeAccessToken } from "../../store/userSlice";
+import {
+  changeUserNickNm,
+  changeAccessToken,
+  changeSurvey,
+} from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +23,7 @@ const KakaoHandle = () => {
         localStorage.setItem("token", res.headers.authorization);
         dispatch(changeUserNickNm(res.data.nickname));
         dispatch(changeAccessToken(res.headers.authorization));
+        dispatch(changeSurvey(res.data.survey));
         navigate("/survey");
       } else {
         alert("로그인 에러가 발생했습니다. 다시 로그인해주세요!");

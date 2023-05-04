@@ -1,5 +1,4 @@
 import { customAxios } from "./customAxios";
-
 interface DrawingQueryTypes {
   title: string;
   contents: string;
@@ -7,8 +6,14 @@ interface DrawingQueryTypes {
 }
 
 // 상세정보 api
-export const getDetailApi = async (paintingId: string) =>
-  await customAxios.get(`paintings/detail/${paintingId}`);
+export const getDetailApi = async (paintingId: string) => {
+  try {
+    const response = await customAxios.get(`paintings/detail/${paintingId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
 
 // 찜하기 api
 export const fullBookmarkApi = async (paintingId: string) => {
@@ -19,6 +24,7 @@ export const fullBookmarkApi = async (paintingId: string) => {
 export const emptyBookmarkApi = async (paintingId: string) => {
   await customAxios.delete(`wishlist/${paintingId}`);
 };
+
 // 그림 저장 api
 export const createDrawingApi = async ({
   title,
