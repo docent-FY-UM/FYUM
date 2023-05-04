@@ -90,9 +90,10 @@ const DetailPage = () => {
     const getDetailData = async () => {
       try {
         const res = await getDetailApi(paintingId);
-        setData(res.data);
-        setBookmark(res.data.wishStatus);
-        setFrame(res.data.exhibitionStatus);
+        // console.log(res)
+        setData(res);
+        setBookmark(res.wishStatus);
+        setFrame(res.exhibitionStatus);
       } catch (error) {
         console.log("데이터 받아오기 실패", error);
       }
