@@ -24,7 +24,6 @@ interface Action {
 // 그림 등록 saga
 function* onCreateDrawingStartAsync({ payload }: Action): Generator<any, void, any> {
   const { formRequestSuccess, formRequestError } = registerActions;
-  console.log("사가보내기전 payload", payload);
   try {
     const response = yield call(createDrawingApi, payload)
     if (response.status === 200) {

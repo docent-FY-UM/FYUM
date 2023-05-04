@@ -30,7 +30,6 @@ const registerSlice = createSlice({
     },
     // 이미지 등록
     setMyDrawingImg(state, action) {
-      console.log("이미지 잘옴?", action.payload);
       state.img = action.payload;
     },
     // 폼 초기화

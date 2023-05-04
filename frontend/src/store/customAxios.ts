@@ -6,6 +6,7 @@ export const customAxios = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL + "/api/",
   headers: {
     Authorization: accessToken,
+    "Content-Type": "application/json;charset=UTF-8",
   },
 });
 

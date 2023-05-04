@@ -22,7 +22,9 @@ import {
 
 interface CanvasProps {
   imgFile: File | undefined;
-  setGetCanvas:React.Dispatch<React.SetStateAction<HTMLCanvasElement | null | undefined>>
+  setGetCanvas: React.Dispatch<
+    React.SetStateAction<HTMLCanvasElement | null | undefined>
+  >;
 }
 
 const DrawingApp = ({ imgFile, setGetCanvas }: CanvasProps) => {

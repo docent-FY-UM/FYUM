@@ -4,11 +4,10 @@ import { registerActions } from "../../store/registerSlice";
 import useModal from "../../components/utils/useModal";
 import Form from "../../components/common/form";
 
+import { ListTitleContainer } from "../../styles/listStyles";
+
 import {
   BackgroundContainer,
-  GridItems,
-  TitleContainer,
-  Underline,
   CanvasBtnContainer,
   BtnContainer,
   RealFileBtn,
@@ -65,10 +64,9 @@ const DrawingPage = () => {
   return (
     <>
       <BackgroundContainer>
-        <TitleContainer>
-          Drawing
-          <Underline />
-        </TitleContainer>
+        <ListTitleContainer>
+        &nbsp;Drawing&nbsp;
+        </ListTitleContainer>
         <CanvasBtnContainer>
           <DrawingApp imgFile={imgFile} setGetCanvas={setGetCanvas} />
           <BtnContainer>

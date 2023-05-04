@@ -3,8 +3,11 @@ import {
   getDetailApi,
   fullBookmarkApi,
   emptyBookmarkApi,
+  fullFrameApi,
+  emptyFrameApi,
 } from "../../store/api";
 import { useLocation } from "react-router-dom";
+
 import {
   DetailContainer,
   BackgroundImg,
@@ -78,10 +81,6 @@ const DetailPage = () => {
     setDescription(!description);
   };
 
-  const changeFrame = () => {
-    setFrame(!frame);
-  };
-
   const changeBookmark = () => {
     setBookmark(!bookmark);
   };
@@ -89,9 +88,14 @@ const DetailPage = () => {
   useEffect(() => {
     // 명화 상세 정보 받아오는 api
     const getDetailData = async () => {
-      const res = await getDetailApi(paintingId);
-      setData(res.data);
-      setBookmark(res.data.wishStatus);
+      try {
+        const res = await getDetailApi(paintingId);
+        setData(res.data);
+        setBookmark(res.data.wishStatus);
+        setFrame(res.data.exhibitionStatus);
+      } catch (error) {
+        console.log("데이터 받아오기 실패", error);
+      }
     };
     getDetailData();
   }, []);
@@ -100,16 +104,49 @@ const DetailPage = () => {
   useEffect(() => {
     if (bookmark === true) {
       const fullBookmark = async () => {
-        await fullBookmarkApi(paintingId);
+        try {
+          await fullBookmarkApi(paintingId);
+        } catch (error) {
+          console.log("찜하기 실패", error);
+        }
       };
       fullBookmark();
     } else {
       const emptyBookmark = async () => {
-        await emptyBookmarkApi(paintingId);
+        try {
+          await emptyBookmarkApi(paintingId);
+        } catch (error) {
+          console.log("찜하기 취소 실패", error);
+        }
       };
       emptyBookmark();
     }
   }, [bookmark]);
+
+  // 전시회 저장 api
+  const changeFrame = () => {
+    if (frame === false) {
+      const fullFrame = async () => {
+        try {
+          await fullFrameApi(paintingId);
+        } catch (error) {
+          console.log("전시회 저장 실패", error);
+        }
+      };
+      fullFrame();
+      setFrame(true);
+    } else {
+      const emptyFrame = async () => {
+        try {
+          await emptyFrameApi(paintingId);
+        } catch (error) {
+          console.log("전시회 저장 취소 실패", error);
+        }
+      };
+      emptyFrame();
+      setFrame(false);
+    }
+  };
 
   const imgURL = data.imgSrc;
 
@@ -122,7 +159,7 @@ const DetailPage = () => {
       />
       {description === true ? (
         <ContentContainer>
-          <TitleOrigin len={data.titleOrigin.length}>
+          <TitleOrigin len={data.titleOrigin?.length}>
             {data.titleOrigin}
           </TitleOrigin>
           <TitleKr>{data.titleKr}</TitleKr>

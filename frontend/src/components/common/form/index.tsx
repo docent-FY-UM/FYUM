@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { registerActions } from "../../../store/registerSlice";
+import useModal from "../../utils/useModal";
 
 import Btn from "../Btn";
 
@@ -9,6 +9,7 @@ import {
   FormContainer,
   InputContainer,
   InputStyle,
+  TextAreaStyle,
   InputDiv,
   PreviewImgStyle,
   BtnContainer,
@@ -17,16 +18,17 @@ import {
 
 const Form = () => {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
   const { title, contents, img } = useSelector(
     (state: RootState) => state.register
   );
 
-  // 이미지 미리보기
-  // const previewImg = new Image();
-  // previewImg.src = img;
-
   // 1. input 변경 이벤트 핸들러
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     let { name, value } = e.target;
     dispatch(
       registerActions.changeField({
@@ -39,7 +41,6 @@ const Form = () => {
   // 2. form 등록 이벤트 핸들러
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("제출버튼");
 
     // 공백 검사
     let blank_pattern = /^\s+|\s+$/g;
@@ -53,6 +54,8 @@ const Form = () => {
     }
 
     dispatch(registerActions.formRequestStart({ title, contents, img }));
+    alert("myDrawings에 저장 완료!");
+    closeModal();
   };
 
   return (
@@ -71,8 +74,7 @@ const Form = () => {
           </InputDiv>
           <InputDiv>
             <p>Contents</p>
-            <InputStyle
-              className="contents"
+            <TextAreaStyle
               name="contents"
               placeholder="작품의 설명을 입력하세요."
               onChange={(e) => {

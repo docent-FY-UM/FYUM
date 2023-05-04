@@ -6,41 +6,16 @@ export const BackgroundContainer = styled.div`
   width: 100%;
   background-color: ${black};
 
-  /* overflow-y: hidden; */
-
   @media screen and (max-width: 768px) {
     overflow-y: visible;
   }
 `;
 
-export const GridItems = styled.div`
-  height: 100%;
-  grid-column: 2 / span 8;
-`;
-
-export const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 80px;
-
-  color: white;
-  font-weight: 700;
-  font-size: 54px;
-  line-height: 83px;
-`;
-
-export const Underline = styled.div`
-  border: 1.5px solid ${white};
-  width: 18vw;
-  margin-top: -12px;
-`;
 
 export const CanvasBtnContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  padding-top: 40px;
+  padding-top: 60px;
 
 
   @media screen and (max-width: 1050px) {

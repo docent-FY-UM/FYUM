@@ -21,10 +21,24 @@ export const InputStyle = styled.input`
   width: 323px;
   padding: 5px;
   border-radius: 5px;
+  border-color: ${grey[100]};
 
-  &.contents {
-    height: 80px;
-  }
+  font-family: "SUIT";
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const TextAreaStyle = styled.textarea`
+  height: 80px;
+  width: 323px;
+  padding: 5px;
+  border: 1.8px solid ${grey[300]};
+  border-radius: 5px;
+  resize: none;
+
+  font-family: "SUIT";
+  font-weight: 500;
+  font-size: 14px;
 `;
 
 export const InputDiv = styled.div`
