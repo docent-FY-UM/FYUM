@@ -1,15 +1,15 @@
 package com.example.fyum.myDrawing.controller;
 
+import com.example.fyum.myDrawing.dto.MyDrawingDetailDto;
 import com.example.fyum.myDrawing.dto.MyDrawingRequestDto;
 import com.example.fyum.myDrawing.dto.MyDrawingResponseDto;
 import com.example.fyum.myDrawing.service.MyDrawingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +22,16 @@ public class MyDrawingController {
     public ResponseEntity<MyDrawingResponseDto> saveMyDrawing(@RequestBody MyDrawingRequestDto dto, Authentication authentication){
         return ResponseEntity.ok(myDrawingService.saveMyDrawing(dto,authentication.getName()));
     }
+
+    @GetMapping("")
+    public ResponseEntity<List<MyDrawingResponseDto>> getMyDrawing(Authentication authentication){
+        return ResponseEntity.ok(myDrawingService.getMyDrawing(authentication.getName()));
+    }
+
+    @GetMapping("/detail/{paintingId}")
+    public ResponseEntity<MyDrawingDetailDto> getDetailMyDrawing(@PathVariable int paintingId, Authentication authentication){
+        return ResponseEntity.ok(myDrawingService.getDetail(paintingId,authentication.getName()));
+    }
+
 
 }

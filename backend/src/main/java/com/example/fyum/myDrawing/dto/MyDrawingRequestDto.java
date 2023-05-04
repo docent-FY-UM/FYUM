@@ -7,6 +7,5 @@ public class MyDrawingRequestDto {
 
     String title;
     String description;
-
-    String base64;
+    String img;
 }

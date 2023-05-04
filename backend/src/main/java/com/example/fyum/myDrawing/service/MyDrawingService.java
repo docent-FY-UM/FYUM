@@ -5,8 +5,11 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.fyum.config.AwsS3Config;
+import com.example.fyum.exhibition.entity.Exhibition;
+import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
+import com.example.fyum.myDrawing.dto.MyDrawingDetailDto;
 import com.example.fyum.myDrawing.dto.MyDrawingRequestDto;
 import com.example.fyum.myDrawing.dto.MyDrawingResponseDto;
 import com.example.fyum.myDrawing.entity.MyDrawing;
@@ -16,9 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.util.Base64;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,8 @@ public class MyDrawingService {
     private final MyDrawingRepository myDrawingRepository;
 
     private final MemberRepository memberRepository;
+
+    private final ExhibitionRepository exhibitionRepository;
 
     private final AmazonS3 amazonS3;
 
@@ -49,7 +52,7 @@ public class MyDrawingService {
 
 
         // base64 문자열로부터 이미지 데이터 디코딩
-        byte[] imageBytes = Base64.getDecoder().decode(dto.getBase64());
+        byte[] imageBytes = Base64.getDecoder().decode(dto.getImg());
 
         // S3 객체 메타 데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
@@ -71,6 +74,41 @@ public class MyDrawingService {
         resdto.setImgSrc(perfix+filename);
 
         return resdto;
+
+    }
+
+    public List<MyDrawingResponseDto> getMyDrawing(String kakaoId){
+        Member member = memberRepository.findByKakaoId(kakaoId);
+
+        List<MyDrawing> temp = myDrawingRepository.findByMember(member);
+
+        List<MyDrawingResponseDto> res = new ArrayList<>();
+        for(int i = 0; i< temp.size(); i++){
+            MyDrawing md = temp.get(i);
+            MyDrawingResponseDto dto = new MyDrawingResponseDto();
+            dto.setImgSrc(md.getImgSrc());
+            dto.setPaintingId(md.getId());
+            res.add(dto);
+        }
+        return res;
+    }
+
+    public MyDrawingDetailDto getDetail(int paintingId, String kakaoId){
+
+        Member member =memberRepository.findByKakaoId(kakaoId);
+
+        MyDrawing temp =myDrawingRepository.findByMemberAndId(member,paintingId);
+
+        MyDrawingDetailDto res = new MyDrawingDetailDto();
+        res.setImgSrc(temp.getImgSrc());
+        res.setPaintingId(temp.getId());
+        res.setTitle(temp.getTitle());
+        res.setDiscription(temp.getDescription());
+        res.setCuration(temp.getCuration());
+        res.setExhibitionStatus(exhibitionRepository.existsByMemberIdAndMyDrawingIdx(member,temp));
+
+
+        return res;
 
     }
 
