@@ -2,8 +2,8 @@ import Unity, { UnityContent } from "react-unity-webgl";
 
 export default function UnityPage2() {
   let unityContent = new UnityContent(
-    "unity/Build/edittset.json",
-    "unity/Build/UnityLoader.js"
+    "/unity/Build/edittset.json",
+    "/unity/Build/UnityLoader.js"
   );
   function clicking() {
     alert("눌렸음!");
