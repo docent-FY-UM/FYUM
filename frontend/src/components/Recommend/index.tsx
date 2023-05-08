@@ -31,7 +31,11 @@ const RecommendList = () => {
       <ImageContainer ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle key={item.id} onClick={() => goDetail(item.paintingId)}>
+            <ImageStyle
+              key={item.id}
+              title={""}
+              onClick={() => goDetail(item.paintingId)}
+            >
               {
                 <img
                   src={item.imgSrc}
