@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { white } from "./colors";
 
 export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   height: 100vh;
@@ -31,22 +32,25 @@ export const ListTitleContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     font-size: 36px;
+    padding-top: 70px;
   }
 `;
 export const ImageContainer = styled.div<{ ref: any }>`
   align-items: center;
   display: flex;
-  height: 80%;
+  height: 79%;
   width: 100%;
   position: absolute;
   top: 12%;
-  overflow-y: scroll;
+  overflow-y: hidden;
   margin: auto;
   ::-webkit-scrollbar {
     display: none;
   }
   @media (max-width: 768px) {
     display: inline-block;
+    top: 21%;
+    overflow-y: scroll;
   }
 `;
 
@@ -59,7 +63,15 @@ export const ImageStyle = styled.div<{ title?: string | null }>`
   cursor: pointer;
   box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
   position: relative;
-  margin-top: ${(props) => (props.title === "artList" ? "5%" : "0%")};
+  margin-top: ${(props) => (props.title === "artList" ? "4.5%" : "0%")};
+  color: ${(props) => (props.title === "artList" ? `${white}` : "")};
+
+  @media (max-width: 768px) {
+    width: 50%;
+    box-shadow: none;
+    left: 10%;
+    margin-bottom: 20%;
+  }
 `;
 
 export const ImageTitleStyle = styled.div`
@@ -70,4 +82,7 @@ export const ImageTitleStyle = styled.div`
   width: 100%;
   text-align: center;
   top: 110%;
+  @media (max-width: 768px) {
+    top: 100%;
+  }
 `;

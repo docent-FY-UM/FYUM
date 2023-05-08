@@ -12,6 +12,11 @@ export const ListContainer = styled.div<{ add: string }>`
       : props.add === "art-trend"
       ? `url(${ArtTrendBackImg})`
       : `url(${ThemeBackImg})`};
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    top: -3%;
+    height: 103%;
+  }
 `;
 
 export const ImageStyle = styled.div`
@@ -21,6 +26,13 @@ export const ImageStyle = styled.div`
   margin-left: 1%;
   margin-right: 1%;
   cursor: pointer;
+`;
+
+export const ImageSrcStyle = styled.img<{ src: string }>`
+  src: ${(props) => props.src};
+  @media screen and (max-width: 768px) {
+    width: 150%;
+  }
 `;
 
 export const ListPageEnd = styled.div`

@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, EventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 
-import { ListContainer, ListPageEnd } from "./styles";
-import { ImageStyle } from "../../styles/listStyles";
+import { ImageSrcStyle, ListContainer, ListPageEnd } from "./styles";
+import { ImageStyle, ImageTitleStyle } from "../../styles/listStyles";
 
 import { getListApi } from "../../store/api";
 import { ListTitleContainer, ImageContainer } from "../../styles/listStyles";
@@ -81,7 +81,7 @@ const List = () => {
     navigate(`/artlist/${currentUrl[2]}/${id}`);
   };
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
-
+  console.log(listData);
   return (
     <>
       <ListContainer add={currentUrl[2]}>
@@ -93,7 +93,26 @@ const List = () => {
               title={"artList"}
               onClick={() => goArtList(item.id)}
             >
-              {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
+              {/* style={{ maxWidth: "150%" }} */}
+              {window.innerWidth > 768 ? (
+                <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
+              ) : (
+                <img
+                  src={item.imgSrc}
+                  referrerPolicy="no-referrer"
+                  style={{ maxWidth: "150%" }}
+                ></img>
+              )}
+              {}
+              {/* <ImageSrcStyle
+                src={item.imgSrc}
+                referrerPolicy="no-referrer"
+              ></ImageSrcStyle> */}
+              <ImageTitleStyle>
+                {item.nameOrigin}
+                <br></br>
+                {item.nameKr}
+              </ImageTitleStyle>
             </ImageStyle>
           ))}
           <ListPageEnd ref={pageEnd}></ListPageEnd>
