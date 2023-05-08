@@ -30,4 +30,9 @@ public class ExhibitionController {
     public ResponseEntity<List<ExhibitionResponseDto>> getExhibition(Authentication authentication){
         return ResponseEntity.ok(exhibitionService.getExhi(authentication.getName()));
     }
+
+    @GetMapping("/Other/{id}")
+    public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(@PathVariable int id){
+        return ResponseEntity.ok(exhibitionService.getOtherExhi(id));
+    }
 }

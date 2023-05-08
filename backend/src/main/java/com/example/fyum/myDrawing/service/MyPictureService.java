@@ -4,8 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.fyum.config.AwsS3Config;
-import com.example.fyum.exhibition.entity.Exhibition;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
@@ -21,12 +19,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class MyDrawingService {
-
+public class MyPictureService {
     private final MyDrawingRepository myDrawingRepository;
 
     private final MyPictureRepository myPictureRepository;
@@ -43,12 +43,12 @@ public class MyDrawingService {
     @Value("${perfixS3}")
     private String perfix;
 
-    public MyDrawingResponseDto saveMyDrawing(MyDrawingRequestDto dto, String kakaoId){
+    public MyDrawingResponseDto saveMyPicture(MyDrawingRequestDto dto, String kakaoId){
 
         Member member = memberRepository.findByKakaoId(kakaoId);
 
 
-        MyDrawing myDrawing = MyDrawing.builder()
+        MyPicture myPicture = MyPicture.builder()
                 .title(dto.getTitle())
                 .description(dto.getDescription())
                 .member(member)
@@ -71,8 +71,8 @@ public class MyDrawingService {
         amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
 
-        myDrawing.setImgSrc(perfix+filename);
-        int pId = myDrawingRepository.save(myDrawing).getId();
+        myPicture.setImgSrc(perfix+filename);
+        int pId = myPictureRepository.save(myPicture).getId();
 
         MyDrawingResponseDto resdto = new MyDrawingResponseDto();
         resdto.setPaintingId(pId);
@@ -82,14 +82,14 @@ public class MyDrawingService {
 
     }
 
-    public List<MyDrawingResponseDto> getMyDrawing(String kakaoId){
+    public List<MyDrawingResponseDto> getMyPicture(String kakaoId){
         Member member = memberRepository.findByKakaoId(kakaoId);
 
-        List<MyDrawing> temp = myDrawingRepository.findByMember(member);
+        List<MyPicture> temp = myPictureRepository.findByMember(member);
 
         List<MyDrawingResponseDto> res = new ArrayList<>();
         for(int i = 0; i< temp.size(); i++){
-            MyDrawing md = temp.get(i);
+            MyPicture md = temp.get(i);
             MyDrawingResponseDto dto = new MyDrawingResponseDto();
             dto.setImgSrc(md.getImgSrc());
             dto.setPaintingId(md.getId());
@@ -103,7 +103,7 @@ public class MyDrawingService {
 
         Member member =memberRepository.findByKakaoId(kakaoId);
 
-        MyDrawing temp =myDrawingRepository.findByMemberAndId(member,paintingId);
+        MyPicture temp =myPictureRepository.findByMemberAndId(member,paintingId);
 
         MyDrawingDetailDto res = new MyDrawingDetailDto();
         res.setImgSrc(temp.getImgSrc());
@@ -111,11 +111,10 @@ public class MyDrawingService {
         res.setTitle(temp.getTitle());
         res.setDiscription(temp.getDescription());
         res.setCuration(temp.getCuration());
-        res.setExhibitionStatus(exhibitionRepository.existsByMemberIdAndMyDrawingIdx(member,temp));
+        res.setExhibitionStatus(exhibitionRepository.existsByMemberIdAndMyPictureIdx(member,temp));
 
 
         return res;
 
     }
-
 }

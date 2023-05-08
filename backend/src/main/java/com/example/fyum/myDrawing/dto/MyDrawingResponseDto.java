@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class MyDrawingResponseDto {
     int paintingId;
-
     String imgSrc;
+    String title;
 }

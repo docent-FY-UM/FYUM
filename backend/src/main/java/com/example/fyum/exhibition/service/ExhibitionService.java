@@ -11,7 +11,10 @@ import com.example.fyum.masterpiece.repository.PaintingRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.myDrawing.entity.MyDrawing;
+import com.example.fyum.myDrawing.entity.MyPicture;
 import com.example.fyum.myDrawing.repository.MyDrawingRepository;
+import com.example.fyum.myDrawing.repository.MyPictureRepository;
+import com.example.fyum.myDrawing.service.MyPictureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +37,8 @@ public class ExhibitionService {
 
     private final MyDrawingRepository myDrawingRepository;
 
+    private final MyPictureRepository myPictureRepository;
+
     public Painting getEx(int paintingId){
 
         String temp = paintingRepository.selectSQLById(paintingId);
@@ -41,8 +46,11 @@ public class ExhibitionService {
         if(temp.equals("MP")){
             Optional<Masterpiece> ex = masterpieceRepository.findById(paintingId);
             return ex.get();
-        }else{
+        }else if(temp.equals("MD")){
             Optional<MyDrawing> ex =  myDrawingRepository.findById(paintingId);
+            return ex.get();
+        }else {
+            Optional<MyPicture> ex = myPictureRepository.findById(paintingId);
             return ex.get();
         }
 
@@ -100,8 +108,10 @@ public class ExhibitionService {
             dto.setPaintingId(painting.getId());
             if(Dtype.equals("MP")){
                 dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
-            }else{
+            }else if(Dtype.equals("MD")){
                 dto.setTitle(myDrawingRepository.findById(painting.getId()).get().getTitle());
+            }else{
+                dto.setTitle(myPictureRepository.findById(painting.getId()).get().getTitle());
             }
             return dto;
         }
@@ -151,6 +161,52 @@ public class ExhibitionService {
         return res;
 
     }
+    public List<ExhibitionResponseDto> getOtherExhi(int otherId){
+
+        Optional<Member> member = memberRepository.findById(otherId);
+        Exhibition exhibition = exhibitionRepository.findByMember(member.get());
+        List<ExhibitionResponseDto> res = new ArrayList<>();
+
+        if(exToDto(exhibition.getPainting1()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting1()));
+        }
+        if(exToDto(exhibition.getPainting2()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting2()));
+        }
+        if(exToDto(exhibition.getPainting3()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting3()));
+        }
+        if(exToDto(exhibition.getPainting4()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting4()));
+        }
+        if(exToDto(exhibition.getPainting5()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting5()));
+        }
+        if(exToDto(exhibition.getPainting6()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting6()));
+        }
+        if(exToDto(exhibition.getPainting7()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting7()));
+        }
+        if(exToDto(exhibition.getPainting8()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting8()));
+        }
+        if(exToDto(exhibition.getPainting9()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting9()));
+        }
+        if(exToDto(exhibition.getPainting10()).getPaintingId()!=-1){
+            res.add(exToDto(exhibition.getPainting10()));
+        }
+
+
+
+        return res;
+
+    }
+
+
+
+
 
 
     public int outExhi(int paintingId,String kakaoId){
