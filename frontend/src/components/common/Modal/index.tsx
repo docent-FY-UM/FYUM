@@ -56,7 +56,7 @@ const Modal = () => {
         </ModalDimmer>
       )}
 
-      {isOpen && type === "mydrawing" && (
+      {isOpen && (type === "mydrawing" || type === "upload") && (
         <ModalDimmer>
           <ModalContainer className="mydrawing">
             <ModalTitle className="mydrawing">

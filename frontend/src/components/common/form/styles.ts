@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { grey, black, pink } from "../../../styles/colors";
+import { grey, black, white } from "../../../styles/colors";
 
 export const FormContainer = styled.div`
   p {
@@ -17,6 +17,13 @@ export const InputContainer = styled.div`
   flex-direction: column;
 `;
 
+export const BrowseFileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+
 export const InputStyle = styled.input`
   width: 323px;
   padding: 5px;
@@ -26,6 +33,10 @@ export const InputStyle = styled.input`
   font-family: "SUIT";
   font-weight: 500;
   font-size: 14px;
+
+  &.exhibitionList {
+    width: 200px;
+  }
 `;
 
 export const TextAreaStyle = styled.textarea`
@@ -45,10 +56,15 @@ export const InputDiv = styled.div`
   margin-bottom: 20px;
 `;
 
-export const PreviewImgStyle = styled.img`
+export const PreviewImgStyle = styled.img<{ type?: string }>`
   width: 300px;
   height: 200px;
   align-self: center;
+
+  &.exhibitionList {
+    width: 120px;
+    height: 100px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 200px;
@@ -68,4 +84,25 @@ export const BtnContainer = styled.div`
 
 export const BtnDiv = styled.div`
   margin-right: 15px;
+`;
+
+export const RealFileBtn = styled.input`
+  display: none;
+`;
+
+export const NonPreviewImg = styled.div`
+  width: 120px;
+  height: 100px;
+  align-self: center;
+  background-color: ${white};
+  border: 2px solid ${grey[300]};
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    color: ${grey[400]};
+  }
 `;

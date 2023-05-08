@@ -78,6 +78,10 @@ export const AbsoluteDiv = styled.div`
   position: absolute;
   top: 100%;
   width: 97%;
+
+  &.etc {
+    top: 150%;
+  }
 `;
 
 export const DetailContent = styled.p`
@@ -85,6 +89,23 @@ export const DetailContent = styled.p`
   font-family: "SUIT";
   color: ${white};
   margin: 0;
+
+  &.etc {
+    font-size: 1.8vw;
+    height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+    }
+  }
 
   @media (max-width: 768px) {
     font-size: 2vw;

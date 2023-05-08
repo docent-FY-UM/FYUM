@@ -34,13 +34,13 @@ const TestPage = () => {
       </button>
       <button
         onClick={() => {
-          openModal({ type: "mydrawing", title: "안뇽", content: <Form /> });
+          openModal({ type: "mydrawing", title: "안뇽", content: <Form type="mydrawing" /> });
         }}
       >
         큰모달버튼!
       </button>
       <h2>form 테스트</h2>
-      <Form />
+      <Form type="mydrawing"/>
     </div>
   );
 };

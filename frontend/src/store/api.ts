@@ -60,6 +60,14 @@ export const emptyFrameApi = async (paintingId: string) =>
 export const getExhibitionListApi = async () =>
   await customAxios.get("exhibitions");
 
+// 내 그림 리스트 받아오기
+export const getMyDrawingsListApi = async () =>
+  await customAxios.get("mypaintings");
+
+// 내 그림 상세정보 받아오기
+export const getMyDrawingsDetailApi = async (myPaintingId: string) =>
+  await customAxios.get(`mypaintings/detail/${myPaintingId}`);
+
 // 그림 저장 api
 export const createDrawingApi = async ({
   title,

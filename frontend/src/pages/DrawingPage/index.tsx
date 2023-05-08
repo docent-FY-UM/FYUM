@@ -54,7 +54,7 @@ const DrawingPage = () => {
         openModal({
           type: "mydrawing",
           title: "전시회 목록에 저장하기",
-          content: <Form />,
+          content: <Form type="mydrawing"/>,
         });
         setIsSaveClick(false);
       }

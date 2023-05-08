@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { RootState } from "../../../store";
 import { registerActions } from "../../../store/registerSlice";
 import useModal from "../../utils/useModal";
@@ -8,20 +9,31 @@ import Btn from "../Btn";
 import {
   FormContainer,
   InputContainer,
+  BrowseFileContainer,
   InputStyle,
   TextAreaStyle,
   InputDiv,
   PreviewImgStyle,
   BtnContainer,
   BtnDiv,
+  RealFileBtn,
+  NonPreviewImg,
 } from "./styles";
 
-const Form = () => {
+interface FormProps {
+  type: string;
+}
+
+const Form = ({ type }: FormProps) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const [uploadImg, setUploadImg] = useState<string | undefined>();
+  const [fileName, setFileName] = useState<string | undefined>();
   const { title, contents, img } = useSelector(
     (state: RootState) => state.register
   );
+
+  console.log("타입뭔데", type);
 
   // 1. input 변경 이벤트 핸들러
   const onChange = (
@@ -53,14 +65,68 @@ const Form = () => {
       return;
     }
 
-    dispatch(registerActions.formRequestStart({ title, contents, img }));
-    alert("myDrawings에 저장 완료!");
+    if (type === "mydrawing") {
+      dispatch(registerActions.formRequestStart({ title, contents, img }));
+      alert("myDrawings에 저장 완료!");
+    } else {
+      dispatch(registerActions.formRequestStart({}));
+    }
+
     closeModal();
+  };
+
+  // 이미지 파일 업로드
+  const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const result = reader.result;
+        if (typeof result === "string") {
+          console.log("이미지업로드결과?", result);
+          setUploadImg(result);
+          setFileName(file.name);
+        } else {
+          console.error("Failed to read image file");
+        }
+      };
+    }
   };
 
   return (
     <FormContainer>
       <form>
+        <InputDiv>
+          <p>Attachment</p>
+          <BrowseFileContainer>
+            <InputStyle
+              className="exhibitionList"
+              placeholder="작품을 업로드하세요."
+              value={fileName}
+            />
+            <label htmlFor="file-upload">
+              <Btn
+                type="attachment"
+                text="Browse files"
+                language="en"
+                width={110}
+                height={31}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("file-upload")?.click();
+                }}
+              />
+            </label>
+            <RealFileBtn
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              onChange={(e) => onUpload(e)}
+            />
+          </BrowseFileContainer>
+        </InputDiv>
+
         <InputContainer>
           <InputDiv>
             <p>Title</p>
@@ -82,10 +148,24 @@ const Form = () => {
               }}
             />
           </InputDiv>
-          <PreviewImgStyle
-            src={`data:image/jpeg;base64,${img}`}
-            alt="이미지 미리보기"
-          />
+          {type === "mydrawing" && (
+            <PreviewImgStyle
+              src={`data:image/jpeg;base64,${img}`}
+              alt="이미지 미리보기"
+            />
+          )}
+          {uploadImg && type === "exhibitionList" && (
+            <PreviewImgStyle
+              className="exhibitionList"
+              src={`${uploadImg}`}
+              alt="이미지 미리보기"
+            />
+          )}
+          {!uploadImg && type === "exhibitionList" && (
+            <NonPreviewImg>
+              <span>작품 미리보기</span>
+            </NonPreviewImg>
+          )}
           <BtnContainer>
             <BtnDiv>
               <Btn

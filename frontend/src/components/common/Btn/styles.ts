@@ -5,6 +5,7 @@ interface BtnStyleProps {
   language?: string | undefined;
   width?: number | undefined;
   widthM?: number | undefined;
+  height?: number | undefined;
 }
 
 export const BtnStyle = styled.button<BtnStyleProps>`
@@ -29,10 +30,11 @@ export const BtnStyle = styled.button<BtnStyleProps>`
 
   &.Btn_transparent {
     background-color: transparent;
-    border: 4px solid ${white};
-    border-radius: 17px;
-    height: 90px;
+    border: 3px solid ${white};
+    border-radius: 40px;
+    height: 50px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 20px;
 
     @media screen and (max-width: 768px) {
       width: ${(props) => (props.width ? props.width / 2.1 + "px" : "auto")};
@@ -45,7 +47,7 @@ export const BtnStyle = styled.button<BtnStyleProps>`
     background-color: ${mainColor};
     border: none;
     border-radius: 10px;
-    height: 40px;
+    height: ${(props) => (props.height ? props.height + "px" : "40px")};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     @media (hover: hover) {
@@ -84,7 +86,7 @@ export const BtnText = styled.span<BtnStyleProps>`
   }
 
   &.Btn_transparent {
-    font-size: 36px;
+    font-size: 20px;
 
     @media screen and (max-width: 768px) {
       font-size: 16px;
@@ -94,7 +96,7 @@ export const BtnText = styled.span<BtnStyleProps>`
   &.Btn_attachment {
     font-family: ${({ language }) =>
       language === "en" ? "Kim jung chul Myungjo" : "SUIT"};
-    font-size: 15px;
+    font-size: ${(props) => (props.height ? "13px" : "15px")};
   }
 
   &.Btn_upload {
