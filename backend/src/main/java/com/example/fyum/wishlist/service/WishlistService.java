@@ -65,7 +65,7 @@ public class WishlistService {
             WishlistResponseDto dto = new WishlistResponseDto();
             Masterpiece Ent = temp.get(i).getMasterpiece();
             dto.setPaintingId(Ent.getId());
-            dto.setTitle(Ent.getTitleKr());
+            dto.setTitle(Ent.getTitleOrigin());
             dto.setImgSrc(Ent.getImgSrc());
 
             res.add(dto);
