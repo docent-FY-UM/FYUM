@@ -50,7 +50,7 @@ export const ImageContainer = styled.div<{ ref: any }>`
   }
 `;
 
-export const ImageStyle = styled.div<{ title: string | null }>`
+export const ImageStyle = styled.div<{ title?: string | null }>`
   height: 60%;
   width: 100%;
   display: flex;
