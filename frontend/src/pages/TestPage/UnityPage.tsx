@@ -6,6 +6,7 @@ export default function UnityApp() {
         "unity/Build/edittset.json",
         "unity/Build/UnityLoader.js"
     );
+    alert("gogogo");
     function clicking() {
         alert("눌렸음!");
         unityContent.send("React", "aaa");
