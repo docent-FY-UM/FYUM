@@ -3,6 +3,8 @@ package com.example.fyum.masterpiece.controller;
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
 import com.example.fyum.masterpiece.dto.MasterpieceListDto;
+import com.example.fyum.masterpiece.dto.PainterListDto;
+import com.example.fyum.masterpiece.dto.TrendListDto;
 import com.example.fyum.masterpiece.service.MasterpieceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,11 +35,11 @@ public class MasterpieceController {
 
     // 작가별 작품 리스트
     @GetMapping("/painters/{painterId}")
-    public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByPainter(
+    public ResponseEntity<PainterListDto> getMasterpiecesByPainter(
         @PathVariable int painterId,
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
-        Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByPainter(painterId,
+        PainterListDto result = masterpieceService.getMasterpiecesByPainter(painterId,
             page);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -74,11 +76,11 @@ public class MasterpieceController {
 
     // 사조별 작품 리스트
     @GetMapping("/trends/{trendId}")
-    public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByTrend(
+    public ResponseEntity<TrendListDto> getMasterpiecesByTrend(
         @PathVariable int trendId,
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
-        Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByTrend(trendId, page);
+        TrendListDto result = masterpieceService.getMasterpiecesByTrend(trendId, page);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

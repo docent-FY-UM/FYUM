@@ -4,6 +4,8 @@ import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
 import com.example.fyum.masterpiece.dto.MasterpieceListDto;
+import com.example.fyum.masterpiece.dto.PainterListDto;
+import com.example.fyum.masterpiece.dto.TrendListDto;
 import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.masterpiece.entity.Painter;
 import com.example.fyum.masterpiece.entity.Theme;
@@ -41,15 +43,17 @@ public class MasterpieceService {
         return painters.map(CategoryDto::new);
     }
 
-    public Page<MasterpieceListDto> getMasterpiecesByPainter(int painterId, int page) {
+    public PainterListDto getMasterpiecesByPainter(int painterId, int page) {
         Pageable pageable = PageRequest.of(page, 10);
         Optional<Painter> optionalPainter = painterRepository.findById(painterId);
         if (optionalPainter.isEmpty()) {
             return null;
         }
         Painter painter = optionalPainter.get();
-        Page<Masterpiece> result = masterpieceRepository.findAllByPainter(pageable, painter);
-        return result.map(MasterpieceListDto::new);
+        Page<MasterpieceListDto> masterpieceLists = masterpieceRepository.findAllByPainter(pageable,
+            painter).map(MasterpieceListDto::new);
+
+        return new PainterListDto(masterpieceLists, painter);
     }
 
     public Page<CategoryDto> getThemes(int page) {
@@ -60,7 +64,7 @@ public class MasterpieceService {
 
     public Page<CategoryDto> getTrends(int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Trend> trends = trendRepository.findAll(pageable);
+        Page<Trend> trends = trendRepository.findAllByOrderByMasterpieceDesc(pageable);
         return trends.map(CategoryDto::new);
     }
 
@@ -89,14 +93,16 @@ public class MasterpieceService {
         return masterpieces.map(MasterpieceListDto::new);
     }
 
-    public Page<MasterpieceListDto> getMasterpiecesByTrend(int trendId, int page) {
+    public TrendListDto getMasterpiecesByTrend(int trendId, int page) {
         Pageable pageable = PageRequest.of(page, 10);
         Optional<Trend> trendOptional = trendRepository.findById(trendId);
         if (trendOptional.isEmpty()) {
             return null;
         }
         Trend trend = trendOptional.get();
-        Page<Masterpiece> masterpieces = masterpieceRepository.findAllByTrend(pageable, trend);
-        return masterpieces.map(MasterpieceListDto::new);
+        Page<MasterpieceListDto> masterpieces = masterpieceRepository.findAllByTrend(pageable,
+            trend).map(MasterpieceListDto::new);
+
+        return new TrendListDto(masterpieces, trend);
     }
 }
