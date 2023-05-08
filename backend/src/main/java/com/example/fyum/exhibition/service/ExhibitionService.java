@@ -94,9 +94,15 @@ public class ExhibitionService {
             dto.setPaintingId(-1);
             return dto;
         }else{
-            dto.setDType(paintingRepository.selectSQLById(painting.getId()));
+            String Dtype = paintingRepository.selectSQLById(painting.getId());
+            dto.setDType(Dtype);
             dto.setImgSrc(painting.getImgSrc());
             dto.setPaintingId(painting.getId());
+            if(Dtype.equals("MP")){
+                dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
+            }else{
+                dto.setTitle(myDrawingRepository.findById(painting.getId()).get().getTitle());
+            }
             return dto;
         }
 
