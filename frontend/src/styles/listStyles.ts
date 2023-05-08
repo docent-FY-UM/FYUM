@@ -50,7 +50,7 @@ export const ImageContainer = styled.div<{ ref: any }>`
   }
 `;
 
-export const ImageStyle = styled.div`
+export const ImageStyle = styled.div<{ title: string | null }>`
   height: 60%;
   width: 100%;
   display: flex;
@@ -59,6 +59,7 @@ export const ImageStyle = styled.div`
   cursor: pointer;
   box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
   position: relative;
+  margin-top: ${(props) => (props.title === "artList" ? "5%" : "0%")};
 `;
 
 export const ImageTitleStyle = styled.div`

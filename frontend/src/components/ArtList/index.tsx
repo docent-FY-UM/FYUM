@@ -86,6 +86,7 @@ const ArtList = () => {
         {artListData.map((item: any) => (
           <ImageStyle
             key={item.paintingId}
+            title={""}
             onClick={() => goDetail(item.paintingId)}
           >
             {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
