@@ -141,7 +141,7 @@ const List = () => {
     alert("이동하게 하기" + id);
     navigate(`/artlist/${currentUrl[2]}/${id}`);
   };
-  const scrollRef = useHorizontalScroll();
+  const scrollRef = useHorizontalScroll(window.innerWidth > 768);
 
   return (
     <>

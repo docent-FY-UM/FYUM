@@ -16,6 +16,7 @@ const ArtList = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const pageEnd: any = useRef();
+  const [scrollFunctionRef, setScrollFunctionRef] = useState(null);
 
   let currentUrl = window.location.pathname.split("/");
   const [prevPage, setPrevPage] = useState(0); //1로 하는게 맞는가?0으로 하는게 맞는가?
@@ -77,7 +78,7 @@ const ArtList = () => {
     alert("이동하게 하기" + id);
     navigate(`/detail/${id}`);
   };
-  const scrollRef = useHorizontalScroll();
+  const scrollRef = useHorizontalScroll(window.innerWidth > 768);
 
   return (
     <ArtListContainer>
