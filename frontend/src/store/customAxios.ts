@@ -18,14 +18,12 @@ customAxios.interceptors.response.use((response) => {
     window.location.href = "/login";
   }
   return response;
-}
-);
+});
 
 // DJANGO
 export const djangoAxios = axios.create({
-  baseURL: process.env.REACT_APP_API_DJANGO_URL,
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   headers: {
     Authorization: accessToken,
   },
-
 });
