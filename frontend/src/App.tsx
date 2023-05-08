@@ -17,7 +17,8 @@ import {
   KakaoHandle,
   MyDrawingsPage,
   TestPage,
-  Unity,
+  UnityPage,
+  UnityPage2,
 } from "../src/pages/index";
 
 import Header from "./components/common/Header";
@@ -47,8 +48,9 @@ function App() {
         <Route path="/my-drawings" element={<MyDrawingsPage />} />
 
         {/* 테스트 페이지 */}
-        <Route path="/test" element={<TestPage></TestPage>} />
-        <Route path="/unity" element={<Unity></Unity>} />
+        <Route path="/test" element={<TestPage />} />
+        <Route path="/unity" element={<UnityPage />} />
+        <Route path="/unity2" element={<UnityPage2 />} />
       </Routes>
     </BrowserRouter>
   );
