@@ -12,7 +12,7 @@ import {
   CollectionPage,
   RecommendationPage,
   SurveyPage,
-  WishListPage,
+  LikedListPage,
   IntroPage,
   KakaoHandle,
   MyDrawingsPage,
@@ -40,7 +40,7 @@ function App() {
         <Route path="/collection" element={<CollectionPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/exhibitionlist" element={<ExhibitionListPage />} />
-        <Route path="/wishlist" element={<WishListPage />} />
+        <Route path="/liked-list" element={<LikedListPage />} />
         <Route path="/artlist/:name/:id" element={<ArtListPage />} />
         <Route path="/list/:id" element={<ListPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />

@@ -28,8 +28,8 @@ const GalleryPage = () => {
     },
     {
       className: "wish",
-      text: "WISH LIST",
-      nav: "wishlist",
+      text: "LIKED LIST",
+      nav: "liked-list",
     },
   ];
 

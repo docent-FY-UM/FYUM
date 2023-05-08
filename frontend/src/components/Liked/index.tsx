@@ -1,27 +1,29 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRecommendApi } from "../../store/api";
+import { likedListApi } from "../../store/api";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 import { ImageContainer, ImageStyle } from "../../styles/listStyles";
 import { ImageTitleStyle } from "./styles";
 
-const RecommendList = () => {
+const LikedList = () => {
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getRecomData = async () => {
+    const getLikedData = async () => {
       try {
-        const res = await getRecommendApi();
+        const res = await likedListApi();
         setData(res.data);
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
     };
-    getRecomData();
+    getLikedData();
   }, []);
 
+  console.log(data);
   const goDetail = (id: number) => {
     navigate(`/detail/${id}`);
   };
@@ -39,7 +41,7 @@ const RecommendList = () => {
                 <img
                   src={item.imgSrc}
                   referrerPolicy="no-referrer"
-                  alt="추천 이미지"
+                  alt="찜 이미지"
                 ></img>
               }
               <ImageTitleStyle>{item.title}</ImageTitleStyle>
@@ -50,4 +52,4 @@ const RecommendList = () => {
   );
 };
 
-export default RecommendList;
+export default LikedList;

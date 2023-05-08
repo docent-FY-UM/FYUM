@@ -10,7 +10,7 @@ import MainPage from "./MainPage";
 import CollectionPage from "./CollectionPage";
 import RecommendationPage from "./RecommendationPage";
 import SurveyPage from "./SurveyPage";
-import WishListPage from "./WishListPage";
+import LikedListPage from "./LikedListPage";
 import IntroPage from "./IntroPage";
 import KakaoHandle from "../components/auth/KakaoHandle";
 import MyDrawingsPage from "./MyDrawingsPage";
@@ -31,7 +31,7 @@ export {
   CollectionPage,
   RecommendationPage,
   SurveyPage,
-  WishListPage,
+  LikedListPage,
   IntroPage,
   KakaoHandle,
   MyDrawingsPage,

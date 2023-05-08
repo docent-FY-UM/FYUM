@@ -47,6 +47,9 @@ export const surveySubmitApi = async (choosed: number[]) =>
 export const getRecommendApi = async () =>
   await customAxios.get("recommends/recommends");
 
+// liked 페이지 api
+export const likedListApi = async () => await customAxios.get("wishlist");
+
 // 전시회 저장 api
 export const fullFrameApi = async (paintingId: string) =>
   await customAxios.post("exhibitions", { paintingId });
