@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { AniProps } from "..";
+import { userSlice } from "../../../store/userSlice";
+import { RootState } from "../../../store";
 
 import {
   BackgroundStyle,
@@ -17,14 +20,19 @@ import main1Img1 from "../../../assets/images/main1Img1.png";
 import main1Img2 from "../../../assets/images/main1Img2.png";
 
 const FirstMain = ({ isAnimation, setIsAnimation }: AniProps) => {
+  const navigate = useNavigate();
+  const { survey } = useSelector((state: RootState) => state.user);
+
   useEffect(() => {
     setIsAnimation(true);
   }, []);
 
-  const navigate = useNavigate();
-
   const handleClickView = () => {
-    navigate("/recommend");
+    if (survey) {
+      navigate("/recommend");
+    } else {
+      navigate("/survey");
+    }
   };
 
   return (

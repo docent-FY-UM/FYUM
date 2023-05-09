@@ -83,6 +83,19 @@ export const createDrawingApi = async ({
   return response;
 };
 
+// 사진 업로드 api
+export const createPictureApi = async ({
+  title, contents, img
+}: DrawingQueryTypes) => {
+  const response = await customAxios.post("mypaintings/picture/save", {
+    title: title,
+    description: contents,
+    img: img,
+  });
+
+  return response;
+}
+
 // list 페이지 api
 export const getListApi = async ({ listUrl, page }: ListQueryTypes) =>
   await customAxios.get(`/paintings/${listUrl}/?page=${page + 1}`);

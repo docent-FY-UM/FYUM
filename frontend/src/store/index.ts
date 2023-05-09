@@ -12,7 +12,7 @@ import exhibitionListReducer from "./exhibitionListSlice";
 
 // 관리하는 saga
 import { registerSagas } from "./registerSagas";
-import { exhibitionListSagas } from "./exhibitionLisfSagas";
+import { exhibitionListSagas } from "./exhibitionListSagas";
 
 // rootReducers by using combineReducers
 const rootReducers = combineReducers({

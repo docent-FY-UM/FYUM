@@ -16,6 +16,7 @@ import {
   EmptyFrameIcStyle,
   FullFrameIcStyle,
 } from "../../pages/DetailPage/styles";
+import { DeleteIcStyle } from "./styles";
 
 const Detail = ({
   data,
@@ -91,12 +92,13 @@ const Detail = ({
           )}
         </DescriptionBtn>
         {description && (
-          <MarkContainer>
+          <MarkContainer className="etc">
             {frame === false ? (
               <EmptyFrameIcStyle onClick={changeFrame} />
             ) : (
               <FullFrameIcStyle onClick={changeFrame} />
             )}
+            <DeleteIcStyle />
           </MarkContainer>
         )}
       </FixedContainer>

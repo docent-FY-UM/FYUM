@@ -22,6 +22,11 @@ import {
   ArrowStyle,
 } from "./styles";
 
+interface DetailProps {
+  id: number;
+  type: string;
+}
+
 const ExhibitionList = () => {
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
   const dispatch = useDispatch();
@@ -34,8 +39,13 @@ const ExhibitionList = () => {
   }, []);
 
   // 상세 페이지로 이동
-  const goDetail = (id: number) => {
-    navigate(`/detail/${id}`);
+  const goDetail = ({id, type}: DetailProps) => {
+    if (type === "MP") {
+      navigate(`/detail/${id}`);
+    } else {
+      navigate(`/detail/paintings/${id}`)
+    }
+   
   };
 
   // 전시회 입장 페이지로 이동
@@ -63,7 +73,7 @@ const ExhibitionList = () => {
       <ImageContainer ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle key={item.id} onClick={() => goDetail(item.paintingId)}>
+            <ImageStyle key={item.paintingId} onClick={() => goDetail({id: item.paintingId, type: item.dtype})}>
               {
                 <img
                   src={item.imgSrc}
