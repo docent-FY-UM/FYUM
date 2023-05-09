@@ -17,7 +17,15 @@ import com.example.fyum.masterpiece.repository.TrendRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.wishlist.repository.WishlistRepository;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +43,10 @@ public class MasterpieceService {
     private final MemberRepository memberRepository;
     private final WishlistRepository wishlistRepository;
     private final ExhibitionRepository exhibitionRepository;
+    @Value("${clova.client_id}")
+    private String clovaClientId;
+    @Value("${clova.client_secret}")
+    private String clovaClientSecret;
 
 
     public Page<CategoryDto> getPainters(int page) {
@@ -76,8 +88,8 @@ public class MasterpieceService {
         }
         Masterpiece masterpiece = masterpieceOptional.get();
         Boolean wishStatus = wishlistRepository.existsByMemberAndMasterpiece(member, masterpiece);
-        Boolean exhibitStatus = exhibitionRepository.existsByMemberIdAndPaintingIdx(
-            member, masterpiece);
+        Boolean exhibitStatus = exhibitionRepository.existsByMemberIdAndPaintingIdx(member,
+            masterpiece);
 
         return new MasterpieceDto(masterpiece, wishStatus, exhibitStatus);
     }
@@ -104,5 +116,61 @@ public class MasterpieceService {
             trend).map(MasterpieceListDto::new);
 
         return new TrendListDto(masterpieces, trend);
+    }
+
+    public String getCuration(int paintingId) {
+        Optional<Masterpiece> masterpieceOptional = masterpieceRepository.findById(paintingId);
+        if (masterpieceOptional.isEmpty()) {
+            return null;
+        }
+        String description = getShortDescription(masterpieceOptional.get().getDescription());
+        try {
+            String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
+            String encodedText = URLEncoder.encode(description, "UTF-8");
+            String params = "speaker=nara&text=" + encodedText;
+
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clovaClientId);
+            con.setRequestProperty("X-NCP-APIGW-API-KEY", clovaClientSecret);
+            con.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(params);
+            wr.flush();
+            wr.close();
+
+            if (con.getResponseCode() == 200) {
+                InputStream is = con.getInputStream();
+                ByteArrayOutputStream bOutStream = new ByteArrayOutputStream();
+                byte[] bytes = new byte[1024];
+                int readBytes;
+                while ((readBytes = is.read(bytes)) != -1) {
+                    bOutStream.write(bytes, 0, readBytes);
+                }
+                byte[] bytesArr = bOutStream.toByteArray();
+                bOutStream.close();
+                is.close();
+
+                return Base64.getEncoder().encodeToString(bytesArr);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    private String getShortDescription(String description) {
+        if (null == description) {
+            return null;
+        }
+
+        String[] desc = description.split("[.]", 6);
+        StringBuilder shortDesc = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            shortDesc.append(desc[i]).append(".");
+        }
+        return shortDesc.toString();
     }
 }

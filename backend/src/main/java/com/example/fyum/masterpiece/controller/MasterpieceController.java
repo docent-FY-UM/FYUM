@@ -94,5 +94,12 @@ public class MasterpieceController {
         return new ResponseEntity<>(painting, HttpStatus.OK);
     }
 
+    // 작품 큐레이션 음성 생성
+    @GetMapping("/curation/{paintingId}")
+    public ResponseEntity<String> getCuration(@PathVariable int paintingId) {
+        String result = masterpieceService.getCuration(paintingId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 
 }
