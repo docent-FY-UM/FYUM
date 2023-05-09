@@ -134,7 +134,7 @@ public class MyDrawingService {
         String fileName = arr[3];
 
 
-        myPictureRepository.deleteById(paintingId);
+        myDrawingRepository.deleteById(paintingId);
         //이미지도 삭제
 
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
