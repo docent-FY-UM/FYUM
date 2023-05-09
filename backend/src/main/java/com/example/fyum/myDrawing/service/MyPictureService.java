@@ -2,9 +2,11 @@ package com.example.fyum.myDrawing.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
+import com.example.fyum.exhibition.service.ExhibitionService;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.myDrawing.dto.MyDrawingDetailDto;
@@ -19,10 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,8 @@ public class MyPictureService {
     private final MemberRepository memberRepository;
 
     private final ExhibitionRepository exhibitionRepository;
+
+    private final ExhibitionService exhibitionService;
 
     private final AmazonS3 amazonS3;
 
@@ -78,6 +79,10 @@ public class MyPictureService {
         resdto.setPaintingId(pId);
         resdto.setImgSrc(perfix+filename);
 
+
+        //사진은 저장하자마자 전시회 등록
+        exhibitionService.postExhibition(kakaoId,pId);
+
         return resdto;
 
     }
@@ -115,6 +120,27 @@ public class MyPictureService {
 
 
         return res;
+
+    }
+
+    public void deleteMyPicture(int paintingId, String kakaoId){
+        Member member =memberRepository.findByKakaoId(kakaoId);
+
+        //전시회에서 내리기
+        exhibitionService.outExhi(paintingId, kakaoId);
+        //목록에서 지우기
+        Optional<MyPicture> temp = myPictureRepository.findById(paintingId);
+        String fileNameArr = temp.get().getImgSrc();
+        String [] arr = fileNameArr.split("/");
+        String fileName = arr[3];
+
+
+        myPictureRepository.deleteById(paintingId);
+        //이미지도 삭제
+
+
+        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+
 
     }
 }

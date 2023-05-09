@@ -2,11 +2,13 @@ package com.example.fyum.myDrawing.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.fyum.config.AwsS3Config;
 import com.example.fyum.exhibition.entity.Exhibition;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
+import com.example.fyum.exhibition.service.ExhibitionService;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.myDrawing.dto.MyDrawingDetailDto;
@@ -34,6 +36,8 @@ public class MyDrawingService {
     private final MemberRepository memberRepository;
 
     private final ExhibitionRepository exhibitionRepository;
+
+    private final ExhibitionService exhibitionService;
 
     private final AmazonS3 amazonS3;
 
@@ -115,6 +119,26 @@ public class MyDrawingService {
 
 
         return res;
+
+    }
+
+    public void deleteMyDrawing(int paintingId, String kakaoId){
+        Member member =memberRepository.findByKakaoId(kakaoId);
+
+        //전시회에서 내리기
+        exhibitionService.outExhi(paintingId, kakaoId);
+        //목록에서 지우기
+        Optional<MyDrawing> temp = myDrawingRepository.findById(paintingId);
+        String fileNameArr = temp.get().getImgSrc();
+        String [] arr = fileNameArr.split("/");
+        String fileName = arr[3];
+
+
+        myPictureRepository.deleteById(paintingId);
+        //이미지도 삭제
+
+        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+
 
     }
 

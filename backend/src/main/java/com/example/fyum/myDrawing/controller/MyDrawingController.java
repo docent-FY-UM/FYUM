@@ -6,6 +6,7 @@ import com.example.fyum.myDrawing.dto.MyDrawingResponseDto;
 import com.example.fyum.myDrawing.service.MyDrawingService;
 import com.example.fyum.myDrawing.service.MyPictureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,19 @@ public class MyDrawingController {
     @GetMapping("/picture/detail/{paintingId}")
     public ResponseEntity<MyDrawingDetailDto> getDetailMyPicture(@PathVariable int paintingId, Authentication authentication){
         return ResponseEntity.ok(myPictureService.getDetail(paintingId,authentication.getName()));
+    }
+
+
+    @DeleteMapping("/{paintingId}")
+    public ResponseEntity deleteMyDrawing(@PathVariable int paintingId,Authentication authentication){
+        myDrawingService.deleteMyDrawing(paintingId, authentication.getName());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/picture/{paintingId}")
+    public ResponseEntity deleteMyPicture(@PathVariable int paintingId,Authentication authentication){
+        myPictureService.deleteMyPicture(paintingId, authentication.getName());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

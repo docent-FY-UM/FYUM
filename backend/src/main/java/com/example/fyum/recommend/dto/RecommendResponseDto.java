@@ -8,13 +8,13 @@ import lombok.Data;
 public class RecommendResponseDto {
     private int paintingId;
     private String titleKr;
-    private String titleOrigin;
+    private String title;
     private String imgSrc;
 
     public RecommendResponseDto(Masterpiece ob){
         this.paintingId = ob.getId();
         this.titleKr = ob.getTitleKr();
-        this.titleOrigin = ob.getTitleOrigin();
+        this.title= ob.getTitleOrigin();
         this.imgSrc = ob.getImgSrc();
     }
 
