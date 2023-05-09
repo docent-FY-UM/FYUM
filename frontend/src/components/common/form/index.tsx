@@ -86,7 +86,7 @@ const Form = ({ type }: FormProps) => {
         })
       );
       alert("사진 업로드 완료!");
-      // 새로고침 필요?
+      // window.location.reload();
     }
 
     closeModal();

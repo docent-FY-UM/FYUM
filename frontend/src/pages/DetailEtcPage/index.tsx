@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { getMyDrawingsDetailApi } from "../../store/api";
+import { getMyDrawingsDetailApi, getMyPicturesDetailApi } from "../../store/api";
 import Detail from "../../components/Detail";
 
 export interface PaintingData {
@@ -31,16 +31,30 @@ const DetailEtcPage = () => {
   const id = pathParts[3];
 
   useEffect(() => {
-    const getMyDrawingsDetail = async () => {
-      try {
-        const res = await getMyDrawingsDetailApi(id);
-        setData(res.data);
-        setFrame(res.data.exhibitionStatus);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getMyDrawingsDetail();
+    if (locate === "painting") {
+      const getMyDrawingsDetail = async () => {
+        try {
+          const res = await getMyDrawingsDetailApi(id);
+          setData(res.data);
+          setFrame(res.data.exhibitionStatus);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getMyDrawingsDetail();
+    } else if (locate === "picture") {
+      const getMyPicturesDetail = async () => {
+        try {
+          const res = await getMyPicturesDetailApi(id);
+          setData(res.data);
+          setFrame(res.data.exhibitionStatus);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getMyPicturesDetail();
+    }
+   
   }, []);
 
   return <Detail data={data} frame={frame} setFrame={setFrame}/>;

@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router";
 
 import { PaintingData } from "../../pages/DetailEtcPage";
-import { fullFrameApi, emptyFrameApi } from "../../store/api";
+import {
+  fullFrameApi,
+  emptyFrameApi,
+  deleteMyDrawingApi,
+  deleteMyPictureApi,
+} from "../../store/api";
 import {
   DetailContainer,
   BackgroundImg,
@@ -27,6 +33,8 @@ const Detail = ({
   frame: boolean;
   setFrame: any;
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [description, setDescription] = useState(true);
 
   const changeState = () => {
@@ -63,8 +71,38 @@ const Detail = ({
     }
   };
 
+  // 삭제
+  const onDelete = () => {
+    const pathName = location.pathname;
+    const pathParts = pathName.split("/");
+    const locate = pathParts[2];
+
+    if (locate === "painting") {
+      const deleteRequest = async () => {
+        try {
+          await deleteMyDrawingApi(data.paintingId.toString());
+          alert("삭제되었습니다!");
+          navigate(-1);
+        } catch (error) {
+          console.log("삭제 실패", error);
+        }
+      };
+      deleteRequest();
+    } else if (locate === "picture") {
+      const deleteRequest = async () => {
+        try {
+          await deleteMyPictureApi(data.paintingId.toString());
+          alert("삭제되었습니다!");
+          navigate(-1);
+        } catch (error) {
+          console.log("삭제 실패", error);
+        }
+      };
+      deleteRequest();
+    }
+  };
+
   console.log("데이터 잘넘어옴?", data);
-  console.log("배경이미지?", data.imgSrc);
 
   return (
     <DetailContainer>
@@ -98,7 +136,7 @@ const Detail = ({
             ) : (
               <FullFrameIcStyle onClick={changeFrame} />
             )}
-            <DeleteIcStyle />
+            <DeleteIcStyle onClick={onDelete} />
           </MarkContainer>
         )}
       </FixedContainer>

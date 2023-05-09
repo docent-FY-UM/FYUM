@@ -42,8 +42,10 @@ const ExhibitionList = () => {
   const goDetail = ({id, type}: DetailProps) => {
     if (type === "MP") {
       navigate(`/detail/${id}`);
-    } else {
+    } else if (type === "MD") {
       navigate(`/detail/painting/${id}`)
+    } else {
+      navigate(`/detail/picture/${id}`)
     }
    
   };
