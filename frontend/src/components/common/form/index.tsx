@@ -86,10 +86,9 @@ const Form = ({ type }: FormProps) => {
         })
       );
       alert("사진 업로드 완료!");
-      // window.location.reload();
     }
-
     closeModal();
+    window.location.reload();
   };
 
   // 이미지 파일 업로드
@@ -102,7 +101,19 @@ const Form = ({ type }: FormProps) => {
         const result = reader.result;
         if (typeof result === "string") {
           let [_, base64EncodedUrl] = result.split(",");
-          console.log("이미지업로드결과?", base64EncodedUrl);
+
+          // 10MB 이하의 파일만 업로드 가능함
+          const sizeInBytes =
+            4 *
+            Math.ceil(base64EncodedUrl.length / 3) *
+            0.5624896334383812 *
+            1.4;
+          const sizeInMB = sizeInBytes / (1024 * 1024);
+          if (sizeInMB > 10) {
+            alert("파일의 용량이 너무 큽니다.");
+            return;
+          }
+
           setUploadImg(base64EncodedUrl);
           setFileName(file.name);
         } else {
