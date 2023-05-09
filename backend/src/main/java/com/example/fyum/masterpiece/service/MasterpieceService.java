@@ -51,7 +51,7 @@ public class MasterpieceService {
 
     public Page<CategoryDto> getPainters(int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Painter> painters = painterRepository.findAll(pageable);
+        Page<Painter> painters = painterRepository.findAllByImgSrcIsNotNull(pageable);
         return painters.map(CategoryDto::new);
     }
 
