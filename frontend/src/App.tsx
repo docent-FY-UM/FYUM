@@ -45,7 +45,7 @@ function App() {
         <Route path="/artlist/:name/:id" element={<ArtListPage />} />
         <Route path="/list/:id" element={<ListPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/detail/:name/:id" element={<DetailEtcPage />} />
+        <Route path="/detail/painting/:id" element={<DetailEtcPage />} />
         <Route path="/drawing" element={<DrawingPage />} />
         <Route path="/my-drawings" element={<MyDrawingsPage />} />
 

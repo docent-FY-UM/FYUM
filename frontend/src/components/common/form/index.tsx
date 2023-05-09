@@ -19,6 +19,7 @@ import {
   RealFileBtn,
   NonPreviewImg,
 } from "./styles";
+import { upload } from "@testing-library/user-event/dist/upload";
 
 interface FormProps {
   type: string;
@@ -66,10 +67,26 @@ const Form = ({ type }: FormProps) => {
     }
 
     if (type === "mydrawing") {
-      dispatch(registerActions.formRequestStart({ title, contents, img }));
+      dispatch(
+        registerActions.formRequestStart({
+          title,
+          contents,
+          img,
+          type: "mydrawing",
+        })
+      );
       alert("myDrawings에 저장 완료!");
     } else {
-      dispatch(registerActions.formRequestStart({}));
+      dispatch(
+        registerActions.formRequestStart({
+          title,
+          contents,
+          img: uploadImg,
+          type: "mypicture",
+        })
+      );
+      alert("사진 업로드 완료!");
+      // 새로고침 필요?
     }
 
     closeModal();
@@ -84,11 +101,12 @@ const Form = ({ type }: FormProps) => {
       reader.onload = () => {
         const result = reader.result;
         if (typeof result === "string") {
-          console.log("이미지업로드결과?", result);
-          setUploadImg(result);
+          let [_, base64EncodedUrl] = result.split(",");
+          console.log("이미지업로드결과?", base64EncodedUrl);
+          setUploadImg(base64EncodedUrl);
           setFileName(file.name);
         } else {
-          console.error("Failed to read image file");
+          console.error("파일 업로드 실패");
         }
       };
     }
@@ -97,35 +115,37 @@ const Form = ({ type }: FormProps) => {
   return (
     <FormContainer>
       <form>
-        <InputDiv>
-          <p>Attachment</p>
-          <BrowseFileContainer>
-            <InputStyle
-              className="exhibitionList"
-              placeholder="작품을 업로드하세요."
-              value={fileName}
-            />
-            <label htmlFor="file-upload">
-              <Btn
-                type="attachment"
-                text="Browse files"
-                language="en"
-                width={110}
-                height={31}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("file-upload")?.click();
-                }}
+        {type === "exhibitionList" && (
+          <InputDiv>
+            <p>Attachment</p>
+            <BrowseFileContainer>
+              <InputStyle
+                className="exhibitionList"
+                placeholder="작품을 업로드하세요."
+                value={fileName}
               />
-            </label>
-            <RealFileBtn
-              id="file-upload"
-              type="file"
-              accept="image/*"
-              onChange={(e) => onUpload(e)}
-            />
-          </BrowseFileContainer>
-        </InputDiv>
+              <label htmlFor="file-upload">
+                <Btn
+                  type="attachment"
+                  text="Browse files"
+                  language="en"
+                  width={110}
+                  height={31}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("file-upload")?.click();
+                  }}
+                />
+              </label>
+              <RealFileBtn
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                onChange={(e) => onUpload(e)}
+              />
+            </BrowseFileContainer>
+          </InputDiv>
+        )}
 
         <InputContainer>
           <InputDiv>
@@ -157,7 +177,7 @@ const Form = ({ type }: FormProps) => {
           {uploadImg && type === "exhibitionList" && (
             <PreviewImgStyle
               className="exhibitionList"
-              src={`${uploadImg}`}
+              src={`data:image/jpeg;base64,${uploadImg}`}
               alt="이미지 미리보기"
             />
           )}

@@ -189,6 +189,11 @@ export const MarkContainer = styled.div`
   bottom: 3vh;
   right: 2.6vw;
 
+  &.etc {
+    display: flex;
+    align-items: center;
+  }
+
   @media (max-width: 768px) {
     bottom: 0.1vh;
     right: 5vw;

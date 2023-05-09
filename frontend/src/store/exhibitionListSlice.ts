@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface PaintingTypes {
+  paintingId: number;
+  imgSrc: string;
+  title: string;
+  dType: string;
+}
+
 interface ExhibitionListState {
-  data: any;
+  data: PaintingTypes[];
   loading: boolean;
   error: null | string;
 }

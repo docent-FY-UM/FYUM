@@ -19,8 +19,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (currentUrl.includes("/main")) {
-      // setHeaderColor("black");
+    if (currentUrl.includes("/main") || currentUrl.includes("/drawing")) {
+      setHeaderColor("black");
     } else if (currentUrl.includes("/artlist")) {
       setIconColor("black");
     } else {
