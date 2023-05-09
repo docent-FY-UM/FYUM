@@ -38,8 +38,8 @@ export const ListTitleContainer = styled.div`
 export const ImageContainer = styled.div<{ ref: any }>`
   align-items: center;
   display: flex;
-  height: 79%;
-  width: 100%;
+  height: 78%;
+  width: 99%;
   position: absolute;
   top: 12%;
   overflow-y: hidden;
@@ -56,10 +56,10 @@ export const ImageContainer = styled.div<{ ref: any }>`
 
 export const ImageStyle = styled.div<{ title?: string | null }>`
   height: 60%;
-  width: 100%;
+  width: 99%;
   display: flex;
   margin-left: 3%;
-  margin-right: 3%;
+  margin-right: 0.1%;
   cursor: pointer;
   box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -70,7 +70,7 @@ export const ImageStyle = styled.div<{ title?: string | null }>`
     width: 50%;
     box-shadow: none;
     left: 10%;
-    margin-bottom: 20%;
+    margin-bottom: 25%;
   }
 `;
 
@@ -81,7 +81,7 @@ export const ImageTitleStyle = styled.div`
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 110%;
+  top: 109%;
   @media (max-width: 768px) {
     top: 100%;
   }

@@ -3,23 +3,26 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect, useRef, EventHandler } from "react";
 import { useHorizontalScroll } from "../utils/useSideScroll";
-import { ListPageEnd } from "../List/styles";
+import { ImageSrcStyle, ListPageEnd } from "../List/styles";
 import { getArtListApi } from "../../store/api";
 import {
   ImageStyle,
   ImageContainer,
   ImageTitleStyle,
 } from "../../styles/listStyles";
+import { DescriptionBtn, DescriptionP } from "../../pages/DetailPage/styles";
+import SideBar from "./SideBar";
+
 const ArtList = () => {
   const navigate = useNavigate();
   const [artListData, setArtListData] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const pageEnd: any = useRef();
-  const [scrollFunctionRef, setScrollFunctionRef] = useState(null);
+  const [info, setInfo] = useState(true);
 
   let currentUrl = window.location.pathname.split("/");
-  const [prevPage, setPrevPage] = useState(0); //1로 하는게 맞는가?0으로 하는게 맞는가?
+  const [prevPage, setPrevPage] = useState(0);
 
   useEffect(() => {
     setArtListData([]);
@@ -59,6 +62,7 @@ const ArtList = () => {
   useEffect(() => {
     getArtListDatas(page);
   }, [page]);
+
   useEffect(() => {
     if (loading) {
       const observer = new IntersectionObserver(
@@ -68,7 +72,7 @@ const ArtList = () => {
           }
         },
         {
-          threshold: 0.5,
+          threshold: 0.01,
         }
       );
       observer.observe(pageEnd.current);
@@ -79,22 +83,41 @@ const ArtList = () => {
     navigate(`/detail/${id}`);
   };
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
+  window.onresize = () => {
+    window.location.reload();
+  };
+
+  const changeState = () => {
+    setInfo(!info);
+  };
 
   return (
     <ArtListContainer>
       <ImageContainer ref={scrollRef}>
+        {/* <SideBar info={info} setInfo={setInfo}></SideBar> */}
         {artListData.map((item: any) => (
           <ImageStyle
             key={item.paintingId}
-            title={""}
             onClick={() => goDetail(item.paintingId)}
           >
-            {<img src={item.imgSrc} referrerPolicy="no-referrer"></img>}
+            {/* {window.innerWidth > 768 ? (
+              <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
+            ) : (
+              <img
+                src={item.imgSrc}
+                referrerPolicy="no-referrer"
+                style={{ maxWidth: "150%" }}
+              ></img>
+            )} */}
+            <ImageSrcStyle src={item.imgSrc}></ImageSrcStyle>
             <ImageTitleStyle> {item.titleOrigin}</ImageTitleStyle>
           </ImageStyle>
         ))}
         <ListPageEnd ref={pageEnd}></ListPageEnd>
       </ImageContainer>
+      <DescriptionBtn onClick={changeState}>
+        <DescriptionP info={true}>Info.</DescriptionP>
+      </DescriptionBtn>
     </ArtListContainer>
   );
 };

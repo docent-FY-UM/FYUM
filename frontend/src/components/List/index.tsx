@@ -7,6 +7,7 @@ import { ImageStyle, ImageTitleStyle } from "../../styles/listStyles";
 
 import { getListApi } from "../../store/api";
 import { ListTitleContainer, ImageContainer } from "../../styles/listStyles";
+import { $CombinedState } from "@reduxjs/toolkit";
 
 const List = () => {
   const navigate = useNavigate();
@@ -82,6 +83,10 @@ const List = () => {
   };
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
   console.log(listData);
+  window.onresize = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <ListContainer add={currentUrl[2]}>
@@ -93,21 +98,20 @@ const List = () => {
               title={"artList"}
               onClick={() => goArtList(item.id)}
             >
-              {/* style={{ maxWidth: "150%" }} */}
-              {window.innerWidth > 768 ? (
-                <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
+              {/* {window.innerWidth > 768 ? (
+                <img
+                  src={item.imgSrc}
+                  referrerPolicy="no-referrer"
+                  style={{ maxWidth: "100vw" }}
+                ></img>
               ) : (
                 <img
                   src={item.imgSrc}
                   referrerPolicy="no-referrer"
                   style={{ maxWidth: "150%" }}
                 ></img>
-              )}
-              {}
-              {/* <ImageSrcStyle
-                src={item.imgSrc}
-                referrerPolicy="no-referrer"
-              ></ImageSrcStyle> */}
+              )} */}
+              <ImageSrcStyle src={item.imgSrc}></ImageSrcStyle>
               <ImageTitleStyle>
                 {item.nameOrigin}
                 <br></br>

@@ -177,8 +177,8 @@ export const DescriptionBtn = styled.div`
   }
 `;
 
-export const DescriptionP = styled.p`
-  color: ${white};
+export const DescriptionP = styled.p<{ info?: boolean }>`
+  color: ${(props) => (props.info ? `${black}` : `${white}`)};
   font-family: "SUIT";
   font-size: 1.5vw;
   font-weight: 800;

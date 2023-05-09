@@ -30,11 +30,13 @@ export const ImageStyle = styled.div`
 
 export const ImageSrcStyle = styled.img<{ src: string }>`
   src: ${(props) => props.src};
+  max-width: 100vw;
   @media screen and (max-width: 768px) {
-    width: 150%;
+    max-width: 150%;
   }
 `;
 
 export const ListPageEnd = styled.div`
-  visibility: hidden;
+  margin-left: -1%;
+  /* visibility: hidden; */
 `;
