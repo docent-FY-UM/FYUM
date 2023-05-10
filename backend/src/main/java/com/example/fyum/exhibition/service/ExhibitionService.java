@@ -107,7 +107,11 @@ public class ExhibitionService {
             dto.setImgSrc(painting.getImgSrc());
             dto.setPaintingId(painting.getId());
             if(Dtype.equals("MP")){
-                dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
+                if(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin() != null){
+                    dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
+                }else{
+                    dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleKr());
+                }
             }else if(Dtype.equals("MD")){
                 dto.setTitle(myDrawingRepository.findById(painting.getId()).get().getTitle());
             }else{
