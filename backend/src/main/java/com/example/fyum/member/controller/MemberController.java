@@ -43,6 +43,7 @@ public class MemberController {
         memberResponseDto.setNickname(kakaoProfile.getProperties().getNickname());
         System.out.print(kakaoProfile.getId());
         memberResponseDto.setSurvey(memberService.isSurvey(String.valueOf(kakaoProfile.getId())));
+        memberResponseDto.setId(memberService.getMember(String.valueOf(kakaoProfile.getId())).getId());
 
         return new ResponseEntity<MemberResponseDto>(memberResponseDto,headers,HttpStatus.valueOf(200));
     }

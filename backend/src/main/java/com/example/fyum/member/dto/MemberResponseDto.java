@@ -8,4 +8,6 @@ public class MemberResponseDto {
 
     private Boolean survey;
 
+    private int id;
+
 }
