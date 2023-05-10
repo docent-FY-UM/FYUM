@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import BackImg from "../../assets/images/artListBackground.png";
 import { ReactComponent as CloseIc } from "../../assets/icon/closeIc.svg";
-import { black, grey } from "../../styles/colors";
+import { black, grey, white } from "../../styles/colors";
 
 export const ArtListContainer = styled.div`
   height: 100%;
@@ -29,5 +29,29 @@ export const SideBarCloseIcStyle = styled(CloseIc)`
   float: right;
   height: 20px;
   width: 20px;
+  margin: 3%;
   fill: ${grey[300]};
+  cursor: pointer;
+`;
+
+export const SideBarFontStyle = styled.div`
+  &.kr {
+    color: ${white};
+    font-weight: 700;
+    font-size: 50px;
+    font-family: SUIT;
+  }
+  &.en {
+    color: ${grey[200]};
+
+    font-weight: 300;
+    font-size: 24px;
+  }
+  &.info {
+    color: ${grey[100]};
+
+    font-weight: 500;
+    font-size: 15px;
+    font-family: SUIT;
+  }
 `;

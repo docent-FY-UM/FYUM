@@ -19,15 +19,6 @@ export const ListContainer = styled.div<{ add: string }>`
   }
 `;
 
-export const ImageStyle = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  margin-left: 1%;
-  margin-right: 1%;
-  cursor: pointer;
-`;
-
 export const ImageSrcStyle = styled.img<{ src: string }>`
   src: ${(props) => props.src};
   max-width: 100vw;

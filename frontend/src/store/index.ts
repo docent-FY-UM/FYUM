@@ -7,8 +7,9 @@ import authReducer from "./authSlice";
 import modalReducer from "./modalSlice";
 import userReducer from "./userSlice";
 import listReducer from "./listSlice";
-import registerReducer from "./registerSlice"
+import registerReducer from "./registerSlice";
 import exhibitionListReducer from "./exhibitionListSlice";
+import sideBarReducer from "./sideBarSlice";
 
 // 관리하는 saga
 import { registerSagas } from "./registerSagas";
@@ -22,6 +23,7 @@ const rootReducers = combineReducers({
   list: listReducer,
   register: registerReducer,
   exhibitionList: exhibitionListReducer,
+  sideBar: sideBarReducer,
 });
 
 // rootSaga

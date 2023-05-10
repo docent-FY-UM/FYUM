@@ -30,7 +30,7 @@ const List = () => {
   const getListDatas = async (page: number) => {
     const listUrl = window.location.pathname.includes("painter")
       ? "painters"
-      : window.location.pathname.includes("art")
+      : window.location.pathname.includes("trend")
       ? "trends"
       : "themes";
 
@@ -77,7 +77,6 @@ const List = () => {
     currentUrl[2].slice(1, currentUrl[2].length);
 
   const goArtList = (id: number) => {
-    alert("이동하게 하기" + id);
     navigate(`/artlist/${currentUrl[2]}/${id}`);
   };
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
