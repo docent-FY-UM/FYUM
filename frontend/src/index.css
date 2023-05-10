@@ -4,22 +4,28 @@ body {
 
 @font-face {
   font-family: "Kim jung chul Myungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Bold.woff2")
+    format("woff2");
   font-weight: 700;
-  src: local("Kim jung chul Myungjo Bold"),
-    url("./fonts/KimjungchulMyungjo-Bold.ttf") format("ttf");
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Kim jung chul Myungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Regular.woff2")
+    format("woff2");
   font-weight: 400;
-  src: local("Kim jung chul Myungjo Regular"),
-    url("./fonts/KimjungchulMyungjo-Regular.ttf") format("ttf");
+  font-style: normal;
 }
+
 @font-face {
   font-family: "Kim jung chul Myungjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/KimjungchulMyungjo-Light.woff2")
+    format("woff2");
   font-weight: 300;
-  src: local("Kim jung chul Myungjo Light"),
-    url("./fonts/KimjungchulMyungjo-Light.ttf") format("ttf");
+  font-style: normal;
 }
+
 @font-face {
   font-family: "SUIT";
   font-weight: 100;
