@@ -1,16 +1,21 @@
 import { ArtListContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect, useRef, EventHandler } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHorizontalScroll } from "../utils/useSideScroll";
-import { ImageSrcStyle, ListPageEnd } from "../List/styles";
 import { getArtListApi } from "../../store/api";
+
 import {
-  ImageStyle,
+  ImgtitleContainer,
   ImageContainer,
+  ImageStyle,
+  ImgSrcStyle,
   ImageTitleStyle,
+  ListPageEnd,
 } from "../../styles/listStyles";
+
 import { DescriptionBtn, DescriptionP } from "../../pages/DetailPage/styles";
+
 import SideBar from "./SideBar";
 import { useDispatch } from "react-redux";
 import { sideBarActions } from "../../store/sideBarSlice";
@@ -108,10 +113,13 @@ const ArtList = () => {
       observer.observe(pageEnd.current);
     }
   }, [loading]);
+
   const goDetail = (id: number) => {
     navigate(`/detail/${id}`);
   };
+
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
+
 
   const changeState = () => {
     setOnOff(!onOff);
@@ -129,7 +137,7 @@ const ArtList = () => {
   }, [[nameKr, nameEn, infoState]]);
   return (
     <ArtListContainer>
-      <ImageContainer ref={scrollRef}>
+      <ImageContainer className="artlist" ref={scrollRef}>
         {artListUrl === "themes" ? (
           <></>
         ) : onOff === true ? (
@@ -138,25 +146,25 @@ const ArtList = () => {
           <></>
         )}
         {artListData.map((item: any) => (
-          <ImageStyle
-            key={item.paintingId}
-            onClick={() => goDetail(item.paintingId)}
-          >
-            {/* {window.innerWidth > 768 ? (
-              <img src={item.imgSrc} referrerPolicy="no-referrer"></img>
-            ) : (
-              <img
+          <ImgtitleContainer className="artlist">
+            <ImageStyle
+              className="artlist"
+              key={item.paintingId}
+              onClick={() => goDetail(item.paintingId)}
+            >
+              <ImgSrcStyle
+                className="artlist"
                 src={item.imgSrc}
                 referrerPolicy="no-referrer"
-                style={{ maxWidth: "150%" }}
-              ></img>
-            )} */}
-            <ImageSrcStyle
-              src={item.imgSrc}
-              referrerPolicy="no-referrer"
-            ></ImageSrcStyle>
-            <ImageTitleStyle> {item.titleOrigin}</ImageTitleStyle>
-          </ImageStyle>
+              />
+            </ImageStyle>
+
+            {item.titleOrigin === null ? (
+              <ImageTitleStyle title={"artList"}>{item.titleKr}</ImageTitleStyle>
+            ) : (
+              <ImageTitleStyle title={"artList"}> {item.titleOrigin}</ImageTitleStyle>
+            )}
+          </ImgtitleContainer>
         ))}
         <ListPageEnd ref={pageEnd}></ListPageEnd>
       </ImageContainer>

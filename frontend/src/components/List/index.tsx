@@ -1,9 +1,15 @@
-import { useState, useEffect, useRef, EventHandler } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 
-import { ImageSrcStyle, ListContainer, ListPageEnd } from "./styles";
-import { ImageStyle, ImageTitleStyle } from "../../styles/listStyles";
+import { ListContainer, FrameContainer, Frame } from "./styles";
+import {
+  ImageStyle,
+  ImgtitleContainer,
+  ImgSrcStyle,
+  ImageTitleStyle,
+  ListPageEnd,
+} from "../../styles/listStyles";
 
 import { getListApi } from "../../store/api";
 import { ListTitleContainer, ImageContainer } from "../../styles/listStyles";
@@ -79,11 +85,12 @@ const List = () => {
   const goArtList = (id: number) => {
     navigate(`/artlist/${currentUrl[2]}/${id}`);
   };
+
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
   console.log(listData);
-  window.onresize = () => {
-    window.location.reload();
-  };
+  // window.onresize = () => {
+  //   window.location.reload();
+  // };
 
   return (
     <>
@@ -91,34 +98,23 @@ const List = () => {
         <ListTitleContainer>&nbsp;{title}&nbsp;</ListTitleContainer>
         <ImageContainer ref={scrollRef}>
           {listData.map((item: any) => (
-            <ImageStyle
-              key={item.id}
-              title={"artList"}
-              onClick={() => goArtList(item.id)}
-            >
-              {/* {window.innerWidth > 768 ? (
-                <img
+            <ImgtitleContainer>
+              <ImageStyle
+                key={item.id}
+                title={"artList"}
+                onClick={() => goArtList(item.id)}
+              >
+                <ImgSrcStyle
                   src={item.imgSrc}
                   referrerPolicy="no-referrer"
-                  style={{ maxWidth: "100vw" }}
-                ></img>
-              ) : (
-                <img
-                  src={item.imgSrc}
-                  referrerPolicy="no-referrer"
-                  style={{ maxWidth: "150%" }}
-                ></img>
-              )} */}
-              <ImageSrcStyle
-                src={item.imgSrc}
-                referrerPolicy="no-referrer"
-              ></ImageSrcStyle>
-              <ImageTitleStyle>
-                {item.nameOrigin}
-                <br></br>
-                {item.nameKr}
-              </ImageTitleStyle>
-            </ImageStyle>
+                  alt="화가 이미지"
+                />
+                <FrameContainer>
+                  <Frame />
+                </FrameContainer>
+              </ImageStyle>
+              <ImageTitleStyle>{item.nameKr}</ImageTitleStyle>
+            </ImgtitleContainer>
           ))}
           <ListPageEnd ref={pageEnd}></ListPageEnd>
         </ImageContainer>

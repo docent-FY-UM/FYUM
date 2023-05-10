@@ -4,7 +4,9 @@ import { getMyDrawingsListApi } from "../../store/api";
 
 import {
   ImageContainer,
+  ImgtitleContainer,
   ImageStyle,
+  ImgSrcStyle,
   ImageTitleStyle,
 } from "../../styles/listStyles";
 
@@ -33,29 +35,33 @@ const MyDrawings = () => {
   };
 
   return (
-    <div>
-      <ImageContainer ref={scrollRef}>
+    <>
+      <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle
-              key={item.paintingId}
-              onClick={() => goDetail(item.paintingId)}
-            >
-              {
-                <img
-                  src={item.imgSrc}
-                  referrerPolicy="no-referrer"
-                  alt="전시회 이미지"
-                  key={`image-${item.paintingId}`}
-                ></img>
-              }
+            <ImgtitleContainer className="artlist">
+              <ImageStyle
+                className="artlist"
+                key={item.paintingId}
+                onClick={() => goDetail(item.paintingId)}
+              >
+                {
+                  <ImgSrcStyle
+                    className="artlist"
+                    src={item.imgSrc}
+                    referrerPolicy="no-referrer"
+                    alt="전시회 이미지"
+                    key={`image-${item.paintingId}`}
+                  />
+                }
+              </ImageStyle>
               <ImageTitleStyle key={`title-${item.paintingId}`}>
                 {item.title}
               </ImageTitleStyle>
-            </ImageStyle>
+            </ImgtitleContainer>
           ))}
       </ImageContainer>
-    </div>
+    </>
   );
 };
 

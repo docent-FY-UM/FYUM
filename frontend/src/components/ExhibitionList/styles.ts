@@ -12,13 +12,13 @@ export const FixedContainer = styled.div`
 export const UploadBtn = styled.div`
   position: absolute;
   bottom: 20px;
-  left: 2vw;
+  left: 30px;
 `;
 
 export const GoExhibitionBtn = styled.div`
   position: absolute;
   bottom: 20px;
-  right: 2vw;
+  right: 30px;
 
   display: flex;
   justify-content: center;

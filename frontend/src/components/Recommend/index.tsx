@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getRecommendApi } from "../../store/api";
 import { useHorizontalScroll } from "../utils/useSideScroll";
-import { ImageContainer } from "../../styles/listStyles";
-import { ImageTitleStyle, ImageStyle } from "./styles";
+
+import {
+  ImageContainer,
+  ImgtitleContainer,
+  ImageStyle,
+  ImgSrcStyle,
+  ImageTitleStyle,
+} from "../../styles/listStyles";
 
 const RecommendList = () => {
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
@@ -27,26 +33,30 @@ const RecommendList = () => {
   };
 
   return (
-    <div>
-      <ImageContainer ref={scrollRef}>
+    <>
+      <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle
-              key={item.paintingId}
-              onClick={() => goDetail(item.paintingId)}
-            >
-              {
-                <img
-                  src={item.imgSrc}
-                  referrerPolicy="no-referrer"
-                  alt="추천 이미지"
-                ></img>
-              }
-              <ImageTitleStyle>{item.title}</ImageTitleStyle>
-            </ImageStyle>
+            <ImgtitleContainer className="artlist">
+              <ImageStyle
+                className="artlist"
+                key={item.paintingId}
+                onClick={() => goDetail(item.paintingId)}
+              >
+                {
+                  <ImgSrcStyle
+                    className="artlist"
+                    src={item.imgSrc}
+                    referrerPolicy="no-referrer"
+                    alt="추천 이미지"
+                  />
+                }
+              </ImageStyle>
+                <ImageTitleStyle>{item.title}</ImageTitleStyle>
+            </ImgtitleContainer>
           ))}
       </ImageContainer>
-    </div>
+    </>
   );
 };
 

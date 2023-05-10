@@ -11,8 +11,11 @@ import useModal from "../utils/useModal";
 
 import {
   ImageContainer,
+  ImgtitleContainer,
   ImageStyle,
+  ImgSrcStyle,
   ImageTitleStyle,
+  InvisibleBox,
 } from "../../styles/listStyles";
 
 import {
@@ -39,15 +42,14 @@ const ExhibitionList = () => {
   }, []);
 
   // 상세 페이지로 이동
-  const goDetail = ({id, type}: DetailProps) => {
+  const goDetail = ({ id, type }: DetailProps) => {
     if (type === "MP") {
       navigate(`/detail/${id}`);
     } else if (type === "MD") {
-      navigate(`/detail/painting/${id}`)
+      navigate(`/detail/painting/${id}`);
     } else {
-      navigate(`/detail/picture/${id}`)
+      navigate(`/detail/picture/${id}`);
     }
-   
   };
 
   // 전시회 입장 페이지로 이동
@@ -71,21 +73,31 @@ const ExhibitionList = () => {
   console.log("데이터는?", data);
 
   return (
-    <div>
-      <ImageContainer ref={scrollRef}>
+    <>
+      <ImageContainer className="artlist exhibition-list" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle key={item.paintingId} onClick={() => goDetail({id: item.paintingId, type: item.dtype})}>
-              {
-                <img
-                  src={item.imgSrc}
-                  referrerPolicy="no-referrer"
-                  alt="전시회 이미지"
-                ></img>
-              }
+            <ImgtitleContainer className="artlist exhibition-list ">
+              <ImageStyle
+                className="artlist"
+                key={item.paintingId}
+                onClick={() =>
+                  goDetail({ id: item.paintingId, type: item.dtype })
+                }
+              >
+                {
+                  <ImgSrcStyle
+                    className="artlist"
+                    src={item.imgSrc}
+                    referrerPolicy="no-referrer"
+                    alt="전시회 이미지"
+                  />
+                }
+              </ImageStyle>
               <ImageTitleStyle>{item.title}</ImageTitleStyle>
-            </ImageStyle>
+            </ImgtitleContainer>
           ))}
+        {data.length < 4 && <InvisibleBox />}
       </ImageContainer>
       <FixedContainer>
         <UploadBtn onClick={openUpload}>
@@ -96,7 +108,7 @@ const ExhibitionList = () => {
           <ArrowStyle />
         </GoExhibitionBtn>
       </FixedContainer>
-    </div>
+    </>
   );
 };
 

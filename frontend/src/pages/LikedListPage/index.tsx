@@ -1,16 +1,16 @@
 import {
-  ListBackgroundContainer,
   ListTitleContainer,
 } from "../../styles/listStyles";
+import { ListContainer } from "../../components/List/styles"; 
+
 import LikedList from "../../components/Liked";
-import likedImg from "../../assets/images/likedPageImg.png";
 
 const LikedListPage = () => {
   return (
-    <ListBackgroundContainer backgroundimg={likedImg}>
+    <ListContainer add={"like"}>
       <ListTitleContainer>&nbsp;Liked List&nbsp;</ListTitleContainer>
       <LikedList />
-    </ListBackgroundContainer>
+    </ListContainer>
   );
 };
 export default LikedListPage;

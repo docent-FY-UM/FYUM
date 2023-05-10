@@ -2,8 +2,15 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { likedListApi } from "../../store/api";
 import { useHorizontalScroll } from "../utils/useSideScroll";
-import { ImageContainer } from "../../styles/listStyles";
-import { ImageTitleStyle, ImageStyle } from "./styles";
+
+import {
+  ImageContainer,
+  ImgtitleContainer,
+  ImageStyle,
+  ImgSrcStyle,
+  ImageTitleStyle,
+  InvisibleBox,
+} from "../../styles/listStyles";
 
 const LikedList = () => {
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
@@ -23,32 +30,39 @@ const LikedList = () => {
     getLikedData();
   }, []);
 
-  console.log(data);
+  console.log("데이터?", data);
+  console.log("데이터 길이는?", data.length);
+
   const goDetail = (id: number) => {
     navigate(`/detail/${id}`);
   };
 
   return (
-    <div>
-      <ImageContainer ref={scrollRef}>
+    <>
+      <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImageStyle
-              key={item.paintingId}
-              onClick={() => goDetail(item.paintingId)}
-            >
-              {
-                <img
-                  src={item.imgSrc}
-                  referrerPolicy="no-referrer"
-                  alt="찜 이미지"
-                ></img>
-              }
+            <ImgtitleContainer className="artlist">
+              <ImageStyle
+                className="artlist"
+                key={item.paintingId}
+                onClick={() => goDetail(item.paintingId)}
+              >
+                {
+                  <ImgSrcStyle
+                    className="artlist"
+                    src={item.imgSrc}
+                    referrerPolicy="no-referrer"
+                    alt="찜 이미지"
+                  />
+                }
+              </ImageStyle>
               <ImageTitleStyle>{item.title}</ImageTitleStyle>
-            </ImageStyle>
+            </ImgtitleContainer>
           ))}
+        {data.length < 4 && <InvisibleBox />}
       </ImageContainer>
-    </div>
+    </>
   );
 };
 

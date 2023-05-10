@@ -1,10 +1,15 @@
 import styled from "styled-components";
-import { white } from "./colors";
+import { white, black } from "./colors";
 
 export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   height: 100vh;
   width: 100vw;
   background-image: url(${(props) => props.backgroundimg});
+
+  //수정
+  display: flex;
+  flex-direction: column;
+  //
 
   @media screen and (max-width: 768px) {
     overflow-y: visible;
@@ -36,53 +41,150 @@ export const ListTitleContainer = styled.div`
   }
 `;
 export const ImageContainer = styled.div<{ ref: any }>`
-  align-items: center;
   display: flex;
-  height: 78%;
-  width: 99%;
-  position: absolute;
-  top: 12%;
+  height: 65%;
+  width: 95%;
+  gap: 93px;
+  margin-top: 30px;
   overflow-y: hidden;
-  margin: auto;
+
+  padding-right: 30px;
+
+  &.artlist {
+    margin-top: 0px;
+    height: 80%;
+    align-items: center;
+
+    &.exhibition-list {
+      height: 65%;
+    }
+  }
+
+  &.etc {
+    margin-top: 0px;
+    align-items: center;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
-  @media (max-width: 768px) {
-    display: inline-block;
-    top: 21%;
+
+  @media screen and (max-width: 768px) {
+    height: 72%;
+    flex-direction: column;
+    align-items: center;
     overflow-y: scroll;
+    gap: 100px;
+    padding-right: 0px;
+
+    &.artlist {
+      margin-top: 60px;
+
+      &.exhibition-list {
+        margin-top: 10px;
+      }
+    }
+
+    &.etc {
+      margin-top: 0px;
+    }
   }
 `;
 
-export const ImageStyle = styled.div<{ title?: string | null }>`
-  height: 60%;
-  width: 99%;
+export const ImageStyle = styled.div`
+  margin-top: 20px;
+  margin-left: 10px;
+  width: 280px;
+  height: 330px;
   display: flex;
-  margin-left: 3%;
-  margin-right: 0.1%;
   cursor: pointer;
   box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
   position: relative;
-  margin-top: ${(props) => (props.title === "artList" ? "4.5%" : "0%")};
-  color: ${(props) => (props.title === "artList" ? `${white}` : "")};
+
+  &.artlist {
+    width: auto;
+    min-width: 240px;
+    max-width: 150%;
+    height: auto;
+    max-height: 100%;
+  }
 
   @media (max-width: 768px) {
-    width: 50%;
-    box-shadow: none;
-    left: 10%;
-    margin-bottom: 25%;
+    height: 90%;
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 0px;
   }
 `;
 
-export const ImageTitleStyle = styled.div`
-  display: inline-block;
+export const ImgSrcStyle = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+
+  &.artlist {
+    /* object-fit: cover; */
+  }
+`;
+
+export const ImgtitleContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+
+  &.artlist {
+    width: auto;
+    height: auto;
+    gap: 40px;
+
+    &.exhibition-list {
+      gap: 40px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 70%;
+    height: 80%;
+    gap: 60px;
+
+    &.artlist {
+      width: 70%;
+      height: 80%;
+      gap: 40px;
+    }
+  }
+`;
+
+export const ImageTitleStyle = styled.div<{ title?: string }>`
   font-weight: 500;
   font-size: 20px;
-  position: absolute;
   width: 100%;
   text-align: center;
-  top: 109%;
+
+  color: ${(props) => (props.title === "artList" ? `${black}` : `${white}`)};
+
   @media (max-width: 768px) {
-    top: 100%;
   }
+`;
+
+export const ListPageEnd = styled.div`
+  width: 20px;
+  height: 100%;
+  /* background-color: pink; */
+  margin-right: 20px;
+  visibility: hidden;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0px;
+    height: 20px;
+    margin-bottom: 20px;
+  }
+`;
+
+export const InvisibleBox = styled.div`
+  width: 800%;
+  height: 800%;
+  visibility: hidden;
 `;

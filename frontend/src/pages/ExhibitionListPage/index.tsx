@@ -1,18 +1,17 @@
 import {
-  ListBackgroundContainer,
   ListTitleContainer,
 } from "../../styles/listStyles";
+import { ListContainer } from "../../components/List/styles"; 
 
 import ExhibitionList from "../../components/ExhibitionList";
 
-import backgroundImg from "../../assets/images/exListBackgroundImg.png";
 
 const ExhibitionListPage = () => {
   return (
-    <ListBackgroundContainer backgroundimg={backgroundImg}>
+    <ListContainer add={"exhibition-list"}>
       <ListTitleContainer>&nbsp;Exhibition List&nbsp;</ListTitleContainer>
       <ExhibitionList />
-    </ListBackgroundContainer>
+    </ListContainer>
   );
 };
 export default ExhibitionListPage;

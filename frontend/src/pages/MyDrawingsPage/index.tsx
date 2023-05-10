@@ -1,17 +1,16 @@
 import {
-  ListBackgroundContainer,
   ListTitleContainer,
 } from "../../styles/listStyles";
+import { ListContainer } from "../../components/List/styles"; 
 
-import backgroundImg from "../../assets/images/myDrawingsBackgroundImg.png";
 import MyDrawings from "../../components/MyDrawings";
 
 const MyDrawingsPage = () => {
   return (
-    <ListBackgroundContainer backgroundimg={backgroundImg}>
+    <ListContainer add={"mydrawing"}>
       <ListTitleContainer>&nbsp;My Drawings&nbsp;</ListTitleContainer>
       <MyDrawings />
-    </ListBackgroundContainer>
+    </ListContainer>
   );
 };
 
