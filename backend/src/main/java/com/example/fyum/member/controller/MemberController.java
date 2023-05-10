@@ -58,6 +58,12 @@ public class MemberController {
         return ResponseEntity.ok().body(member);
     }
 
+    @GetMapping("/nickname/{id}")
+    public ResponseEntity <String> getNickName(@PathVariable int id, Authentication authentication){
+        String nickname = memberService.getNickName(id);
+        return ResponseEntity.ok(nickname);
+    }
+
 }
 
 

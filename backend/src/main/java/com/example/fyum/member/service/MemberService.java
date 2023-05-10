@@ -27,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -164,6 +165,13 @@ public class MemberService {
 
         return true;
     }
+
+    public String getNickName (int id){
+        Optional<Member> member = memberRepository.findById(id);
+        return member.get().getName();
+    }
+
+
 
 
 
