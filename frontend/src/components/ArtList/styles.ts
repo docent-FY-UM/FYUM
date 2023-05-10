@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import BackImg from "../../assets/images/artListBackground.png";
 import { ReactComponent as CloseIc } from "../../assets/icon/closeIc.svg";
-import { grey } from "../../styles/colors";
+import { black, grey } from "../../styles/colors";
 
 export const ArtListContainer = styled.div`
   height: 100%;
@@ -14,7 +14,19 @@ export const ArtListContainer = styled.div`
   }
 `;
 
+export const SideBarContainer = styled.div`
+  position: fixed;
+  width: 330px;
+  height: 100vh;
+  left: 0%;
+  top: 0%;
+  background: ${black};
+  border-radius: 0px 10px 10px 0px;
+  z-index: 999999;
+`;
+
 export const SideBarCloseIcStyle = styled(CloseIc)`
+  float: right;
   height: 20px;
   width: 20px;
   fill: ${grey[300]};

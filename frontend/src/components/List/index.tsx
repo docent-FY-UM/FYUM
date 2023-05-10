@@ -110,7 +110,10 @@ const List = () => {
                   style={{ maxWidth: "150%" }}
                 ></img>
               )} */}
-              <ImageSrcStyle src={item.imgSrc}></ImageSrcStyle>
+              <ImageSrcStyle
+                src={item.imgSrc}
+                referrerPolicy="no-referrer"
+              ></ImageSrcStyle>
               <ImageTitleStyle>
                 {item.nameOrigin}
                 <br></br>

@@ -90,11 +90,11 @@ const ArtList = () => {
   const changeState = () => {
     setInfo(!info);
   };
-
+  useEffect(() => {}, [info]);
   return (
     <ArtListContainer>
       <ImageContainer ref={scrollRef}>
-        {/* <SideBar info={info} setInfo={setInfo}></SideBar> */}
+        <SideBar info={info} setInfo={setInfo}></SideBar>
         {artListData.map((item: any) => (
           <ImageStyle
             key={item.paintingId}
@@ -109,7 +109,10 @@ const ArtList = () => {
                 style={{ maxWidth: "150%" }}
               ></img>
             )} */}
-            <ImageSrcStyle src={item.imgSrc}></ImageSrcStyle>
+            <ImageSrcStyle
+              src={item.imgSrc}
+              referrerPolicy="no-referrer"
+            ></ImageSrcStyle>
             <ImageTitleStyle> {item.titleOrigin}</ImageTitleStyle>
           </ImageStyle>
         ))}

@@ -1,4 +1,4 @@
-import { SideBarCloseIcStyle } from "./styles";
+import { SideBarCloseIcStyle, SideBarContainer } from "./styles";
 
 interface Props {
   info: boolean;
@@ -9,9 +9,9 @@ const SideBar = ({ info, setInfo }: Props) => {
     setInfo(false);
   };
   return (
-    <>
-      <SideBarCloseIcStyle></SideBarCloseIcStyle>
-    </>
+    <SideBarContainer>
+      <SideBarCloseIcStyle onClick={() => closeSideBar()}></SideBarCloseIcStyle>
+    </SideBarContainer>
   );
 };
 export default SideBar;
