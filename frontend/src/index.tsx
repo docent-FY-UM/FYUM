@@ -4,11 +4,18 @@ import store from "./store/index";
 import { Provider } from "react-redux";
 import "./index.css";
 //사가 불러오는 법 알아보기. ver18에서
+
+// redux-persist
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./store/index";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
-    <App />
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );

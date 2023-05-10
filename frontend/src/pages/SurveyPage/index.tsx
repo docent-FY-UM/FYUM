@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { surveySubmitApi } from "../../store/api";
+import { changeSurvey } from "../../store/userSlice";
 import {
   BackgroundContainer,
   SurveyContainer,
@@ -24,6 +26,7 @@ import art_238 from "../../assets/images/survey/238.jpg";
 
 const SurveyPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [choosed, setChoosed] = useState<number[]>([]);
 
@@ -48,7 +51,7 @@ const SurveyPage = () => {
   const sendSurveyData = async () => {
     try {
       await surveySubmitApi(choosed);
-      console.log("성공!");
+      dispatch(changeSurvey(true));
     } catch (err) {
       console.log(err);
     }

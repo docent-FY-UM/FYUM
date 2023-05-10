@@ -4,12 +4,14 @@ interface UserInfo {
   userNickNm: string;
   accessToken: string;
   survey: boolean;
+  id: number;
 }
 
 const initialUserState: UserInfo = {
   userNickNm: "",
   accessToken: "",
   survey: false,
+  id: 0,
 };
 
 export const userSlice = createSlice({
@@ -25,9 +27,12 @@ export const userSlice = createSlice({
     changeSurvey: (state, action) => {
       state.survey = action.payload;
     },
+    changeId: (state, action) => {
+      state.id = action.payload;
+    },
   },
 });
 
-export const { changeUserNickNm, changeAccessToken, changeSurvey } =
+export const { changeUserNickNm, changeAccessToken, changeSurvey, changeId } =
   userSlice.actions;
 export default userSlice.reducer;

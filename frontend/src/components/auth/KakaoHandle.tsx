@@ -3,6 +3,7 @@ import {
   changeUserNickNm,
   changeAccessToken,
   changeSurvey,
+  changeId,
 } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 
@@ -22,7 +23,12 @@ const KakaoHandle = () => {
         dispatch(changeUserNickNm(res.data.nickname));
         dispatch(changeAccessToken(res.headers.authorization));
         dispatch(changeSurvey(res.data.survey));
-        window.location.href = "/survey";
+        dispatch(changeId(res.data.id));
+        {
+          res.data.survey === true
+            ? (window.location.href = "/main")
+            : (window.location.href = "/survey");
+        }
       } else {
         alert("로그인 에러가 발생했습니다. 다시 로그인해주세요!");
         window.location.href = "/login";

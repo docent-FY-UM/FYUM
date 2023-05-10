@@ -11,6 +11,11 @@ import registerReducer from "./registerSlice";
 import exhibitionListReducer from "./exhibitionListSlice";
 import sideBarReducer from "./sideBarSlice";
 
+// Redux - Persist
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import persistStore from "redux-persist/es/persistStore";
+
 // 관리하는 saga
 import { registerSagas } from "./registerSagas";
 import { exhibitionListSagas } from "./exhibitionListSagas";
@@ -26,6 +31,16 @@ const rootReducers = combineReducers({
   sideBar: sideBarReducer,
 });
 
+// 새로운 persist 선언
+const persistConfig = {
+  key: "root",
+  storage: storage,
+  whitelist: ["user"],
+};
+
+// persist + rootReducer
+const persistedReducer = persistReducer(persistConfig, rootReducers);
+
 // rootSaga
 function* rootSaga() {
   yield all([...registerSagas, ...exhibitionListSagas]);
@@ -38,7 +53,7 @@ const middlewares = [sagaMiddleware];
 // 여러가지 리듀서를 하나로 합칠 수 있음
 // store는 하나의 리듀서만을 가진다.
 const store = configureStore({
-  reducer: rootReducers,
+  reducer: persistedReducer,
   middleware: middlewares,
 });
 
@@ -47,5 +62,7 @@ sagaMiddleware.run(rootSaga);
 
 // 외부에서 store를 쓰기위해 export
 export default store;
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducers>;
