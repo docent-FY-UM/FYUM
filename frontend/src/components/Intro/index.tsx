@@ -34,7 +34,9 @@ const Intro = () => {
         <br></br>
         <IntroText>Online Three-Dimensional Exhibition</IntroText>
       </TextDiv>
-      <MobileText> &gt;&gt; &nbsp;Enter</MobileText>
+      <MobileText onClick={() => navigate("/login")}>
+        &gt;&gt; &nbsp;Enter
+      </MobileText>
       <ClickHere position={position}>
         <ClickText> &nbsp; &nbsp;click anywhere</ClickText>
       </ClickHere>

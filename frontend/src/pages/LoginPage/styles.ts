@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import kakaoImg from "../../assets/images/kakao_login_large_wide.png";
-import BackgroundImg from "../../assets/images/loginImg1.png";
+import BackgroundImg from "../../assets/images/login.png";
 import { white } from "../../styles/colors";
 
 export const BackgroundContainer = styled.div`

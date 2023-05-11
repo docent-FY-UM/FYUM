@@ -96,6 +96,10 @@ export const ClickHere = styled.div<ClickHereProps>`
     ${(props) => props.position.x}px,
     ${(props) => props.position.y}px
   );
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const ClickText = styled.p`
