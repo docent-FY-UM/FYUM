@@ -14,7 +14,11 @@ public class RecommendResponseDto {
     public RecommendResponseDto(Masterpiece ob){
         this.paintingId = ob.getId();
         this.titleKr = ob.getTitleKr();
-        this.title= ob.getTitleOrigin();
+        if(ob.getTitleOrigin() == null){
+            this.title = ob.getTitleKr();
+        }else{
+            this.title= ob.getTitleOrigin();
+        }
         this.imgSrc = ob.getImgSrc();
     }
 
