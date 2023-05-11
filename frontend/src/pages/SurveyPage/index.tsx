@@ -58,11 +58,14 @@ const SurveyPage = () => {
   };
 
   const sendSurvey = () => {
-    navigate("/recommend");
-    sendSurveyData();
+    if (choosed.length === 2) {
+      navigate("/main");
+      sendSurveyData();
+    } else {
+      alert("2개의 작품을 선택해주세요 :)");
+    }
   };
 
-  console.log(choosed);
   return (
     <BackgroundContainer>
       <SurveyContainer>

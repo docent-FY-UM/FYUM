@@ -38,10 +38,9 @@ const RecommendList = () => {
       <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImgtitleContainer className="artlist">
+            <ImgtitleContainer key={item.paintingId} className="artlist">
               <ImageStyle
                 className="artlist"
-                key={item.paintingId}
                 onClick={() => goDetail(item.paintingId)}
               >
                 {
