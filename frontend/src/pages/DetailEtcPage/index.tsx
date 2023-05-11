@@ -64,7 +64,6 @@ const DetailEtcPage = () => {
     const getCuration = async () => {
       try {
         const res = await getCurationApi(id);
-        console.log("큐레이션 원본데이터", res)
         console.log("큐레이션?", res.data);
         setCuration(res.data);
       } catch (error) {

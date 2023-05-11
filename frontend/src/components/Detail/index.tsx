@@ -22,6 +22,7 @@ import {
   EmptyFrameIcStyle,
   FullFrameIcStyle,
 } from "../../pages/DetailPage/styles";
+import { SpeakerImg, MuteIcStyle } from "../../pages/DetailPage/styles";
 import { DeleteIcStyle } from "./styles";
 
 const Detail = ({
