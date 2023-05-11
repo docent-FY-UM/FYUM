@@ -77,6 +77,7 @@ const ArtList = () => {
       setNameEn(data.painterOrigin);
     } else {
       setNameKr(data.trendKr);
+      setNameEn(data.trendOrigin);
     }
     setInfoState(data.description);
     if (data.content.length === 0) {
@@ -120,7 +121,6 @@ const ArtList = () => {
 
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
 
-
   const changeState = () => {
     setOnOff(!onOff);
   };
@@ -161,9 +161,14 @@ const ArtList = () => {
                 />
               </ImageStyle>
               {item.titleOrigin === null ? (
-                <ImageTitleStyle title={"artList"}>{item.titleKr}</ImageTitleStyle>
+                <ImageTitleStyle title={"artList"}>
+                  {item.titleKr}
+                </ImageTitleStyle>
               ) : (
-                <ImageTitleStyle title={"artList"}> {item.titleOrigin}</ImageTitleStyle>
+                <ImageTitleStyle title={"artList"}>
+                  {" "}
+                  {item.titleOrigin}
+                </ImageTitleStyle>
               )}
             </ImgtitleContainer>
           ))}
