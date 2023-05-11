@@ -1,5 +1,6 @@
 package com.example.fyum.masterpiece.service;
 
+import com.example.fyum.config.Painting;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
 import com.example.fyum.masterpiece.dto.CategoryDto;
 import com.example.fyum.masterpiece.dto.MasterpieceDto;
@@ -12,10 +13,15 @@ import com.example.fyum.masterpiece.entity.Theme;
 import com.example.fyum.masterpiece.entity.Trend;
 import com.example.fyum.masterpiece.repository.MasterpieceRepository;
 import com.example.fyum.masterpiece.repository.PainterRepository;
+import com.example.fyum.masterpiece.repository.PaintingRepository;
 import com.example.fyum.masterpiece.repository.ThemeRepository;
 import com.example.fyum.masterpiece.repository.TrendRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
+import com.example.fyum.myDrawing.entity.MyDrawing;
+import com.example.fyum.myDrawing.entity.MyPicture;
+import com.example.fyum.myDrawing.repository.MyDrawingRepository;
+import com.example.fyum.myDrawing.repository.MyPictureRepository;
 import com.example.fyum.wishlist.repository.WishlistRepository;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -36,7 +42,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class MasterpieceService {
 
+    private final PaintingRepository paintingRepository;
     private final MasterpieceRepository masterpieceRepository;
+    private final MyDrawingRepository myDrawingRepository;
+    private final MyPictureRepository myPictureRepository;
     private final PainterRepository painterRepository;
     private final ThemeRepository themeRepository;
     private final TrendRepository trendRepository;
@@ -119,11 +128,36 @@ public class MasterpieceService {
     }
 
     public String getCuration(int paintingId) {
-        Optional<Masterpiece> masterpieceOptional = masterpieceRepository.findById(paintingId);
-        if (masterpieceOptional.isEmpty()) {
+        Optional<Painting> paintingOptional = paintingRepository.findById(paintingId);
+        if (paintingOptional.isEmpty()) {
             return null;
         }
-        String description = getShortDescription(masterpieceOptional.get().getDescription());
+        String dtype = paintingRepository.selectSQLById(paintingId);
+        String description;
+        if (dtype.equals("MP")) {
+            Optional<Masterpiece> masterpieceOptional = masterpieceRepository.findById(paintingId);
+            if (masterpieceOptional.isEmpty()) {
+                return null;
+            }
+            description = getShortDescription(masterpieceOptional.get().getDescription());
+        } else if (dtype.equals("MD")) {
+            Optional<MyDrawing> myDrawingOptional = myDrawingRepository.findById(paintingId);
+            if (myDrawingOptional.isEmpty()) {
+                return null;
+            }
+            description = getShortDescription(myDrawingOptional.get().getCuration());
+        } else {
+            Optional<MyPicture> myPictureOptional = myPictureRepository.findById(paintingId);
+            if (myPictureOptional.isEmpty()) {
+                return null;
+            }
+            description = getShortDescription(myPictureOptional.get().getCuration());
+        }
+
+        if (description == null) {
+            return null;
+        }
+
         try {
             String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
             String encodedText = URLEncoder.encode(description, "UTF-8");
@@ -167,6 +201,10 @@ public class MasterpieceService {
         }
 
         String[] desc = description.split("[.]", 6);
+        if (desc.length < 5) {
+            return description;
+        }
+
         StringBuilder shortDesc = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             shortDesc.append(desc[i]).append(".");
