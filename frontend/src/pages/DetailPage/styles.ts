@@ -119,7 +119,6 @@ export const DetailDiv = styled.div`
 `;
 
 export const ContentDiv = styled.div`
-  position: absolute;
   width: 90%;
   height: 160%;
   overflow-y: auto;
@@ -143,6 +142,11 @@ export const ContentDiv = styled.div`
   }
 `;
 
+export const SpeakerDiv = styled.div`
+  position: relative;
+  margin-top: 2%;
+`;
+
 export const Content = styled.p`
   font-size: 1vw;
   font-family: "SUIT";
@@ -159,8 +163,8 @@ export const Content = styled.p`
 `;
 
 export const SpeakerImg = styled(Speaker)`
-  width: 3vw;
-  height: 3vw;
+  width: 2vw;
+  height: 2vw;
   fill: ${white};
 
   @media (hover: hover) {
@@ -172,9 +176,10 @@ export const SpeakerImg = styled(Speaker)`
 `;
 
 export const MuteIcStyle = styled(MuteIc)`
-  width: 3vw;
-  height: 3vw;
+  width: 2vw;
+  height: 2vw;
   fill: ${white};
+  top: 5vh;
 
   @media (hover: hover) {
     &:hover {

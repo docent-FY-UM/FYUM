@@ -22,6 +22,7 @@ import {
   ContentDiv,
   DetailDiv,
   AbsoluteDiv,
+  SpeakerDiv,
   SpeakerImg,
   MuteIcStyle,
   DescriptionBtn,
@@ -238,12 +239,14 @@ const DetailPage = () => {
             <ContentDiv>
               <Content>{data.description}</Content>
             </ContentDiv>
+            <SpeakerDiv>
+              {isPlay === false ? (
+                <SpeakerImg onClick={onClickPlay} />
+              ) : (
+                <MuteIcStyle onClick={onClickStop} />
+              )}
+            </SpeakerDiv>
           </AbsoluteDiv>
-          {isPlay === false ? (
-            <SpeakerImg onClick={onClickPlay} />
-          ) : (
-            <MuteIcStyle onClick={onClickStop} />
-          )}
         </ContentContainer>
       ) : null}
       <FixedContainer>
