@@ -1,9 +1,9 @@
 import { ArtListContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 import { getArtListApi } from "../../store/api";
+import { InvisibleBox } from "../../styles/listStyles";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 import {
@@ -173,6 +173,7 @@ const ArtList = () => {
               )}
             </ImgtitleContainer>
           ))}
+           {artListData.length < 4 && <InvisibleBox />}
           <ListPageEnd ref={pageEnd}></ListPageEnd>
         </ImageContainer>
         {artListUrl === "themes" ? (

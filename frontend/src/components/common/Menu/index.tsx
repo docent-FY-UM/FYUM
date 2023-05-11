@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeUserNickNm, changeAccessToken } from "../../../store/userSlice";
+import { RootState } from "../../../store";
 
 import {
   BackgroundStyle,
@@ -35,6 +36,8 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
   const [selectedImgAngle, setSelectedImgAngle] = useState("-3deg");
   const [previousImgAngle, setPreviousImgAngle] = useState("3deg");
 
+  const { survey } = useSelector((state: RootState) => state.user);
+
   const handleHoverEvent = (img: any) => {
     if (selectedImg !== img) {
       setPreviousImg(selectedImg);
@@ -46,7 +49,11 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }: MenuProps) => {
 
   const handleClickEvent = (loc: string) => {
     setIsMenuOpen(false);
-    navigate(`/${loc}`);
+    if (loc !== "recommend" || (loc === "recommend" && survey)) {
+      navigate(`/${loc}`);
+    } else {
+      navigate("/survey");
+    }
   };
 
   const handleLogout = () => {

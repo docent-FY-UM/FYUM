@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../../store";
 import { registerActions } from "../../../store/registerSlice";
 import useModal from "../../utils/useModal";
@@ -19,13 +20,13 @@ import {
   RealFileBtn,
   NonPreviewImg,
 } from "./styles";
-import { upload } from "@testing-library/user-event/dist/upload";
 
 interface FormProps {
   type: string;
 }
 
 const Form = ({ type }: FormProps) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [uploadImg, setUploadImg] = useState<string | undefined>();
@@ -76,6 +77,8 @@ const Form = ({ type }: FormProps) => {
         })
       );
       alert("myDrawings에 저장 완료!");
+      closeModal();
+      navigate("/my-drawings");
     } else {
       dispatch(
         registerActions.formRequestStart({
@@ -86,9 +89,9 @@ const Form = ({ type }: FormProps) => {
         })
       );
       alert("사진 업로드 완료!");
+      closeModal();
+      window.location.reload();
     }
-    closeModal();
-    window.location.reload();
   };
 
   // 이미지 파일 업로드
@@ -170,7 +173,7 @@ const Form = ({ type }: FormProps) => {
             />
           </InputDiv>
           <InputDiv>
-            <p>Contents</p>
+            <p>Description</p>
             <TextAreaStyle
               name="contents"
               placeholder="작품의 설명을 입력하세요."

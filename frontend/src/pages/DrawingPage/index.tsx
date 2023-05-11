@@ -53,7 +53,7 @@ const DrawingPage = () => {
         dispatch(registerActions.setMyDrawingImg(base64EncodedUrl));
         openModal({
           type: "mydrawing",
-          title: "전시회 목록에 저장하기",
+          title: "내 그림 목록에 저장하기",
           content: <Form type="mydrawing"/>,
         });
         setIsSaveClick(false);

@@ -23,7 +23,6 @@ export const BrowseFileContainer = styled.div`
   justify-content: space-between;
 `;
 
-
 export const InputStyle = styled.input`
   width: 323px;
   padding: 5px;
@@ -59,6 +58,7 @@ export const InputDiv = styled.div`
 export const PreviewImgStyle = styled.img<{ type?: string }>`
   width: 300px;
   height: 200px;
+  margin-bottom: -8px;
   align-self: center;
 
   &.exhibitionList {

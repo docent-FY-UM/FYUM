@@ -28,9 +28,11 @@ import Modal from "./components/common/Modal";
 import Loading from "./components/common/Loading";
 
 function App() {
+  let currentUrl = window.location.pathname.split("/");
+
   return (
     <BrowserRouter>
-      <Header />
+      {currentUrl[1] !== "" && <Header />}
       <Modal />
       <Suspense fallback={<Loading />}>
         <Routes>

@@ -44,7 +44,6 @@ export const TextDiv = styled.div`
   width: 100%;
   position: fixed;
   bottom: 0px;
-  animation: ${fadeIn} 1.5s ease-in;
 
   @media (max-width: 768px) {
     top: 27%;
@@ -52,11 +51,15 @@ export const TextDiv = styled.div`
     left: -4%;
   }
 `;
+
 export const LogoText = styled.div`
   color: ${white};
   font-weight: 700;
   font-size: 8vw;
   margin-bottom: -3%;
+  opacity: 0;
+  animation: ${fadeIn} 1.5s ease-in forwards;
+  animation-delay: 0.5s;
 
   @media (max-width: 768px) {
     margin-bottom: 0%;
@@ -72,12 +75,17 @@ export const IntroText = styled.div`
   color: ${white};
   font-weight: 700;
   font-size: 3.4vw;
+  opacity: 0;
+  animation: ${fadeIn} 1.5s ease-in forwards;
+  animation-delay: 1s;
+
   @media (max-width: 768px) {
     text-align: center;
     margin: -3%;
     font-size: 2vw;
   }
 `;
+
 export const MobileText = styled.div`
   display: none;
   @media (max-width: 768px) {
