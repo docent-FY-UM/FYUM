@@ -24,28 +24,24 @@ public class MasterpieceController {
 
     private final MasterpieceService masterpieceService;
 
-    // 작가 목록
     @GetMapping("/painters")
     public ResponseEntity<Page<CategoryDto>> getPainters(
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
         Page<CategoryDto> painters = masterpieceService.getPainters(page);
+
         return new ResponseEntity<>(painters, HttpStatus.OK);
     }
 
-    // 작가별 작품 리스트
     @GetMapping("/painters/{painterId}")
-    public ResponseEntity<PainterListDto> getMasterpiecesByPainter(
-        @PathVariable int painterId,
+    public ResponseEntity<PainterListDto> getMasterpiecesByPainter(@PathVariable int painterId,
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
-        PainterListDto result = masterpieceService.getMasterpiecesByPainter(painterId,
-            page);
+        PainterListDto result = masterpieceService.getMasterpiecesByPainter(painterId, page);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 테마 목록
     @GetMapping("/themes")
     public ResponseEntity<Page<CategoryDto>> getThemes(
         @RequestParam(required = false, defaultValue = "1") int page) {
@@ -55,49 +51,45 @@ public class MasterpieceController {
         return new ResponseEntity<>(themes, HttpStatus.OK);
     }
 
-    // 테마별 작품 리스트
     @GetMapping("/themes/{themeId}")
     public ResponseEntity<Page<MasterpieceListDto>> getMasterpiecesByTheme(
-        @PathVariable int themeId,
-        @RequestParam(required = false, defaultValue = "1") int page) {
+        @PathVariable int themeId, @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
         Page<MasterpieceListDto> result = masterpieceService.getMasterpiecesByTheme(themeId, page);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 사조 목록
     @GetMapping("/trends")
     public ResponseEntity<Page<CategoryDto>> getTrends(
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
         Page<CategoryDto> trends = masterpieceService.getTrends(page);
+
         return new ResponseEntity<>(trends, HttpStatus.OK);
     }
 
-    // 사조별 작품 리스트
     @GetMapping("/trends/{trendId}")
-    public ResponseEntity<TrendListDto> getMasterpiecesByTrend(
-        @PathVariable int trendId,
+    public ResponseEntity<TrendListDto> getMasterpiecesByTrend(@PathVariable int trendId,
         @RequestParam(required = false, defaultValue = "1") int page) {
         page--;
         TrendListDto result = masterpieceService.getMasterpiecesByTrend(trendId, page);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-    // 작품 상세 정보
     @GetMapping("/detail/{paintingId}")
-    public ResponseEntity<MasterpieceDto> getMasterpieceDetail(
-        @PathVariable int paintingId,
+    public ResponseEntity<MasterpieceDto> getMasterpieceDetail(@PathVariable int paintingId,
         Authentication authentication) {
         MasterpieceDto painting = masterpieceService.getDetail(authentication.getName(),
             paintingId);
+
         return new ResponseEntity<>(painting, HttpStatus.OK);
     }
 
-    // 작품 큐레이션 음성 생성
     @GetMapping("/curation/{paintingId}")
     public ResponseEntity<String> getCuration(@PathVariable int paintingId) {
         String result = masterpieceService.getCuration(paintingId);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
