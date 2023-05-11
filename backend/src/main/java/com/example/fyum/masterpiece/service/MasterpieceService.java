@@ -12,10 +12,15 @@ import com.example.fyum.masterpiece.entity.Theme;
 import com.example.fyum.masterpiece.entity.Trend;
 import com.example.fyum.masterpiece.repository.MasterpieceRepository;
 import com.example.fyum.masterpiece.repository.PainterRepository;
+import com.example.fyum.masterpiece.repository.PaintingRepository;
 import com.example.fyum.masterpiece.repository.ThemeRepository;
 import com.example.fyum.masterpiece.repository.TrendRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
+import com.example.fyum.myDrawing.entity.MyDrawing;
+import com.example.fyum.myDrawing.entity.MyPicture;
+import com.example.fyum.myDrawing.repository.MyDrawingRepository;
+import com.example.fyum.myDrawing.repository.MyPictureRepository;
 import com.example.fyum.wishlist.repository.WishlistRepository;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -34,8 +39,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class MasterpieceService {
-
     private final MasterpieceRepository masterpieceRepository;
+    private final PaintingRepository paintingRepository;
+    private final MyDrawingRepository myDrawingRepository;
+    private final MyPictureRepository myPictureRepository;
     private final PainterRepository painterRepository;
     private final ThemeRepository themeRepository;
     private final TrendRepository trendRepository;
@@ -108,9 +115,22 @@ public class MasterpieceService {
     }
 
     public String getCuration(int paintingId) {
-        Masterpiece masterpiece = masterpieceRepository.findById(paintingId)
-            .orElseThrow(NullPointerException::new);
-        String description = getShortDescription(masterpiece.getDescription());
+        String dtype = paintingRepository.selectSQLById(paintingId);
+        String description;
+        if (dtype.equals("MP")) {
+            Masterpiece masterpiece = masterpieceRepository.findById(paintingId).get();
+            description = getShortDescription(masterpiece.getDescription());
+        } else if (dtype.equals("MD")) {
+            MyDrawing myDrawing = myDrawingRepository.findById(paintingId).get();
+            description = getShortDescription(myDrawing.getCuration());
+        } else {
+            MyPicture myPicture = myPictureRepository.findById(paintingId).get();
+            description = getShortDescription(myPicture.getCuration());
+        }
+
+        if (description == null) {
+            throw new NullPointerException();
+        }
 
         try {
             String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
@@ -129,28 +149,39 @@ public class MasterpieceService {
             wr.flush();
             wr.close();
 
-            InputStream is = con.getInputStream();
-            ByteArrayOutputStream bOutStream = new ByteArrayOutputStream();
-            byte[] bytes = new byte[1024];
-            int readBytes;
-            while ((readBytes = is.read(bytes)) != -1) {
-                bOutStream.write(bytes, 0, readBytes);
-            }
-            byte[] bytesArr = bOutStream.toByteArray();
-            bOutStream.close();
-            is.close();
+            if (con.getResponseCode() == 200) {
+                InputStream is = con.getInputStream();
+                ByteArrayOutputStream bOutStream = new ByteArrayOutputStream();
+                byte[] bytes = new byte[1024];
+                int readBytes;
+                while ((readBytes = is.read(bytes)) != -1) {
+                    bOutStream.write(bytes, 0, readBytes);
+                }
+                byte[] bytesArr = bOutStream.toByteArray();
+                bOutStream.close();
+                is.close();
 
-            return Base64.getEncoder().encodeToString(bytesArr);
+                return Base64.getEncoder().encodeToString(bytesArr);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
+
         return null;
     }
 
     private String getShortDescription(String description) {
-        String[] desc = description.split("[.]", 6);
-        StringBuilder shortDesc = new StringBuilder();
+        if (description == null) {
+            return null;
+        }
 
+        String[] desc = description.split("[.]", 6);
+
+        if (desc.length < 5) {
+            return description;
+        }
+
+        StringBuilder shortDesc = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             shortDesc.append(desc[i]).append(".");
         }
