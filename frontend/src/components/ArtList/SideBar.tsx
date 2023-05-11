@@ -3,7 +3,11 @@ import { RootState } from "../../store";
 import {
   SideBarCloseIcStyle,
   SideBarContainer,
+  SideBarContentContainer,
+  SideBarDimmer,
   SideBarFontStyle,
+  SideBarInfoStyle,
+  SideBarNameStyle,
 } from "./styles";
 
 interface Props {
@@ -16,17 +20,33 @@ const SideBar = ({ onOff, setOnOff }: Props) => {
     nameEn: state.sideBar.nameEn,
     info: state.sideBar.info,
   }));
+
   const closeSideBar = () => {
     setOnOff(false);
   };
+
   console.log(nameKr, nameEn, info);
+
   return (
-    <SideBarContainer>
-      <SideBarCloseIcStyle onClick={() => closeSideBar()}></SideBarCloseIcStyle>
-      <SideBarFontStyle className="kr">{nameKr}</SideBarFontStyle>
-      <SideBarFontStyle className="en">{nameEn}</SideBarFontStyle>
-      <SideBarFontStyle className="info">{info}</SideBarFontStyle>
-    </SideBarContainer>
+    <SideBarDimmer>
+      <SideBarContainer>
+        <SideBarCloseIcStyle onClick={closeSideBar}></SideBarCloseIcStyle>
+        <SideBarContentContainer>
+          <SideBarNameStyle>
+            <SideBarFontStyle className="kr">{nameKr}</SideBarFontStyle>
+            {nameEn ? (
+              <SideBarFontStyle className="en">{nameEn}</SideBarFontStyle>
+            ) : (
+              <></>
+            )}
+          </SideBarNameStyle>
+          <SideBarInfoStyle>
+            <SideBarFontStyle className="infoString">Info</SideBarFontStyle>
+            <SideBarFontStyle className="info">{info}</SideBarFontStyle>
+          </SideBarInfoStyle>
+        </SideBarContentContainer>
+      </SideBarContainer>
+    </SideBarDimmer>
   );
 };
 export default SideBar;

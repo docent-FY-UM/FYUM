@@ -135,47 +135,49 @@ const ArtList = () => {
       ])
     );
   }, [[nameKr, nameEn, infoState]]);
-  return (
-    <ArtListContainer>
-      <ImageContainer className="artlist" ref={scrollRef}>
-        {artListUrl === "themes" ? (
-          <></>
-        ) : onOff === true ? (
-          <SideBar onOff={onOff} setOnOff={setOnOff}></SideBar>
-        ) : (
-          <></>
-        )}
-        {artListData.map((item: any) => (
-          <ImgtitleContainer className="artlist">
-            <ImageStyle
-              className="artlist"
-              key={item.paintingId}
-              onClick={() => goDetail(item.paintingId)}
-            >
-              <ImgSrcStyle
-                className="artlist"
-                src={item.imgSrc}
-                referrerPolicy="no-referrer"
-              />
-            </ImageStyle>
 
-            {item.titleOrigin === null ? (
-              <ImageTitleStyle title={"artList"}>{item.titleKr}</ImageTitleStyle>
-            ) : (
-              <ImageTitleStyle title={"artList"}> {item.titleOrigin}</ImageTitleStyle>
-            )}
-          </ImgtitleContainer>
-        ))}
-        <ListPageEnd ref={pageEnd}></ListPageEnd>
-      </ImageContainer>
+  return (
+    <>
       {artListUrl === "themes" ? (
         <></>
+      ) : onOff === true ? (
+        <SideBar onOff={onOff} setOnOff={setOnOff}></SideBar>
       ) : (
-        <DescriptionBtn onClick={changeState}>
-          <DescriptionP info={true}>Info.</DescriptionP>
-        </DescriptionBtn>
+        <></>
       )}
-    </ArtListContainer>
+      <ArtListContainer>
+        <ImageContainer className="artlist" ref={scrollRef}>
+          {artListData.map((item: any) => (
+            <ImgtitleContainer className="artlist">
+              <ImageStyle
+                className="artlist"
+                key={item.paintingId}
+                onClick={() => goDetail(item.paintingId)}
+              >
+                <ImgSrcStyle
+                  className="artlist"
+                  src={item.imgSrc}
+                  referrerPolicy="no-referrer"
+                />
+              </ImageStyle>
+              {item.titleOrigin === null ? (
+                <ImageTitleStyle title={"artList"}>{item.titleKr}</ImageTitleStyle>
+              ) : (
+                <ImageTitleStyle title={"artList"}> {item.titleOrigin}</ImageTitleStyle>
+              )}
+            </ImgtitleContainer>
+          ))}
+          <ListPageEnd ref={pageEnd}></ListPageEnd>
+        </ImageContainer>
+        {artListUrl === "themes" ? (
+          <></>
+        ) : (
+          <DescriptionBtn onClick={changeState}>
+            <DescriptionP info={true}>Info.</DescriptionP>
+          </DescriptionBtn>
+        )}
+      </ArtListContainer>
+    </>
   );
 };
 export default ArtList;
