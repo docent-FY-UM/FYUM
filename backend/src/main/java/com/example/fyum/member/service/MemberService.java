@@ -27,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -137,6 +138,11 @@ public class MemberService {
                     .build();
 
             recommendRepository.save(recommend);
+
+            Member temp = memberRepository.findByKakaoId(String.valueOf(profile.getId()));
+            temp.setRoomCode(roomCode(temp.getId()));
+
+            memberRepository.save(temp);
         }
 
         return createToken(member);
@@ -165,14 +171,29 @@ public class MemberService {
 
         return true;
     }
-
-    public String getNickName (int id){
-        Optional<Member> member = memberRepository.findById(id);
-        return member.get().getName();
+    //닉네임 반환 함수
+    public String getNickName (String kakao_id){
+        Member member = memberRepository.findByKakaoId(kakao_id);
+        return member.getName();
     }
 
 
 
 
+
+    // 방코드 반환
+    public String roomCode(int id){
+        String temp = String.valueOf(id);
+        return String.valueOf(temp.hashCode());
+    }
+
+    public String ifRoomCode(String roomCode){
+        Optional<Member> member = memberRepository.findByRoomCode(roomCode);
+        if(!member.isPresent()){
+            return "error : 닉네임이 없습니다.";
+        }else{
+            return member.get().getName();
+        }
+    }
 
 }

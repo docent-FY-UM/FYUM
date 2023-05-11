@@ -43,7 +43,7 @@ public class MemberController {
         memberResponseDto.setNickname(kakaoProfile.getProperties().getNickname());
         System.out.print(kakaoProfile.getId());
         memberResponseDto.setSurvey(memberService.isSurvey(String.valueOf(kakaoProfile.getId())));
-        memberResponseDto.setId(memberService.getMember(String.valueOf(kakaoProfile.getId())).getId());
+        memberResponseDto.setRoomCode(memberService.getMember(String.valueOf(kakaoProfile.getId())).getRoomCode());
 
         return new ResponseEntity<MemberResponseDto>(memberResponseDto,headers,HttpStatus.valueOf(200));
     }
@@ -58,10 +58,16 @@ public class MemberController {
         return ResponseEntity.ok().body(member);
     }
 
-    @GetMapping("/nickname/{id}")
-    public ResponseEntity <String> getNickName(@PathVariable int id, Authentication authentication){
-        String nickname = memberService.getNickName(id);
+    @GetMapping("/nickname")
+    public ResponseEntity <String> getNickName(Authentication authentication){
+        String nickname = memberService.getNickName(authentication.getName());
         return ResponseEntity.ok(nickname);
+    }
+
+    @GetMapping("/roomcode/{roomcode}")
+    public ResponseEntity<String> getIfRoomCode(@PathVariable String roomcode, Authentication authentication){
+        String roomCode = memberService.ifRoomCode(roomcode);
+        return new ResponseEntity<>(roomCode,HttpStatus.OK);
     }
 
 }

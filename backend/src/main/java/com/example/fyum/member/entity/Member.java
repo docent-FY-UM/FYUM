@@ -4,6 +4,7 @@ import com.example.fyum.config.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Member extends BaseEntity {
     @Id
@@ -22,6 +24,8 @@ public class Member extends BaseEntity {
     private int id;
     private String kakaoId;
     private String name;
+
+    private String roomCode;
 
     @Builder
     public Member(String kakaoId, String name) {
