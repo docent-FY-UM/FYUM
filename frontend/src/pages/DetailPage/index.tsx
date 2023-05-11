@@ -5,6 +5,7 @@ import {
   emptyBookmarkApi,
   fullFrameApi,
   emptyFrameApi,
+  addLikedApi,
 } from "../../store/api";
 import { useLocation } from "react-router-dom";
 
@@ -111,7 +112,15 @@ const DetailPage = () => {
           console.log("찜하기 실패", error);
         }
       };
+      const addLikedList = async () => {
+        try {
+          await addLikedApi();
+        } catch (err) {
+          console.log("찜하기 반영 실패", err);
+        }
+      };
       fullBookmark();
+      addLikedList();
     } else {
       const emptyBookmark = async () => {
         try {
