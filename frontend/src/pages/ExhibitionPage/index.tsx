@@ -1,4 +1,6 @@
+import Exhibition from "../../components/Exhibition";
+
 const ExhibitionPage = () => {
-  return <div></div>;
+  return <Exhibition></Exhibition>;
 };
 export default ExhibitionPage;

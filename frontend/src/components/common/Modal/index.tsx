@@ -73,6 +73,45 @@ const Modal = () => {
           </ModalContainer>
         </ModalDimmer>
       )}
+
+      {isOpen && type === "noGallery" && (
+        <ModalDimmer>
+          <ModalContainer>
+            <ModalTitle>
+              <span>{title}</span>
+            </ModalTitle>
+            <ModalContents>
+              <span>{content}</span>
+            </ModalContents>
+            <ModalFooter>
+              <ModalBtn onClick={closeModal}>
+                <span>확인</span>
+              </ModalBtn>
+            </ModalFooter>
+          </ModalContainer>
+        </ModalDimmer>
+      )}
+
+      {isOpen && type === "yesGallery" && (
+        <ModalDimmer>
+          <ModalContainer>
+            <ModalTitle>
+              <span>{title}</span>
+            </ModalTitle>
+            <ModalContents>
+              <span>{content}</span>
+            </ModalContents>
+            <ModalFooter>
+              <ModalBtn onClick={closeModal}>
+                <span>취소</span>
+              </ModalBtn>
+              <ModalYesBtn onClick={callback}>
+                <span>확인</span>
+              </ModalYesBtn>
+            </ModalFooter>
+          </ModalContainer>
+        </ModalDimmer>
+      )}
     </div>
   );
 };

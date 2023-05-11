@@ -11,6 +11,7 @@ export const grey = {
   500: "#595959",
   600: "#3D3D3D",
   700: "#373737",
+  800: "#474747",
 };
 
 export const pink = {

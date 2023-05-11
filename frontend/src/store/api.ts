@@ -118,7 +118,7 @@ export const createPictureApi = async ({
 
 // list 페이지 api
 export const getListApi = async ({ listUrl, page }: ListQueryTypes) =>
-  await customAxios.get(`/paintings/${listUrl}/?page=${page + 1}`);
+  await customAxios.get(`paintings/${listUrl}/?page=${page + 1}`);
 
 // artList 페이지 api
 export const getArtListApi = async ({
@@ -126,9 +126,11 @@ export const getArtListApi = async ({
   urlType,
   page,
 }: ArtListQueryTypes) =>
-  await customAxios.get(
-    `/paintings/${artListUrl}/${urlType}/?page=${page + 1}`
-  );
+  await customAxios.get(`paintings/${artListUrl}/${urlType}/?page=${page + 1}`);
+
+// 사용자 gallery 검색 api
+export const getGalleryCodeApi = async (galleryCode: string) =>
+  await customAxios.get(`members/roomcode/${galleryCode}`);
 
 // 찜하기 이후에 추천결과 반영하기
 export const addLikedApi = async () => await djangoAxios.get("/recomm/test");

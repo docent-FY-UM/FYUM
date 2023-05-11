@@ -23,7 +23,7 @@ const KakaoHandle = () => {
         dispatch(changeUserNickNm(res.data.nickname));
         dispatch(changeAccessToken(res.headers.authorization));
         dispatch(changeSurvey(res.data.survey));
-        dispatch(changeId(res.data.id));
+        dispatch(changeId(res.data.roomCode));
         {
           res.data.survey === true
             ? (window.location.href = "/main")
