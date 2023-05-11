@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { likedListApi } from "../../store/api";
 import { useHorizontalScroll } from "../utils/useSideScroll";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import {
   ImageContainer,
@@ -54,6 +55,7 @@ const LikedList = () => {
                     src={item.imgSrc}
                     referrerPolicy="no-referrer"
                     alt="찜 이미지"
+                    effect="blur"
                   />
                 }
               </ImageStyle>

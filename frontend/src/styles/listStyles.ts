@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { white, black } from "./colors";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   height: 100vh;
@@ -117,7 +118,7 @@ export const ImageStyle = styled.div`
   }
 `;
 
-export const ImgSrcStyle = styled.img`
+export const ImgSrcStyle = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: fill;

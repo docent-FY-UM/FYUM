@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { useHorizontalScroll } from "../utils/useSideScroll";
 import { getArtListApi } from "../../store/api";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import {
   ImgtitleContainer,
@@ -158,6 +159,7 @@ const ArtList = () => {
                   className="artlist"
                   src={item.imgSrc}
                   referrerPolicy="no-referrer"
+                  effect="blur"
                 />
               </ImageStyle>
               {item.titleOrigin === null ? (
@@ -166,7 +168,6 @@ const ArtList = () => {
                 </ImageTitleStyle>
               ) : (
                 <ImageTitleStyle title={"artList"}>
-                  {" "}
                   {item.titleOrigin}
                 </ImageTitleStyle>
               )}

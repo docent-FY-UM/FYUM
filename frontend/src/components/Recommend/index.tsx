@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getRecommendApi } from "../../store/api";
 import { useHorizontalScroll } from "../utils/useSideScroll";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import {
   ImageContainer,
@@ -49,10 +50,11 @@ const RecommendList = () => {
                     src={item.imgSrc}
                     referrerPolicy="no-referrer"
                     alt="추천 이미지"
+                    effect="blur"
                   />
                 }
               </ImageStyle>
-                <ImageTitleStyle>{item.title}</ImageTitleStyle>
+              <ImageTitleStyle>{item.title}</ImageTitleStyle>
             </ImgtitleContainer>
           ))}
       </ImageContainer>
