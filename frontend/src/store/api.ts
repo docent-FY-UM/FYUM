@@ -27,6 +27,10 @@ export const getDetailApi = async (paintingId: string) => {
   }
 };
 
+// 큐레이션 받아오기
+export const getCurationApi = async (paintingId: string) =>
+  await customAxios.get(`paintings/curation/${paintingId}`);
+
 // 찜하기 api
 export const fullBookmarkApi = async (paintingId: string) => {
   await customAxios.post(`wishlist/${paintingId}`);

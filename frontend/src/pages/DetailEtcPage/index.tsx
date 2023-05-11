@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { getMyDrawingsDetailApi, getMyPicturesDetailApi } from "../../store/api";
+import {
+  getMyDrawingsDetailApi,
+  getMyPicturesDetailApi,
+  getCurationApi,
+} from "../../store/api";
 import Detail from "../../components/Detail";
 
 export interface PaintingData {
@@ -24,6 +28,7 @@ const DetailEtcPage = () => {
     title: "",
   });
   const [frame, setFrame] = useState(false);
+  const [curation, setCuration] = useState<null | string>(null);
 
   const pathName = location.pathname;
   const pathParts = pathName.split("/");
@@ -54,10 +59,22 @@ const DetailEtcPage = () => {
       };
       getMyPicturesDetail();
     }
-   
+
+    // 큐레이션 음성 받아오기
+    const getCuration = async () => {
+      try {
+        const res = await getCurationApi(id);
+        console.log("큐레이션 원본데이터", res)
+        console.log("큐레이션?", res.data);
+        setCuration(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCuration();
   }, []);
 
-  return <Detail data={data} frame={frame} setFrame={setFrame}/>;
+  return <Detail data={data} frame={frame} setFrame={setFrame} />;
 };
 
 export default DetailEtcPage;

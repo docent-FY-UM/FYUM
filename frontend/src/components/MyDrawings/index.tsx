@@ -39,7 +39,7 @@ const MyDrawings = () => {
       <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImgtitleContainer className="artlist">
+            <ImgtitleContainer className="artlist" key={item.paintingId}>
               <ImageStyle
                 className="artlist"
                 key={item.paintingId}
