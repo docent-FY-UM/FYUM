@@ -14,6 +14,7 @@ public interface PainterRepository extends JpaRepository<Painter, Integer> {
         + "FROM painter p "
         + "LEFT JOIN masterpiece m "
         + "ON p.id = m.painter_id "
+        + "WHERE p.img_src IS NOT NULL "
         + "GROUP BY p.id ORDER BY cnt DESC",
         nativeQuery = true)
     Page<Painter> findAllByImgSrcIsNotNull(Pageable pageable);
