@@ -36,6 +36,8 @@ public class MyPictureService {
 
     private final ExhibitionService exhibitionService;
 
+    private final CurationService curationService;
+
     private final AmazonS3 amazonS3;
 
     @Value("${cloud.aws.s3.bucket}")
@@ -74,6 +76,14 @@ public class MyPictureService {
 
         myPicture.setImgSrc(perfix+filename);
         int pId = myPictureRepository.save(myPicture).getId();
+
+        new Thread(() -> {
+            try {
+                curationService.getImagga(pId, "PT");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
 
         MyDrawingResponseDto resdto = new MyDrawingResponseDto();
         resdto.setPaintingId(pId);

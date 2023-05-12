@@ -35,4 +35,5 @@ public class ExhibitionController {
     public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(@PathVariable String roomCode){
         return ResponseEntity.ok(exhibitionService.getOtherExhi(roomCode));
     }
+
 }
