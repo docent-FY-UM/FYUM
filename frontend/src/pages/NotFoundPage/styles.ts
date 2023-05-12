@@ -24,6 +24,7 @@ export const BackgroundImg = styled.img.attrs({
 
 export const Content = styled.p`
   position: absolute;
+  text-align: center;
   font-size: 3vw;
   color: ${white};
   top: 45%;

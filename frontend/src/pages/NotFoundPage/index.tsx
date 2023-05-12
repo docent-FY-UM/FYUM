@@ -4,7 +4,9 @@ const NotFoundPage = () => {
   return (
     <NotFoundContainer>
       <BackgroundImg />
-      <Content>Sorry, page not found</Content>
+      <Content>
+        Sorry, <br/>Page Not Found
+      </Content>
     </NotFoundContainer>
   );
 };
