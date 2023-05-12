@@ -55,23 +55,7 @@ const ArtList = () => {
     const res = await getArtListApi({ artListUrl, urlType, page });
 
     console.log(res);
-    // if (artListUrl === "painters") {
-    //   dispatch(
-    //     sideBarActions.openSideBar([
-    //       {
-    //         nameKr: res.data.painterKr,
-    //         nameEn: res.data.painterOrigin,
-    //         info: res.data.description,
-    //       },
-    //     ])
-    //   );
-    // } else if (artListUrl === "trends") {
-    //   dispatch(
-    //     sideBarActions.openSideBar([
-    //       { nameKr: res.data.painterKr, info: res.data.description },
-    //     ])
-    //   );
-    // }
+
     const data = await res.data; //data.content->data
     if (artListUrl === "painters") {
       setNameKr(data.painterKr);
@@ -162,11 +146,11 @@ const ArtList = () => {
                 />
               </ImageStyle>
               {item.titleOrigin === null ? (
-                <ImageTitleStyle title={"artList"}>
+                <ImageTitleStyle title={"artList"} length={item.titleKr.length}>
                   {item.titleKr}
                 </ImageTitleStyle>
               ) : (
-                <ImageTitleStyle title={"artList"}>
+                <ImageTitleStyle title={"artList"} length={item.titleOrigin.length}>
                   {item.titleOrigin}
                 </ImageTitleStyle>
               )}

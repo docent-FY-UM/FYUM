@@ -63,7 +63,7 @@ const MyDrawings = () => {
                   />
                 }
               </ImageStyle>
-              <ImageTitleStyle key={`title-${item.paintingId}`}>
+              <ImageTitleStyle length={item.title.length} key={`title-${item.paintingId}`}>
                 {item.title}
               </ImageTitleStyle>
             </ImgtitleContainer>

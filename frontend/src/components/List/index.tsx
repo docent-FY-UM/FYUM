@@ -109,7 +109,9 @@ const List = () => {
                   <Frame />
                 </FrameContainer>
               </ImageStyle>
-              <ImageTitleStyle>{item.nameKr}</ImageTitleStyle>
+              <ImageTitleStyle length={item.nameKr.length}>
+                {item.nameKr}
+              </ImageTitleStyle>
             </ImgtitleContainer>
           ))}
           <ListPageEnd ref={pageEnd}></ListPageEnd>

@@ -3,7 +3,6 @@ import { white, black, pink } from "./colors";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ReactComponent as RightArrowIc } from "../assets/icon/rightArrowIc.svg";
 
-
 export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   height: 100vh;
   width: 100vw;
@@ -160,9 +159,10 @@ export const ImgtitleContainer = styled.div`
   }
 `;
 
-export const ImageTitleStyle = styled.div<{ title?: string }>`
+export const ImageTitleStyle = styled.div<{ title?: string; length?: number }>`
   font-weight: 500;
-  font-size: 20px;
+  font-size: ${(props) =>
+    props.length && props.length >= 30 ? "15px" : "18px"};
   width: 100%;
   text-align: center;
 

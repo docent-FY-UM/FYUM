@@ -54,7 +54,9 @@ const LikedList = () => {
                   />
                 }
               </ImageStyle>
-              <ImageTitleStyle>{item.title}</ImageTitleStyle>
+              <ImageTitleStyle length={item.title.length}>
+                {item.title}
+              </ImageTitleStyle>
             </ImgtitleContainer>
           ))}
         {data.length < 4 && <InvisibleBox />}
