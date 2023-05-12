@@ -59,6 +59,7 @@ const SurveyPage = () => {
 
   const sendSurvey = () => {
     if (choosed.length === 2) {
+      alert("설문조사가 완료되었습니다 :)");
       navigate("/main");
       sendSurveyData();
     } else {

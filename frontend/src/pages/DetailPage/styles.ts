@@ -150,7 +150,7 @@ export const SpeakerDiv = styled.div`
 export const Content = styled.p`
   font-size: 1vw;
   font-family: "SUIT";
-  font-weight: 100;
+  font-weight: 200;
   color: ${white};
   line-height: 160%;
   margin: 0;

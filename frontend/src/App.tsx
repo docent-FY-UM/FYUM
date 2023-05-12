@@ -21,6 +21,7 @@ import {
   TestPage,
   UnityPage,
   UnityPage2,
+  NotFoundPage,
 } from "../src/pages/index";
 
 import Header from "./components/common/Header";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/detail/:name/:id" element={<DetailEtcPage />} />
           <Route path="/drawing" element={<DrawingPage />} />
           <Route path="/my-drawings" element={<MyDrawingsPage />} />
+          <Route path="/*" element={<NotFoundPage />} />
 
           {/* 테스트 페이지 */}
           <Route path="/test" element={<TestPage />} />

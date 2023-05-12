@@ -23,16 +23,12 @@ const LikedList = () => {
       try {
         const res = await likedListApi();
         setData(res.data);
-        console.log(res);
       } catch (err) {
         console.log(err);
       }
     };
     getLikedData();
   }, []);
-
-  console.log("데이터?", data);
-  console.log("데이터 길이는?", data.length);
 
   const goDetail = (id: number) => {
     navigate(`/detail/${id}`);
@@ -43,10 +39,9 @@ const LikedList = () => {
       <ImageContainer className="etc" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImgtitleContainer className="artlist">
+            <ImgtitleContainer key={item.paintingId} className="artlist">
               <ImageStyle
                 className="artlist"
-                key={item.paintingId}
                 onClick={() => goDetail(item.paintingId)}
               >
                 {
