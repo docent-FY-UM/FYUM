@@ -149,10 +149,9 @@ const ArtList = () => {
       <ArtListContainer>
         <ImageContainer className="artlist" ref={scrollRef}>
           {artListData.map((item: any) => (
-            <ImgtitleContainer className="artlist">
+            <ImgtitleContainer key={item.paintingId} className="artlist">
               <ImageStyle
                 className="artlist"
-                key={item.paintingId}
                 onClick={() => goDetail(item.paintingId)}
               >
                 <ImgSrcStyle
@@ -173,7 +172,7 @@ const ArtList = () => {
               )}
             </ImgtitleContainer>
           ))}
-           {artListData.length < 4 && <InvisibleBox />}
+          {artListData.length < 4 && <InvisibleBox />}
           <ListPageEnd ref={pageEnd}></ListPageEnd>
         </ImageContainer>
         {artListUrl === "themes" ? (

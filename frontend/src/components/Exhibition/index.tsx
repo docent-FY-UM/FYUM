@@ -12,8 +12,10 @@ import {
   OtherGalleryContainer,
   OtherGalleryEnterStyle,
   OtherGalleryImgStyle,
-  OtherGallerySearchStyle,
+  SearchInputStyle,
   OtherGalleryTextStyle,
+  SearchIcContainer,
+  OtherGallerySearchContainer,
 } from "./styles";
 import useModal from "../utils/useModal";
 
@@ -33,26 +35,31 @@ const Exhibition = () => {
     goMyGallery(Number(search), galleryCode.userToken);
   };
 
+  const getIsRoomCode = async (search: string) => {
+    const res = await getGalleryCodeApi(search);
+    res.data === "error : 닉네임이 없습니다."
+      ? openModal({
+          type: "noGallery",
+          title: "존재하지 않는 갤러리입니다.",
+          content: "갤러리 코드를 다시 확인 해 주시기 바랍니다.",
+        })
+      : openModal({
+          type: "yesGallery",
+          title: res.data + "님의 갤러리입니다.",
+          content: "갤러리로 입장 하시겠습니까?",
+          callback: isClicked,
+        });
+  };
   const onCheckEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const getIsRoomCode = async (search: string) => {
-        const res = await getGalleryCodeApi(search);
-        res.data === "error : 닉네임이 없습니다."
-          ? openModal({
-              type: "noGallery",
-              title: "존재하지 않는 갤러리입니다.",
-              content: "갤러리 코드를 다시 확인 해 주시기 바랍니다.",
-            })
-          : openModal({
-              type: "yesGallery",
-              title: res.data + "님의 갤러리입니다.",
-              content: "갤러리로 입장 하시겠습니까?",
-              callback: isClicked,
-            });
-      };
       getIsRoomCode(search);
       setSearch("");
     }
+  };
+
+  const onClickSearchIc = () => {
+    getIsRoomCode(search);
+    setSearch("");
   };
 
   return (
@@ -78,12 +85,15 @@ const Exhibition = () => {
           <OtherGalleryTextStyle>
             Enter Other Gallery&gt;&gt;
           </OtherGalleryTextStyle>
-          <OtherGallerySearchStyle
-            placeholder="Input Gallery Code"
-            value={search}
-            onChange={handleSearchInput}
-            onKeyDown={(e) => onCheckEnter(e)}
-          />
+          <OtherGallerySearchContainer>
+            <SearchInputStyle
+              placeholder="Input Gallery Code"
+              value={search}
+              onChange={handleSearchInput}
+              onKeyDown={(e) => onCheckEnter(e)}
+            />
+            <SearchIcContainer onClick={onClickSearchIc}></SearchIcContainer>
+          </OtherGallerySearchContainer>
         </OtherGalleryEnterStyle>
       </OtherGalleryContainer>
     </ExhibitionContainer>

@@ -3,6 +3,7 @@ import { grey, white } from "../../styles/colors";
 
 import leftImg from "../../assets/images/exhibitionLeftNoBackground.png";
 import rightImg from "../../assets/images/exhibitionRightNoBackground.png";
+import { ReactComponent as SearchIc } from "../../assets/icon/searchIc.svg";
 
 export const ExhibitionContainer = styled.div`
   width: 100%;
@@ -42,12 +43,12 @@ export const MyGalleryTextStyle = styled.div`
   bottom: 10%;
   right: 5%;
   font-weight: 700;
-  font-size: 50px;
+  font-size: 3.5vw;
   cursor: pointer;
 
   &.code {
     bottom: 3%;
-    font-size: 40px;
+    font-size: 2.8vw;
     cursor: auto;
   }
 `;
@@ -70,7 +71,7 @@ export const OtherGalleryImgStyle = styled.img.attrs({
   left: 50%;
 `;
 
-export const OtherGalleryEnterStyle = styled.div``;
+export const OtherGalleryEnterStyle = styled.label``;
 
 export const OtherGalleryTextStyle = styled.div`
   position: absolute;
@@ -78,16 +79,39 @@ export const OtherGalleryTextStyle = styled.div`
   bottom: 10%;
   left: 5%;
   font-weight: 700;
-  font-size: 50px;
-  cursor: pointer;
+  font-size: 3.5vw;
 `;
 
-export const OtherGallerySearchStyle = styled.input`
+export const OtherGallerySearchContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
+export const SearchInputStyle = styled.input`
   position: absolute;
-  bottom: 5%;
+  bottom: 3.8%;
   left: 5%;
   border: 2px solid #959595;
-  height: 3%;
-  width: 50%;
+  height: 4%;
+  width: 30%;
   border-radius: 15px;
+  font-size: 1vw;
+  padding-left: 10px;
+
+  @media (max-width: 768px) {
+    width: 25%;
+  }
+`;
+
+export const SearchIcContainer = styled(SearchIc)`
+  position: absolute;
+  bottom: 5.1%;
+  left: 33%;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    left: 29%;
+    bottom: 5.5%;
+    width: 10px;
+    height: 10px;
+  }
 `;
