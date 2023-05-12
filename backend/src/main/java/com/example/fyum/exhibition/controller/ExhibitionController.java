@@ -31,8 +31,8 @@ public class ExhibitionController {
         return ResponseEntity.ok(exhibitionService.getExhi(authentication.getName()));
     }
 
-    @GetMapping("/Other/{id}")
-    public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(@PathVariable int id){
-        return ResponseEntity.ok(exhibitionService.getOtherExhi(id));
+    @GetMapping("/Other/{roomCode}")
+    public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(@PathVariable String roomCode){
+        return ResponseEntity.ok(exhibitionService.getOtherExhi(roomCode));
     }
 }

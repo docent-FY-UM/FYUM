@@ -165,9 +165,9 @@ public class ExhibitionService {
         return res;
 
     }
-    public List<ExhibitionResponseDto> getOtherExhi(int otherId){
+    public List<ExhibitionResponseDto> getOtherExhi(String roomCode){
 
-        Optional<Member> member = memberRepository.findById(otherId);
+        Optional<Member> member = memberRepository.findByRoomCode(roomCode);
         Exhibition exhibition = exhibitionRepository.findByMember(member.get());
         List<ExhibitionResponseDto> res = new ArrayList<>();
 
