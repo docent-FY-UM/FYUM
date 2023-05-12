@@ -67,6 +67,21 @@ const Form = ({ type }: FormProps) => {
       return;
     }
 
+    // 글자 수 제한 검사
+    const encodedTitle = encodeURIComponent(title);
+    const encodedContents = encodeURIComponent(contents);
+    const titleByteCount = encodedTitle.length;
+    const contentsByteCount = encodedContents.length;
+
+    if (titleByteCount > 255) {
+      alert("제목은 255바이트를 초과할 수 없습니다.");
+      return;
+    }
+    if (contentsByteCount > 255) {
+      alert("설명은 255바이트를 초과할 수 없습니다.");
+      return;
+    }
+
     if (type === "mydrawing") {
       dispatch(
         registerActions.formRequestStart({
