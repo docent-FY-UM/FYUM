@@ -30,8 +30,8 @@ import {
   MarkContainer,
   EmptyFrameIcStyle,
   FullFrameIcStyle,
-  EmptyBookMarkIcStyle,
-  FullBookMarkIcStyle,
+  EmptyHeartIcStyle,
+  FullHeartIcStyle,
   FixedContainer,
 } from "./styles";
 
@@ -265,9 +265,9 @@ const DetailPage = () => {
               <FullFrameIcStyle onClick={changeFrame} />
             )}
             {bookmark === false ? (
-              <EmptyBookMarkIcStyle onClick={changeBookmark} />
+              <EmptyHeartIcStyle onClick={changeBookmark} />
             ) : (
-              <FullBookMarkIcStyle onClick={changeBookmark} />
+              <FullHeartIcStyle onClick={changeBookmark} />
             )}
           </MarkContainer>
         ) : null}

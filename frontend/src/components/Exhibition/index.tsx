@@ -9,6 +9,7 @@ import {
   MyGalleryEnterStyle,
   MyGalleryImgStyle,
   MyGalleryTextStyle,
+  MyGallerySubTextStyle,
   OtherGalleryContainer,
   OtherGalleryEnterStyle,
   OtherGalleryImgStyle,
@@ -72,18 +73,18 @@ const Exhibition = () => {
               goMyGallery(galleryCode.galleryCode, galleryCode.userToken)
             }
           >
-            &lt;&lt;Enter My Gallery
+            &lt;&lt;&nbsp;&nbsp;Enter My Gallery
           </MyGalleryTextStyle>
-          <MyGalleryTextStyle className="code">
+          <MyGallerySubTextStyle className="code">
             Gallery Code : {galleryCode.galleryCode}
-          </MyGalleryTextStyle>
+          </MyGallerySubTextStyle>
         </MyGalleryEnterStyle>
       </MyGalleryContainer>
       <OtherGalleryContainer>
         <OtherGalleryImgStyle></OtherGalleryImgStyle>
         <OtherGalleryEnterStyle>
           <OtherGalleryTextStyle>
-            Enter Other Gallery&gt;&gt;
+            Enter Other Gallery&nbsp;&nbsp;&gt;&gt;
           </OtherGalleryTextStyle>
           <OtherGallerySearchContainer>
             <SearchInputStyle

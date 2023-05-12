@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { grey, white } from "../../styles/colors";
-
-import leftImg from "../../assets/images/exhibitionLeftNoBackground.png";
+import leftImg from "../../assets/images/exhibitionLeftNoBackground2.png";
 import rightImg from "../../assets/images/exhibitionRightNoBackground.png";
 import { ReactComponent as SearchIc } from "../../assets/icon/searchIc.svg";
 
@@ -18,21 +17,26 @@ export const ExhibitionContainer = styled.div`
 
 export const MyGalleryContainer = styled.div`
   background-color: ${grey[800]};
-
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  filter: brightness(40%);
+
+  &:hover {
+    filter: brightness(100%);
+  }
 `;
 
 export const MyGalleryImgStyle = styled.img.attrs({
   src: `${leftImg}`,
 })`
-  height: 70%;
-  width: 80%;
+  height: 60%;
+  width: 70%;
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
+  top: 17%;
 `;
 
 export const MyGalleryEnterStyle = styled.div``;
@@ -53,22 +57,43 @@ export const MyGalleryTextStyle = styled.div`
   }
 `;
 
+export const MyGallerySubTextStyle = styled.div`
+  position: absolute;
+  color: ${white};
+  bottom: 10%;
+  right: 5%;
+  font-weight: 700;
+  font-size: 3.5vw;
+  cursor: pointer;
+
+  &.code {
+    bottom: 3.5%;
+    font-size: 2vw;
+    cursor: auto;
+  }
+`;
+
 export const OtherGalleryContainer = styled.div`
   background-color: ${grey[700]};
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  filter: brightness(40%);
+  &:hover {
+    filter: brightness(100%);
+  }
 `;
 
 export const OtherGalleryImgStyle = styled.img.attrs({
   src: `${rightImg}`,
 })`
-  height: 70%;
-  width: 80%;
+  height: 60%;
+  width: 70%;
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
+  top: 17%;
 `;
 
 export const OtherGalleryEnterStyle = styled.label``;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { black, white, pink } from "../../styles/colors";
 import { ReactComponent as EmptyFrame } from "../../assets/icon/empty_frame.svg";
-import { ReactComponent as EmptyBookmark } from "../../assets/icon/empty_bookmark.svg";
+import { ReactComponent as EmptyHeart } from "../../assets/icon/empty_heart.svg";
 import { ReactComponent as FullFrame } from "../../assets/icon/full_frame.svg";
-import { ReactComponent as FullBookmark } from "../../assets/icon/full_bookmark.svg";
+import { ReactComponent as FullHeart } from "../../assets/icon/full_heart.svg";
 import { ReactComponent as Speaker } from "../../assets/icon/speaker.svg";
 import { ReactComponent as MuteIc } from "../../assets/icon/muteIc.svg";
 
@@ -250,22 +250,28 @@ export const FullFrameIcStyle = styled(FullFrame)`
   }
 `;
 
-export const EmptyBookMarkIcStyle = styled(EmptyBookmark)`
-  width: 1.5vw;
+export const EmptyHeartIcStyle = styled(EmptyHeart)`
+  width: 2.2vw;
+  height: 2.7vw;
   fill: ${white};
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 3vw;
+    width: 5vw;
+    height: 5vw;
+    margin-bottom: 2.6vw;
   }
 `;
 
-export const FullBookMarkIcStyle = styled(FullBookmark)`
-  width: 1.5vw;
+export const FullHeartIcStyle = styled(FullHeart)`
+  width: 2.2vw;
+  height: 2.7vw;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 3vw;
+    width: 5vw;
+    height: 5vw;
+    margin-bottom: 2.6vw;
   }
 `;
 
