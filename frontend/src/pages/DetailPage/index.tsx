@@ -229,6 +229,8 @@ const DetailPage = () => {
     };
   }, []);
 
+  console.log("큐레이션좀", curation)
+
   return (
     <Suspense fallback={<Loading />}>
       {curation.length >= 1 ? (
@@ -255,13 +257,17 @@ const DetailPage = () => {
                 <ContentDiv>
                   <Content>{data.description}</Content>
                 </ContentDiv>
-                <SpeakerDiv>
-                  {isPlay === false ? (
-                    <SpeakerImg onClick={onClickPlay} />
-                  ) : (
-                    <MuteIcStyle onClick={onClickStop} />
-                  )}
-                </SpeakerDiv>
+                {curation === "큐레이션이 없습니다." ? (
+                  <></>
+                ) : (
+                  <SpeakerDiv>
+                    {isPlay === false ? (
+                      <SpeakerImg onClick={onClickPlay} />
+                    ) : (
+                      <MuteIcStyle onClick={onClickStop} />
+                    )}
+                  </SpeakerDiv>
+                )}
               </AbsoluteDiv>
             </ContentContainer>
           ) : null}
