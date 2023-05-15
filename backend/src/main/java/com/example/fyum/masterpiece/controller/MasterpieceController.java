@@ -77,6 +77,7 @@ public class MasterpieceController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
     @GetMapping("/detail/{paintingId}")
     public ResponseEntity<MasterpieceDto> getMasterpieceDetail(@PathVariable int paintingId,
         Authentication authentication) {
@@ -89,7 +90,9 @@ public class MasterpieceController {
     @GetMapping("/curation/{paintingId}")
     public ResponseEntity<String> getCuration(@PathVariable int paintingId) {
         String result = masterpieceService.getCuration(paintingId);
-
+        if (result == null) {
+            result = "큐레이션이 없습니다.";
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

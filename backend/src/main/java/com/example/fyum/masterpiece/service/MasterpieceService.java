@@ -39,6 +39,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class MasterpieceService {
+
     private final MasterpieceRepository masterpieceRepository;
     private final PaintingRepository paintingRepository;
     private final MyDrawingRepository myDrawingRepository;
@@ -116,7 +117,7 @@ public class MasterpieceService {
 
     public String getCuration(int paintingId) {
         String dtype = paintingRepository.selectSQLById(paintingId);
-        String description;
+        String description = null;
         if (dtype.equals("MP")) {
             Masterpiece masterpiece = masterpieceRepository.findById(paintingId).get();
             description = getShortDescription(masterpiece.getDescription());
@@ -129,7 +130,7 @@ public class MasterpieceService {
         }
 
         if (description == null) {
-            throw new NullPointerException();
+            return null;
         }
 
         try {
