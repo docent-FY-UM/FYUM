@@ -32,6 +32,7 @@ export const PainterContainer = styled.div`
   &:hover {
     filter: brightness(100%);
   }
+
   @media (max-width: 768px) {
     position: relative;
     grid-column: 1/1;
@@ -41,19 +42,21 @@ export const PainterContainer = styled.div`
     filter: brightness(100%);
   }
 `;
-export const PainterNoBackContainer = styled.div`
+
+export const PainterNoBackContainer = styled.img.attrs({
+  src: `${PainterNoBackImg}`,
+})`
   display: none;
+
   @media (max-width: 768px) {
     display: inline-block;
     position: absolute;
-    background-image: url(${PainterNoBackImg});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 35%;
-    height: 80%;
+    width: 200px;
+    height: 75%;
     bottom: 0px;
-    right: 40px;
-    min-width: 195px;
+    right: 20px;
+
+    min-width: 200px;
   }
 `;
 
@@ -65,9 +68,11 @@ export const ArtTrendContainer = styled.div`
   width: 100%;
   height: 100%;
   filter: brightness(40%);
+
   &:hover {
     filter: brightness(100%);
   }
+
   @media (max-width: 768px) {
     position: relative;
 
@@ -78,19 +83,20 @@ export const ArtTrendContainer = styled.div`
     filter: brightness(100%);
   }
 `;
-export const ArtTrendNoBackContainer = styled.div`
+
+export const ArtTrendNoBackContainer = styled.img.attrs({
+  src: `${ArtTrendNoBackImg}`,
+})`
   display: none;
+
   @media (max-width: 768px) {
     display: inline-block;
     position: absolute;
-    background-image: url(${ArtTrendNoBackImg});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 40%;
-    height: 80%;
+    width: 140px;
+    height: 87%;
     bottom: 0px;
     left: 10%;
-    min-width: 103px;
+    min-width: 140px;
   }
 `;
 
@@ -113,19 +119,20 @@ export const ThemeContainer = styled.div`
     filter: brightness(100%);
   }
 `;
-export const ThemeNoBackContainer = styled.div`
+
+export const ThemeNoBackContainer = styled.img.attrs({
+  src: `${ThemeNoBackImg}`,
+})`
   display: none;
+
   @media (max-width: 768px) {
     display: inline-block;
     position: absolute;
-    background-image: url(${ThemeNoBackImg});
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 40%;
-    height: 80%;
+    width: 150px;
+    height: 85%;
     bottom: 0px;
-    right: 0px;
-    min-width: 100px;
+    right: 40px;
+    min-width: 150px;
   }
 `;
 
@@ -133,6 +140,8 @@ export const ImageText = styled.div`
   color: ${white};
   font-weight: 700;
   font-size: 4vw;
+  z-index: 1;
+
   @media (max-width: 768px) {
     font-size: 8vw;
   }
