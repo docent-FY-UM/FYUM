@@ -107,6 +107,8 @@ export const ThemeContainer = styled.div`
   grid-column: 3/4;
   width: 100%;
   height: 100%;
+  position: relative;
+
   filter: brightness(40%);
   &:hover {
     filter: brightness(100%);
