@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { sideBarActions } from "../../store/sideBarSlice";
+import { useDispatch } from "react-redux";
+
 import {
   SideBarCloseIcStyle,
   SideBarContainer,
@@ -15,14 +18,18 @@ interface Props {
   setOnOff: any;
 }
 const SideBar = ({ onOff, setOnOff }: Props) => {
-  const { nameKr, nameEn, info } = useSelector((state: RootState) => ({
+  const dispatch = useDispatch();
+
+  const { nameKr, nameEn, info, isOpen } = useSelector((state: RootState) => ({
     nameKr: state.sideBar.nameKr,
     nameEn: state.sideBar.nameEn,
     info: state.sideBar.info,
+    isOpen: state.sideBar.isOpen,
   }));
 
   const closeSideBar = () => {
     setOnOff(false);
+    dispatch(sideBarActions.closeSideBar());
   };
 
   console.log(nameKr, nameEn, info);

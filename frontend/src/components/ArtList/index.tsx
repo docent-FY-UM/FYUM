@@ -18,14 +18,15 @@ import {
 import { DescriptionBtn, DescriptionP } from "../../pages/DetailPage/styles";
 
 import SideBar from "./SideBar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sideBarActions } from "../../store/sideBarSlice";
+import { RootState } from "../../store";
 
 const ArtList = () => {
   const navigate = useNavigate();
   const [artListData, setArtListData] = useState([]);
-  const [nameKr, setNameKr] = useState("");
-  const [nameEn, setNameEn] = useState("");
+  const [nameK, setNameK] = useState("");
+  const [nameE, setNameE] = useState("");
   const [infoState, setInfoState] = useState("");
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -39,32 +40,33 @@ const ArtList = () => {
   useEffect(() => {
     setArtListData([]);
   }, []);
+
   const loadMore = () => {
     setPage((prev) => prev + 1);
   };
+
   const artListUrl = window.location.pathname.includes("painter")
     ? "painters"
     : window.location.pathname.includes("trend")
     ? "trends"
     : "themes";
-  console.log(artListUrl);
+
   const getArtListDatas = async (page: number) => {
     const artListQuery = {};
     const accessToken = localStorage.getItem("token");
     const urlType = currentUrl[3];
     const res = await getArtListApi({ artListUrl, urlType, page });
 
-    console.log(res);
-
-    const data = await res.data; //data.content->data
+    const data = await res.data;
     if (artListUrl === "painters") {
-      setNameKr(data.painterKr);
-      setNameEn(data.painterOrigin);
+      setNameK(data.painterKr);
+      setNameE(data.painterOrigin);
     } else {
-      setNameKr(data.trendKr);
-      setNameEn(data.trendOrigin);
+      setNameK(data.trendKr);
+      setNameE(data.trendOrigin);
     }
     setInfoState(data.description);
+
     if (data.content.length === 0) {
       if (page === 0) {
         setArtListData(data.content); // 검색결과가 없는 경우
@@ -108,18 +110,28 @@ const ArtList = () => {
 
   const changeState = () => {
     setOnOff(!onOff);
+    dispatch(sideBarActions.closeSideBar());
   };
+
+  const { isOpen, nameKr, nameEn, info } = useSelector((state: RootState) => ({
+    isOpen: state.sideBar.isOpen,
+    nameKr: state.sideBar.nameKr,
+    nameEn: state.sideBar.nameEn,
+    info: state.sideBar.info,
+  }));
+
   useEffect(() => {
-    dispatch(
-      sideBarActions.openSideBar([
-        {
-          nameKr: nameKr,
-          nameEn: nameEn,
-          info: infoState,
-        },
-      ])
-    );
-  }, [[nameKr, nameEn, infoState]]);
+    setOnOff(isOpen);
+  }, []);
+
+  useEffect(() => {
+    if (nameK !== "")
+      dispatch(
+        sideBarActions.successSideBar([
+          { nameKr: nameK, nameEn: nameE, info: infoState },
+        ])
+      );
+  }, [[nameK, nameE, infoState]]);
 
   return (
     <>
