@@ -163,8 +163,8 @@ export const Content = styled.p`
 `;
 
 export const SpeakerImg = styled(Speaker)`
-  width: 2vw;
-  height: 2vw;
+  width: 30px;
+  height: 30px;
   fill: ${white};
 
   @media (hover: hover) {
@@ -173,11 +173,16 @@ export const SpeakerImg = styled(Speaker)`
       fill: ${pink[200]};
     }
   }
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const MuteIcStyle = styled(MuteIc)`
-  width: 2vw;
-  height: 2vw;
+  width: 27px;
+  height: 27px;
   fill: ${white};
   top: 5vh;
 
@@ -186,6 +191,11 @@ export const MuteIcStyle = styled(MuteIc)`
       cursor: pointer;
       fill: ${pink[200]};
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 

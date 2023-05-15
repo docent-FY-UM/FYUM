@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 
 import {
@@ -6,7 +6,9 @@ import {
   getMyPicturesDetailApi,
   getCurationApi,
 } from "../../store/api";
-import Detail from "../../components/Detail";
+import Loading from "../../components/common/Loading";
+
+const DetailComponent = React.lazy(() => import("../../components/Detail"));
 
 export interface PaintingData {
   curation: any;
@@ -28,7 +30,7 @@ const DetailEtcPage = () => {
     title: "",
   });
   const [frame, setFrame] = useState(false);
-  const [curation, setCuration] = useState<null | string>(null);
+  const [curation, setCuration] = useState("");
 
   const pathName = location.pathname;
   const pathParts = pathName.split("/");
@@ -60,12 +62,15 @@ const DetailEtcPage = () => {
       getMyPicturesDetail();
     }
 
-    // 큐레이션 음성 받아오기
     const getCuration = async () => {
       try {
         const res = await getCurationApi(id);
-        console.log("큐레이션?", res.data);
-        setCuration(res.data);
+        // 아직 큐레이션이 생성되지 않은 경우, 요청을 다시 보낸다.
+        if (res.data.status === 400) {
+          setTimeout(getCuration, 1000);
+        } else {
+          setCuration(res.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -73,7 +78,20 @@ const DetailEtcPage = () => {
     getCuration();
   }, []);
 
-  return <Detail data={data} frame={frame} setFrame={setFrame} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      {curation.length >= 1 ? (
+        <DetailComponent
+          data={data}
+          curation={curation}
+          frame={frame}
+          setFrame={setFrame}
+        />
+      ) : (
+        <Loading />
+      )}
+    </Suspense>
+  );
 };
 
 export default DetailEtcPage;

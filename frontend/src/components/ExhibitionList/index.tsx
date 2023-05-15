@@ -74,7 +74,10 @@ const ExhibitionList = () => {
       <ImageContainer className="artlist exhibition-list" ref={scrollRef}>
         {data &&
           data.map((item: any) => (
-            <ImgtitleContainer className="artlist exhibition-list">
+            <ImgtitleContainer
+              className="artlist exhibition-list"
+              key={item.paintingId}
+            >
               <ImageStyle
                 className="artlist"
                 key={item.paintingId}
@@ -91,7 +94,9 @@ const ExhibitionList = () => {
                   />
                 }
               </ImageStyle>
-              <ImageTitleStyle length={item.title.length}>{item.title}</ImageTitleStyle>
+              <ImageTitleStyle length={item.title.length}>
+                {item.title}
+              </ImageTitleStyle>
             </ImgtitleContainer>
           ))}
         {data.length < 4 && <InvisibleBox />}

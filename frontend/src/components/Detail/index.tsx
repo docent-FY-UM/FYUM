@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import { PaintingData } from "../../pages/DetailEtcPage";
@@ -8,6 +8,8 @@ import {
   deleteMyDrawingApi,
   deleteMyPictureApi,
 } from "../../store/api";
+import audioDecoder from "../utils/audioDecoder";
+
 import {
   DetailContainer,
   BackgroundImg,
@@ -23,23 +25,28 @@ import {
   FullFrameIcStyle,
   ArrowBox,
   ArrowStyle,
+  SpeakerDiv,
+  SpeakerImg,
+  MuteIcStyle,
 } from "../../pages/DetailPage/styles";
-import { SpeakerImg, MuteIcStyle } from "../../pages/DetailPage/styles";
 import { DeleteIcStyle } from "./styles";
 
 const Detail = ({
   data,
   frame,
   setFrame,
+  curation,
 }: {
   data: PaintingData;
   frame: boolean;
   setFrame: any;
+  curation: string;
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [description, setDescription] = useState(true);
   const [isArrowBoxVisible, setArrowBoxVisible] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
 
   const pathName = location.pathname;
   const pathParts = pathName.split("/");
@@ -106,6 +113,43 @@ const Detail = ({
     }
   };
 
+  // 큐레이션 재생
+  const onClickPlay = () => {
+    setIsPlay(true);
+  };
+
+  // 큐레이션 중지
+  const onClickStop = () => {
+    setIsPlay(false);
+    audio.pause();
+  };
+
+  useEffect(() => {
+    if (isPlay) {
+      playAudio();
+    }
+  }, [isPlay]);
+
+  // 오디오 객체 생성
+  const audio = new Audio();
+
+  const playAudio = () => {
+    const decodedAudioData = audioDecoder(curation);
+    const blob = new Blob([decodedAudioData], { type: "audio/mp3" });
+    const url = URL.createObjectURL(blob);
+    audio.src = url;
+
+    // 오디오 재생
+    audio.play();
+  };
+
+  useEffect(() => {
+    // 다른 페이지로 이동시 audio 멈추기
+    return () => {
+      window.location.reload()
+    };
+  }, []);
+
   console.log("데이터 잘넘어옴?", data);
 
   return (
@@ -122,6 +166,13 @@ const Detail = ({
           <TitleOrigin len={data.title?.length}>{data.title}</TitleOrigin>
           <AbsoluteDiv className="etc">
             <DetailContent className="etc">{data.discription}</DetailContent>
+            <SpeakerDiv>
+              {isPlay === false ? (
+                <SpeakerImg onClick={onClickPlay} />
+              ) : (
+                <MuteIcStyle onClick={onClickStop} />
+              )}
+            </SpeakerDiv>
           </AbsoluteDiv>
         </ContentContainer>
       )}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import {
   getDetailApi,
@@ -10,6 +10,7 @@ import {
   getCurationApi,
 } from "../../store/api";
 import audioDecoder from "../../components/utils/audioDecoder";
+import Loading from "../../components/common/Loading";
 
 import {
   DetailContainer,
@@ -121,8 +122,6 @@ const DetailPage = () => {
       }
     };
     getCuration();
-
-    // 음성 변환
   }, []);
 
   // 찜하기 api
@@ -191,7 +190,11 @@ const DetailPage = () => {
 
   // 큐레이션 재생
   const onClickPlay = () => {
-    setIsPlay(true);
+    if (curation) {
+      setIsPlay(true);
+    } else {
+      alert("다시 시도해주세요.");
+    }
   };
 
   // 큐레이션 중지
@@ -219,77 +222,90 @@ const DetailPage = () => {
     audio.play();
   };
 
-  return (
-    <DetailContainer>
-      <BackgroundImg
-        src={imgURL}
-        description={description}
-        referrerPolicy="no-referrer"
-      />
-      {description === true ? (
-        <ContentContainer>
-          <TitleOrigin len={data.titleOrigin?.length}>
-            {data.titleOrigin}
-          </TitleOrigin>
-          <TitleKr>{data.titleKr}</TitleKr>
-          <AbsoluteDiv>
-            <DetailDiv>
-              <DetailContent>{data.painterOrigin}</DetailContent>
-              <DetailContent>{data.paintedAt}</DetailContent>
-              <DetailContent>
-                {data.paintingType}, {data.technique}
-              </DetailContent>
-            </DetailDiv>
-            <ContentDiv>
-              <Content>{data.description}</Content>
-            </ContentDiv>
-            <SpeakerDiv>
-              {isPlay === false ? (
-                <SpeakerImg onClick={onClickPlay} />
-              ) : (
-                <MuteIcStyle onClick={onClickStop} />
-              )}
-            </SpeakerDiv>
-          </AbsoluteDiv>
-        </ContentContainer>
-      ) : null}
-      <FixedContainer>
-        <DescriptionBtn onClick={changeState}>
-          {description === true ? (
-            <DescriptionP>Description On.</DescriptionP>
-          ) : (
-            <DescriptionP>Description Off.</DescriptionP>
-          )}
-        </DescriptionBtn>
-        {description === true ? (
-          <MarkContainer>
-            {frame === false ? (
-              <>
-                <EmptyFrameIcStyle
-                  onClick={changeFrame}
-                  onMouseEnter={() => setArrowBoxVisible(true)}
-                  onMouseLeave={() => setArrowBoxVisible(false)}
-                />
-                {isArrowBoxVisible && (
-                  <ArrowBox>
-                    <span>전시회 리스트에 저장하기</span>
-                    <ArrowStyle />
-                  </ArrowBox>
-                )}
-              </>
-            ) : (
-              <FullFrameIcStyle onClick={changeFrame} />
-            )}
+  useEffect(() => {
+    // 다른 페이지로 이동시 audio 멈추기
+    return () => {
+      window.location.reload();
+    };
+  }, []);
 
-            {bookmark === false ? (
-              <EmptyHeartIcStyle onClick={changeBookmark} />
-            ) : (
-              <FullHeartIcStyle onClick={changeBookmark} />
-            )}
-          </MarkContainer>
-        ) : null}
-      </FixedContainer>
-    </DetailContainer>
+  return (
+    <Suspense fallback={<Loading />}>
+      {curation.length >= 1 ? (
+        <DetailContainer>
+          <BackgroundImg
+            src={imgURL}
+            description={description}
+            referrerPolicy="no-referrer"
+          />
+          {description === true ? (
+            <ContentContainer>
+              <TitleOrigin len={data.titleOrigin?.length}>
+                {data.titleOrigin}
+              </TitleOrigin>
+              <TitleKr>{data.titleKr}</TitleKr>
+              <AbsoluteDiv>
+                <DetailDiv>
+                  <DetailContent>{data.painterOrigin}</DetailContent>
+                  <DetailContent>{data.paintedAt}</DetailContent>
+                  <DetailContent>
+                    {data.paintingType}, {data.technique}
+                  </DetailContent>
+                </DetailDiv>
+                <ContentDiv>
+                  <Content>{data.description}</Content>
+                </ContentDiv>
+                <SpeakerDiv>
+                  {isPlay === false ? (
+                    <SpeakerImg onClick={onClickPlay} />
+                  ) : (
+                    <MuteIcStyle onClick={onClickStop} />
+                  )}
+                </SpeakerDiv>
+              </AbsoluteDiv>
+            </ContentContainer>
+          ) : null}
+          <FixedContainer>
+            <DescriptionBtn onClick={changeState}>
+              {description === true ? (
+                <DescriptionP>Description On.</DescriptionP>
+              ) : (
+                <DescriptionP>Description Off.</DescriptionP>
+              )}
+            </DescriptionBtn>
+            {description === true ? (
+              <MarkContainer>
+                {frame === false ? (
+                  <>
+                    <EmptyFrameIcStyle
+                      onClick={changeFrame}
+                      onMouseEnter={() => setArrowBoxVisible(true)}
+                      onMouseLeave={() => setArrowBoxVisible(false)}
+                    />
+                    {isArrowBoxVisible && (
+                      <ArrowBox>
+                        <span>전시회 리스트에 저장하기</span>
+                        <ArrowStyle />
+                      </ArrowBox>
+                    )}
+                  </>
+                ) : (
+                  <FullFrameIcStyle onClick={changeFrame} />
+                )}
+
+                {bookmark === false ? (
+                  <EmptyHeartIcStyle onClick={changeBookmark} />
+                ) : (
+                  <FullHeartIcStyle onClick={changeBookmark} />
+                )}
+              </MarkContainer>
+            ) : null}
+          </FixedContainer>
+        </DetailContainer>
+      ) : (
+        <Loading />
+      )}
+    </Suspense>
   );
 };
 export default DetailPage;

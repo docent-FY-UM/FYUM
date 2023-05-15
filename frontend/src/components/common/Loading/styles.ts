@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const LottieContainer = styled.div`
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
