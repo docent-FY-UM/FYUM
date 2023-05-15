@@ -64,6 +64,7 @@ public class MyPictureService {
         // S3 객체 메타 데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("image/png"); // 이미지 타입 설정
+        metadata.setContentLength(imageBytes.length);
 
 
         String filename = UUID.randomUUID().toString()+".png";
@@ -84,6 +85,7 @@ public class MyPictureService {
                 throw new RuntimeException(e);
             }
         }).start();
+
 
         MyDrawingResponseDto resdto = new MyDrawingResponseDto();
         resdto.setPaintingId(pId);
