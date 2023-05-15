@@ -21,6 +21,8 @@ import {
   MarkContainer,
   EmptyFrameIcStyle,
   FullFrameIcStyle,
+  ArrowBox,
+  ArrowStyle,
 } from "../../pages/DetailPage/styles";
 import { SpeakerImg, MuteIcStyle } from "../../pages/DetailPage/styles";
 import { DeleteIcStyle } from "./styles";
@@ -37,6 +39,11 @@ const Detail = ({
   const navigate = useNavigate();
   const location = useLocation();
   const [description, setDescription] = useState(true);
+  const [isArrowBoxVisible, setArrowBoxVisible] = useState(false);
+
+  const pathName = location.pathname;
+  const pathParts = pathName.split("/");
+  const locate = pathParts[2];
 
   const changeState = () => {
     setDescription(!description);
@@ -74,10 +81,6 @@ const Detail = ({
 
   // 삭제
   const onDelete = () => {
-    const pathName = location.pathname;
-    const pathParts = pathName.split("/");
-    const locate = pathParts[2];
-
     if (locate === "painting") {
       const deleteRequest = async () => {
         try {
@@ -133,9 +136,22 @@ const Detail = ({
         {description && (
           <MarkContainer className="etc">
             {frame === false ? (
-              <EmptyFrameIcStyle onClick={changeFrame} />
+              <>
+                <EmptyFrameIcStyle
+                  onClick={changeFrame}
+                  onMouseEnter={() => setArrowBoxVisible(true)}
+                  onMouseLeave={() => setArrowBoxVisible(false)}
+                  locate={locate}
+                />
+                {isArrowBoxVisible && (
+                  <ArrowBox>
+                    <span>전시회 리스트에 저장하기</span>
+                    <ArrowStyle />
+                  </ArrowBox>
+                )}
+              </>
             ) : (
-              <FullFrameIcStyle onClick={changeFrame} />
+              <FullFrameIcStyle onClick={changeFrame} locate={locate} />
             )}
             <DeleteIcStyle onClick={onDelete} />
           </MarkContainer>

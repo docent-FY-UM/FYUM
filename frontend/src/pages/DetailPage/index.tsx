@@ -33,6 +33,8 @@ import {
   EmptyHeartIcStyle,
   FullHeartIcStyle,
   FixedContainer,
+  ArrowBox,
+  ArrowStyle,
 } from "./styles";
 
 interface detailInfo {
@@ -64,6 +66,8 @@ const DetailPage = () => {
 
   const [curation, setCuration] = useState<string>("");
   const [isPlay, setIsPlay] = useState(false);
+
+  const [isArrowBoxVisible, setArrowBoxVisible] = useState(false);
 
   // 받아온 데이터 저장
   const [data, setData] = useState<detailInfo>({
@@ -260,10 +264,23 @@ const DetailPage = () => {
         {description === true ? (
           <MarkContainer>
             {frame === false ? (
-              <EmptyFrameIcStyle onClick={changeFrame} />
+              <>
+                <EmptyFrameIcStyle
+                  onClick={changeFrame}
+                  onMouseEnter={() => setArrowBoxVisible(true)}
+                  onMouseLeave={() => setArrowBoxVisible(false)}
+                />
+                {isArrowBoxVisible && (
+                  <ArrowBox>
+                    <span>전시회 리스트에 저장하기</span>
+                    <ArrowStyle />
+                  </ArrowBox>
+                )}
+              </>
             ) : (
               <FullFrameIcStyle onClick={changeFrame} />
             )}
+
             {bookmark === false ? (
               <EmptyHeartIcStyle onClick={changeBookmark} />
             ) : (

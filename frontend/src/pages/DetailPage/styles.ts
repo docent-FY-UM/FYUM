@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { black, white, pink } from "../../styles/colors";
+import { black, white, pink, mainColor } from "../../styles/colors";
 import { ReactComponent as EmptyFrame } from "../../assets/icon/empty_frame.svg";
 import { ReactComponent as EmptyHeart } from "../../assets/icon/empty_heart.svg";
 import { ReactComponent as FullFrame } from "../../assets/icon/full_frame.svg";
@@ -213,8 +213,10 @@ export const DescriptionP = styled.p<{ info?: boolean }>`
 
 export const MarkContainer = styled.div`
   position: absolute;
-  bottom: 3vh;
+  bottom: 1vw;
   right: 2.6vw;
+  display: flex;
+  align-items: start;
 
   &.etc {
     display: flex;
@@ -222,55 +224,60 @@ export const MarkContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    bottom: 0.1vh;
-    right: 5vw;
+    bottom: 0.5vh;
+    right: 7vw;
   }
 `;
 
-export const EmptyFrameIcStyle = styled(EmptyFrame)`
-  width: 2vw;
+export const EmptyFrameIcStyle = styled(EmptyFrame)<{ locate?: string }>`
+  width: 1.5vw;
   fill: ${white};
-  margin-right: 1vw;
+  margin-right: 10px;
   cursor: pointer;
+  visibility: ${(props) => (props.locate === "picture" ? "hidden" : "")};
+
+  position: relative;
 
   @media (max-width: 768px) {
-    width: 4vw;
+    width: 3vw;
     margin-right: 2vw;
   }
 `;
 
-export const FullFrameIcStyle = styled(FullFrame)`
-  width: 2vw;
-  margin-right: 1vw;
+export const FullFrameIcStyle = styled(FullFrame)<{ locate?: string }>`
+  width: 1.5vw;
+  margin-right: 10px;
   cursor: pointer;
+  visibility: ${(props) => (props.locate === "picture" ? "hidden" : "")};
 
   @media (max-width: 768px) {
-    width: 4vw;
+    width: 3vw;
     margin-right: 2vw;
   }
 `;
 
 export const EmptyHeartIcStyle = styled(EmptyHeart)`
-  width: 2.2vw;
+  width: 1.8vw;
   height: 2.7vw;
   fill: ${white};
   cursor: pointer;
+  align-self: center;
 
   @media (max-width: 768px) {
-    width: 5vw;
-    height: 5vw;
-    margin-bottom: 2.6vw;
+    width: 3.5vw;
+    height: 3.5vw;
   }
 `;
 
 export const FullHeartIcStyle = styled(FullHeart)`
-  width: 2.2vw;
+  width: 1.8vw;
   height: 2.7vw;
   cursor: pointer;
+  align-self: center;
 
   @media (max-width: 768px) {
-    width: 5vw;
-    height: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
     margin-bottom: 2.6vw;
   }
 `;
@@ -279,4 +286,47 @@ export const FixedContainer = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+`;
+
+export const ArrowBox = styled.div`
+  position: absolute;
+  width: 10vw;
+  height: 30px;
+
+  background: ${mainColor};
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+
+  bottom: 40px;
+  transform: translate(-43%, -30%);
+  padding: 6px 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-family: "SUIT";
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const ArrowStyle = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid ${mainColor};
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
