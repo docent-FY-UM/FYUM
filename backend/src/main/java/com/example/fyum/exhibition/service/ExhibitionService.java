@@ -249,4 +249,17 @@ public class ExhibitionService {
         return flag;
 
     }
+
+
+
+    public int postExhibitionTen(String kakaoId, int paintingId){
+        Member member = memberRepository.findByKakaoId(kakaoId);
+
+        Exhibition exhibition = exhibitionRepository.findByMember(member);
+        int flag = 0;
+        exhibition.setPainting10(getEx(paintingId));
+        exhibitionRepository.save(exhibition);
+        return flag;
+
+    }
 }
