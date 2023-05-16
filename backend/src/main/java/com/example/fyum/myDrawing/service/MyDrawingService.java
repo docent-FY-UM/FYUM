@@ -139,14 +139,14 @@ public class MyDrawingService {
 
     }
 
-    public MyDrawingResponseDto saveOurDrawing(String base64, String kakaoId) {
+    public MyDrawingResponseDto saveOurDrawing(String base64, String roomCode) {
 
-        Member member = memberRepository.findByKakaoId(kakaoId);
+        Optional<Member> member = memberRepository.findByRoomCode(roomCode);
 
         MyDrawing myDrawing = MyDrawing.builder()
             .title("같이 그린 그림")
             .description("모두가 함꼐 그린 그림이에요")
-            .member(member)
+            .member(member.get())
             .build();
 
         byte[] imageBytes = Base64.getDecoder().decode(base64);
@@ -176,7 +176,7 @@ public class MyDrawingService {
         resdto.setPaintingId(pId);
         resdto.setImgSrc(perfix + filename);
 
-        exhibitionService.postExhibitionTen(kakaoId, pId);
+        exhibitionService.postExhibitionTen(member.get().getKakaoId(), pId);
 
         return resdto;
 
