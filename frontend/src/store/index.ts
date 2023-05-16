@@ -3,10 +3,8 @@ import { all } from "redux-saga/effects";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 // 관리하는 슬라이스들
-import authReducer from "./authSlice";
 import modalReducer from "./modalSlice";
 import userReducer from "./userSlice";
-import listReducer from "./listSlice";
 import registerReducer from "./registerSlice";
 import exhibitionListReducer from "./exhibitionListSlice";
 import sideBarReducer from "./sideBarSlice";
@@ -22,10 +20,8 @@ import { exhibitionListSagas } from "./exhibitionListSagas";
 
 // rootReducers by using combineReducers
 const rootReducers = combineReducers({
-  auth: authReducer,
   modal: modalReducer,
   user: userReducer,
-  list: listReducer,
   register: registerReducer,
   exhibitionList: exhibitionListReducer,
   sideBar: sideBarReducer,
@@ -35,7 +31,7 @@ const rootReducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["user"],
+  whitelist: ["user","sideBar"],
 };
 
 // persist + rootReducer

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { pink, white } from "../../../styles/colors";
+import { pink } from "../../../styles/colors";
 
 export const Main4Img1Container = styled.div<{ isanimation: string }>`
   width: 43%;

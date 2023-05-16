@@ -21,9 +21,8 @@ const List = () => {
   const [loading, setLoading] = useState(false);
   const pageEnd: any = useRef(); //페이지 끝부분
 
-  const [prevPage, setPrevPage] = useState(0); //1로 하는게 맞는가?0으로 하는게 맞는가?
+  const [prevPage, setPrevPage] = useState(0); 
 
-  //추후에 원점으로 돌아오는 버튼 구현해보기
 
   //새로고침 할 때마다 초기화
   useEffect(() => {
@@ -87,10 +86,6 @@ const List = () => {
   };
 
   const scrollRef = useHorizontalScroll(window.innerWidth > 768);
-  console.log(listData);
-  // window.onresize = () => {
-  //   window.location.reload();
-  // };
 
   return (
     <>

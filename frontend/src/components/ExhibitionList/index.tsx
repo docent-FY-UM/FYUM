@@ -67,7 +67,6 @@ const ExhibitionList = () => {
     });
   };
 
-  console.log("데이터는?", data);
 
   return (
     <>

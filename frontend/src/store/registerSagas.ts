@@ -1,13 +1,4 @@
-import {
-  take,
-  takeEvery,
-  takeLatest,
-  put,
-  all,
-  delay,
-  fork,
-  call,
-} from "redux-saga/effects";
+import { takeLatest, put, fork, call } from "redux-saga/effects";
 
 // actions import
 import { registerActions } from "./registerSlice";
@@ -22,16 +13,17 @@ interface Action {
 }
 
 // 그림 등록 saga
-function* onCreateDrawingStartAsync({ payload }: Action): Generator<any, void, any> {
+function* onCreateDrawingStartAsync({
+  payload,
+}: Action): Generator<any, void, any> {
   const { formRequestSuccess, formRequestError } = registerActions;
-  const {title, contents, img} = payload
-  const {type} = payload
-  console.log("type은?", type)
+  const { title, contents, img } = payload;
+  const { type } = payload;
   if (type === "mydrawing") {
     try {
-      const response = yield call(createDrawingApi, {title, contents, img})
+      const response = yield call(createDrawingApi, { title, contents, img });
       if (response.status === 200) {
-          yield put(formRequestSuccess(response.data))
+        yield put(formRequestSuccess(response.data));
       }
     } catch (error: any) {
       yield put(formRequestError(error.response.data));
@@ -39,28 +31,22 @@ function* onCreateDrawingStartAsync({ payload }: Action): Generator<any, void, a
     }
   } else if (type === "mypicture") {
     try {
-      const response = yield call(createPictureApi, {title, contents, img})
+      const response = yield call(createPictureApi, { title, contents, img });
       if (response.status === 200) {
-        console.log("업로드 응답?", response.data)
-          yield put(formRequestSuccess(response.data))
+        yield put(formRequestSuccess(response.data));
       }
     } catch (error: any) {
       yield put(formRequestError(error.response.data));
       return;
     }
   }
-
 }
-
 
 // 사가들을 작동시킬 saga
 function* onCreateDrawing() {
-    const { formRequestStart } = registerActions;
-    yield takeLatest(formRequestStart, onCreateDrawingStartAsync)
+  const { formRequestStart } = registerActions;
+  yield takeLatest(formRequestStart, onCreateDrawingStartAsync);
 }
 
-
 // 사가 export
-export const registerSagas = [
-    fork(onCreateDrawing),
-]
+export const registerSagas = [fork(onCreateDrawing)];

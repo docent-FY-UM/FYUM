@@ -8,10 +8,8 @@ export const ListBackgroundContainer = styled.div<{ backgroundimg: string }>`
   width: 100vw;
   background-image: url(${(props) => props.backgroundimg});
 
-  //수정
   display: flex;
   flex-direction: column;
-  //
 
   @media screen and (max-width: 768px) {
     overflow-y: visible;
@@ -123,10 +121,6 @@ export const ImgSrcStyle = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: fill;
-
-  &.artlist {
-    /* object-fit: cover; */
-  }
 `;
 
 export const ImgtitleContainer = styled.div`
@@ -175,7 +169,6 @@ export const ImageTitleStyle = styled.div<{ title?: string; length?: number }>`
 export const ListPageEnd = styled.div`
   width: 20px;
   height: 100%;
-  /* background-color: pink; */
   margin-right: 20px;
   visibility: hidden;
 

@@ -3,7 +3,6 @@ import App from "./App";
 import store from "./store/index";
 import { Provider } from "react-redux";
 import "./index.css";
-//사가 불러오는 법 알아보기. ver18에서
 
 // redux-persist
 import { PersistGate } from "redux-persist/integration/react";

@@ -9,6 +9,7 @@ export const ExhibitionContainer = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -133,6 +134,7 @@ export const SearchIcContainer = styled(SearchIc)`
   bottom: 5.1%;
   left: 33%;
   cursor: pointer;
+  
   @media (max-width: 768px) {
     left: 29%;
     bottom: 5.5%;

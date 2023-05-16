@@ -9,7 +9,6 @@ import {
   ImgSrcStyle,
   ImageTitleStyle,
   FixedContainer,
-  UploadBtn,
   GoPageBtn,
   ArrowStyle,
 } from "../../styles/listStyles";
@@ -26,7 +25,6 @@ const MyDrawings = () => {
       try {
         const res = await getMyDrawingsListApi();
         setData(res.data);
-        console.log("데이터는?", res.data);
       } catch (error) {
         console.log(error);
       }

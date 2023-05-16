@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { AniProps } from "..";
-import { userSlice } from "../../../store/userSlice";
 import { RootState } from "../../../store";
 
 import {

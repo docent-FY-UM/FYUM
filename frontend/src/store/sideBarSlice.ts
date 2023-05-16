@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// interface SideBarTypes {
-//   nameKr: string;
-//   nameEn?: string;
-//   info: string;
-// }
-
 interface SideBarState {
   nameKr: string;
   nameEn?: string;

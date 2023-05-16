@@ -1,10 +1,7 @@
-import {
-  ListTitleContainer,
-} from "../../styles/listStyles";
-import { ListContainer } from "../../components/List/styles"; 
+import { ListTitleContainer } from "../../styles/listStyles";
+import { ListContainer } from "../../components/List/styles";
 
 import ExhibitionList from "../../components/ExhibitionList";
-
 
 const ExhibitionListPage = () => {
   return (

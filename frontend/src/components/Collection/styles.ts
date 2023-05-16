@@ -113,6 +113,7 @@ export const ThemeContainer = styled.div`
   &:hover {
     filter: brightness(100%);
   }
+  
   @media (max-width: 768px) {
     grid-column: 1/1;
     grid-row: 3/4;
@@ -153,6 +154,7 @@ export const PainterText = styled.div`
   position: absolute;
   left: 30%;
   bottom: 10%;
+
   @media (max-width: 768px) {
     bottom: 25%;
     left: 15%;
@@ -164,15 +166,18 @@ export const ArtTrendText = styled.div`
   position: absolute;
   left: 20%;
   bottom: 10%;
+
   @media (max-width: 768px) {
     bottom: 25%;
     left: 50%;
   }
 `;
+
 export const ThemeText = styled.div`
   position: absolute;
   left: 30%;
   bottom: 10%;
+
   @media (max-width: 768px) {
     bottom: 25%;
     left: 15%;

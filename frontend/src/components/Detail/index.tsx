@@ -150,7 +150,6 @@ const Detail = ({
     };
   }, []);
 
-  console.log("데이터 잘넘어옴?", data);
 
   return (
     <DetailContainer>

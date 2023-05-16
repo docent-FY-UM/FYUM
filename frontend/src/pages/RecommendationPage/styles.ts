@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { black, white } from "../../styles/colors";
+import { white } from "../../styles/colors";
 import recommendImg from "../../assets/images/recommendPageImg.png";
 
 export const RecommendContainer = styled.div`

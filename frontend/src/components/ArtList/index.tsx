@@ -52,8 +52,6 @@ const ArtList = () => {
     : "themes";
 
   const getArtListDatas = async (page: number) => {
-    const artListQuery = {};
-    const accessToken = localStorage.getItem("token");
     const urlType = currentUrl[3];
     const res = await getArtListApi({ artListUrl, urlType, page });
 
@@ -113,11 +111,8 @@ const ArtList = () => {
     dispatch(sideBarActions.closeSideBar());
   };
 
-  const { isOpen, nameKr, nameEn, info } = useSelector((state: RootState) => ({
+  const { isOpen } = useSelector((state: RootState) => ({
     isOpen: state.sideBar.isOpen,
-    nameKr: state.sideBar.nameKr,
-    nameEn: state.sideBar.nameEn,
-    info: state.sideBar.info,
   }));
 
   useEffect(() => {
@@ -162,7 +157,10 @@ const ArtList = () => {
                   {item.titleKr}
                 </ImageTitleStyle>
               ) : (
-                <ImageTitleStyle title={"artList"} length={item.titleOrigin.length}>
+                <ImageTitleStyle
+                  title={"artList"}
+                  length={item.titleOrigin.length}
+                >
                   {item.titleOrigin}
                 </ImageTitleStyle>
               )}

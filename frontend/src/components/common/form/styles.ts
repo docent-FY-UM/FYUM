@@ -64,6 +64,7 @@ export const PreviewImgStyle = styled.img<{ type?: string }>`
   &.exhibitionList {
     width: 120px;
     height: 100px;
+    margin-bottom: 3.5px;
   }
 
   @media screen and (max-width: 768px) {

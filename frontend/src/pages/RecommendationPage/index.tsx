@@ -1,6 +1,4 @@
-import {
-  ListTitleContainer,
-} from "../../styles/listStyles";
+import { ListTitleContainer } from "../../styles/listStyles";
 import { ListContainer } from "../../components/List/styles";
 
 import RecommendList from "../../components/Recommend";

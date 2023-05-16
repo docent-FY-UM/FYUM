@@ -20,11 +20,10 @@ interface Props {
 const SideBar = ({ onOff, setOnOff }: Props) => {
   const dispatch = useDispatch();
 
-  const { nameKr, nameEn, info, isOpen } = useSelector((state: RootState) => ({
+  const { nameKr, nameEn, info } = useSelector((state: RootState) => ({
     nameKr: state.sideBar.nameKr,
     nameEn: state.sideBar.nameEn,
     info: state.sideBar.info,
-    isOpen: state.sideBar.isOpen,
   }));
 
   const closeSideBar = () => {
@@ -32,7 +31,6 @@ const SideBar = ({ onOff, setOnOff }: Props) => {
     dispatch(sideBarActions.closeSideBar());
   };
 
-  console.log(nameKr, nameEn, info);
 
   return (
     <SideBarDimmer>

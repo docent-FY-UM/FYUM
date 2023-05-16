@@ -21,13 +21,6 @@ export const HeaderContainer = styled.div<{ headercolor: string }>`
   }
 `;
 
-export const InvisibleBox = styled.div`
-  @media (max-width: 768px) {
-    height: 80px;
-    visibility: hidden;
-  }
-`;
-
 export const LogoIcStyle = styled(LogoIc)<{ iconcolor: string }>`
   width: 60px;
   height: 60px;

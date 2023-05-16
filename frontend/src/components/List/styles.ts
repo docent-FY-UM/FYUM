@@ -7,7 +7,6 @@ import MyDrawingBackImg from "../../assets/images/myDrawingsBackgroundImg.png";
 import RecommendationBackImg from "../../assets/images/recommendPageImg.png";
 import LikedBackImg from "../../assets/images/likedPageImg.png";
 
-
 import FrameImg from "../../assets/images/frameImg.png";
 
 export const ListContainer = styled.div<{ add: string }>`
@@ -25,16 +24,14 @@ export const ListContainer = styled.div<{ add: string }>`
       : props.add === "mydrawing"
       ? `url(${MyDrawingBackImg})`
       : props.add === "rec"
-      ?  `url(${RecommendationBackImg})`
-      :  `url(${LikedBackImg})`};
+      ? `url(${RecommendationBackImg})`
+      : `url(${LikedBackImg})`};
 
-  // 수정
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  //
 
   @media screen and (max-width: 768px) {
   }

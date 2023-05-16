@@ -15,9 +15,6 @@ import IntroPage from "./IntroPage";
 import KakaoHandle from "../components/auth/KakaoHandle";
 import MyDrawingsPage from "./MyDrawingsPage";
 import DetailEtcPage from "./DetailEtcPage";
-import TestPage from "./TestPage";
-import UnityPage from "./TestPage/UnityPage";
-import UnityPage2 from "./TestPage/UnityPage2";
 import NotFoundPage from "./NotFoundPage";
 
 export {
@@ -38,8 +35,5 @@ export {
   KakaoHandle,
   MyDrawingsPage,
   DetailEtcPage,
-  TestPage,
-  UnityPage,
-  UnityPage2,
   NotFoundPage,
 };

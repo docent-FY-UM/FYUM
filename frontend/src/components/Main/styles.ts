@@ -7,15 +7,6 @@ export const BackgroundStyle = styled.div`
   height: 100vh;
   width: 100%;
   background-color: ${black};
-
-  &.test {
-    background-color: pink;
-  }
-
-  @media (max-width: 768px) {
-    /* display: grid;
-    grid-template-rows: repeat(10, 1fr); */
-  }
 `;
 
 export const FontStyle = styled.div`

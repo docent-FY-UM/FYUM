@@ -19,8 +19,6 @@ export const ArtListContainer = styled.div`
   }
 `;
 
-//-----------------------------------------------
-
 export const SideBarDimmer = styled.div`
   position: absolute;
   top: 0;

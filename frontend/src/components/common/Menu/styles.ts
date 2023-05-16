@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { black, white, grey, pink, mainColor } from "../../../styles/colors";
+import styled from "styled-components";
+import { black, white, pink, mainColor } from "../../../styles/colors";
 
 import { ReactComponent as CloseIc } from "../../../assets/icon/closeIc.svg";
 
@@ -122,7 +122,6 @@ export const MenuListContainer = styled.div`
 export const MenuListFontStyle = styled.div`
   p {
     font-weight: 700;
-    /* font-size: 2.7vw; */
     font-size: 40px;
     color: ${white};
 

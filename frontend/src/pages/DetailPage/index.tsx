@@ -102,7 +102,6 @@ const DetailPage = () => {
     const getDetailData = async () => {
       try {
         const res = await getDetailApi(paintingId);
-        // console.log(res)
         setData(res);
         setBookmark(res.wishStatus);
         setFrame(res.exhibitionStatus);
@@ -229,7 +228,6 @@ const DetailPage = () => {
     };
   }, []);
 
-  console.log("큐레이션좀", curation)
 
   return (
     <Suspense fallback={<Loading />}>

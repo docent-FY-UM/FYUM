@@ -5,7 +5,6 @@ import Menu from "../Menu";
 
 import {
   HeaderContainer,
-  InvisibleBox,
   LogoIcStyle,
   MenuIcStyle,
 } from "./styles";
@@ -51,7 +50,6 @@ const Header = () => {
       </HeaderContainer>
 
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      {/* {currentUrl === "/main" && <InvisibleBox />} */}
     </>
   );
 };

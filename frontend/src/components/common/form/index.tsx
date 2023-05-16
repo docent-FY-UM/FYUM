@@ -35,8 +35,6 @@ const Form = ({ type }: FormProps) => {
     (state: RootState) => state.register
   );
 
-  console.log("타입뭔데", type);
-
   // 1. input 변경 이벤트 핸들러
   const onChange = (
     e:
@@ -164,6 +162,7 @@ const Form = ({ type }: FormProps) => {
                 className="exhibitionList"
                 placeholder="작품을 업로드하세요."
                 value={fileName}
+                readOnly
               />
               <label htmlFor="file-upload">
                 <Btn

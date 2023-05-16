@@ -1,4 +1,3 @@
-import { current } from "@reduxjs/toolkit";
 import { useEffect, useRef, useState } from "react";
 import { white, black } from "../../styles/colors";
 

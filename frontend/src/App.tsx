@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   ArtListPage,
@@ -18,9 +18,6 @@ import {
   KakaoHandle,
   MyDrawingsPage,
   DetailEtcPage,
-  TestPage,
-  UnityPage,
-  UnityPage2,
   NotFoundPage,
 } from "../src/pages/index";
 
@@ -55,11 +52,6 @@ function App() {
           <Route path="/drawing" element={<DrawingPage />} />
           <Route path="/my-drawings" element={<MyDrawingsPage />} />
           <Route path="/*" element={<NotFoundPage />} />
-
-          {/* 테스트 페이지 */}
-          <Route path="/test" element={<TestPage />} />
-          <Route path="/unity" element={<UnityPage />} />
-          <Route path="/unity2" element={<UnityPage2 />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

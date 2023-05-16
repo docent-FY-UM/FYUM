@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import IntroImg from "../../assets/images/introImg.png";
 import { white } from "../../styles/colors";
 
 interface ClickHereProps {
