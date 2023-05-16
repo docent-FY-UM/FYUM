@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MyDrawingDetailDto {
+
     int paintingId;
 
     String title;

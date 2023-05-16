@@ -1,6 +1,5 @@
 package com.example.fyum.recommend.entity;
 
-import com.example.fyum.config.Painting;
 import lombok.Data;
 import lombok.Getter;
 
@@ -10,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Data
 public class Survey {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")

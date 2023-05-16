@@ -1,6 +1,5 @@
 package com.example.fyum.recommend.entity;
 
-import com.example.fyum.config.Painting;
 import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.member.entity.Member;
 import lombok.Builder;
@@ -45,8 +44,9 @@ public class Recommend {
     private Masterpiece painting9;
     @ManyToOne(fetch = FetchType.LAZY)
     private Masterpiece painting10;
+
     @Builder
-    public Recommend(Member member){
+    public Recommend(Member member) {
         this.member = member;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.fyum.exhibition.service;
 
 import com.example.fyum.config.Painting;
-import com.example.fyum.exhibition.dto.ExhibitionRequestDto;
 import com.example.fyum.exhibition.dto.ExhibitionResponseDto;
 import com.example.fyum.exhibition.entity.Exhibition;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
@@ -14,11 +13,9 @@ import com.example.fyum.myDrawing.entity.MyDrawing;
 import com.example.fyum.myDrawing.entity.MyPicture;
 import com.example.fyum.myDrawing.repository.MyDrawingRepository;
 import com.example.fyum.myDrawing.repository.MyPictureRepository;
-import com.example.fyum.myDrawing.service.MyPictureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,32 +36,30 @@ public class ExhibitionService {
 
     private final MyPictureRepository myPictureRepository;
 
-    public Painting getEx(int paintingId){
+    public Painting getEx(int paintingId) {
 
         String temp = paintingRepository.selectSQLById(paintingId);
 
-        if(temp.equals("MP")){
+        if (temp.equals("MP")) {
             Optional<Masterpiece> ex = masterpieceRepository.findById(paintingId);
             return ex.get();
-        }else if(temp.equals("MD")){
-            Optional<MyDrawing> ex =  myDrawingRepository.findById(paintingId);
+        } else if (temp.equals("MD")) {
+            Optional<MyDrawing> ex = myDrawingRepository.findById(paintingId);
             return ex.get();
-        }else {
+        } else {
             Optional<MyPicture> ex = myPictureRepository.findById(paintingId);
             return ex.get();
         }
 
     }
-    public int postExhibition(String kakaoId, int paintingId){
+
+    public int postExhibition(String kakaoId, int paintingId) {
         Member member = memberRepository.findByKakaoId(kakaoId);
 
         Exhibition exhibition = exhibitionRepository.findByMember(member);
 
-        //Optional<Painting> painting = paintingRepository.findById(paintingId);
-
-
         int flag = 0;
-        if(exhibition.getPainting1() == null) {
+        if (exhibition.getPainting1() == null) {
             exhibition.setPainting1(getEx(paintingId));
         } else if (exhibition.getPainting2() == null) {
             exhibition.setPainting2(getEx(paintingId));
@@ -88,162 +83,167 @@ public class ExhibitionService {
             flag = 1;
         }
 
-        if(flag == 0){
+        if (flag == 0) {
             exhibitionRepository.save(exhibition);
         }
         return flag;
 
     }
 
-    public ExhibitionResponseDto exToDto(Painting painting){
+    public ExhibitionResponseDto exToDto(Painting painting) {
         ExhibitionResponseDto dto = new ExhibitionResponseDto();
 
-        if(painting == null){
+        if (painting == null) {
             dto.setPaintingId(-1);
             return dto;
-        }else{
+        } else {
             String Dtype = paintingRepository.selectSQLById(painting.getId());
             dto.setDType(Dtype);
             dto.setImgSrc(painting.getImgSrc());
             dto.setPaintingId(painting.getId());
-            if(Dtype.equals("MP")){
-                if(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin() != null){
-                    dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
-                }else{
-                    dto.setTitle(masterpieceRepository.findById(painting.getId()).get().getTitleKr());
+            if (Dtype.equals("MP")) {
+                if (masterpieceRepository.findById(painting.getId()).get().getTitleOrigin()
+                    != null) {
+                    dto.setTitle(
+                        masterpieceRepository.findById(painting.getId()).get().getTitleOrigin());
+                } else {
+                    dto.setTitle(
+                        masterpieceRepository.findById(painting.getId()).get().getTitleKr());
                 }
-            }else if(Dtype.equals("MD")){
+            } else if (Dtype.equals("MD")) {
                 dto.setTitle(myDrawingRepository.findById(painting.getId()).get().getTitle());
-            }else{
+            } else {
                 dto.setTitle(myPictureRepository.findById(painting.getId()).get().getTitle());
             }
             return dto;
         }
 
 
-
     }
-    public List<ExhibitionResponseDto> getExhi(String kakaoId){
+
+    public List<ExhibitionResponseDto> getExhi(String kakaoId) {
 
         Member member = memberRepository.findByKakaoId(kakaoId);
         Exhibition exhibition = exhibitionRepository.findByMember(member);
         List<ExhibitionResponseDto> res = new ArrayList<>();
 
-        if(exToDto(exhibition.getPainting1()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting1()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting1()));
         }
-        if(exToDto(exhibition.getPainting2()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting2()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting2()));
         }
-        if(exToDto(exhibition.getPainting3()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting3()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting3()));
         }
-        if(exToDto(exhibition.getPainting4()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting4()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting4()));
         }
-        if(exToDto(exhibition.getPainting5()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting5()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting5()));
         }
-        if(exToDto(exhibition.getPainting6()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting6()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting6()));
         }
-        if(exToDto(exhibition.getPainting7()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting7()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting7()));
         }
-        if(exToDto(exhibition.getPainting8()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting8()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting8()));
         }
-        if(exToDto(exhibition.getPainting9()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting9()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting9()));
         }
-        if(exToDto(exhibition.getPainting10()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting10()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting10()));
         }
-
-
 
         return res;
 
     }
-    public List<ExhibitionResponseDto> getOtherExhi(String roomCode){
+
+    public List<ExhibitionResponseDto> getOtherExhi(String roomCode) {
 
         Optional<Member> member = memberRepository.findByRoomCode(roomCode);
         Exhibition exhibition = exhibitionRepository.findByMember(member.get());
         List<ExhibitionResponseDto> res = new ArrayList<>();
 
-        if(exToDto(exhibition.getPainting1()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting1()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting1()));
         }
-        if(exToDto(exhibition.getPainting2()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting2()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting2()));
         }
-        if(exToDto(exhibition.getPainting3()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting3()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting3()));
         }
-        if(exToDto(exhibition.getPainting4()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting4()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting4()));
         }
-        if(exToDto(exhibition.getPainting5()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting5()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting5()));
         }
-        if(exToDto(exhibition.getPainting6()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting6()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting6()));
         }
-        if(exToDto(exhibition.getPainting7()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting7()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting7()));
         }
-        if(exToDto(exhibition.getPainting8()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting8()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting8()));
         }
-        if(exToDto(exhibition.getPainting9()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting9()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting9()));
         }
-        if(exToDto(exhibition.getPainting10()).getPaintingId()!=-1){
+        if (exToDto(exhibition.getPainting10()).getPaintingId() != -1) {
             res.add(exToDto(exhibition.getPainting10()));
         }
-
-
 
         return res;
 
     }
 
 
-
-
-
-
-    public int outExhi(int paintingId,String kakaoId){
+    public int outExhi(int paintingId, String kakaoId) {
 
         Member member = memberRepository.findByKakaoId(kakaoId);
         Exhibition exhibition = exhibitionRepository.findByMember(member);
 
         int flag = 0;
-        if(exhibition.getPainting1()!=null && exhibition.getPainting1().getId() == paintingId) {
+        if (exhibition.getPainting1() != null && exhibition.getPainting1().getId() == paintingId) {
             exhibition.setPainting1(null);
-        } else if (exhibition.getPainting2()!=null && exhibition.getPainting2().getId() == paintingId) {
+        } else if (exhibition.getPainting2() != null
+            && exhibition.getPainting2().getId() == paintingId) {
             exhibition.setPainting2(null);
-        } else if (exhibition.getPainting3()!=null &&exhibition.getPainting3().getId() == paintingId) {
+        } else if (exhibition.getPainting3() != null
+            && exhibition.getPainting3().getId() == paintingId) {
             exhibition.setPainting3(null);
-        } else if (exhibition.getPainting4()!=null &&exhibition.getPainting4().getId() == paintingId) {
+        } else if (exhibition.getPainting4() != null
+            && exhibition.getPainting4().getId() == paintingId) {
             exhibition.setPainting4(null);
-        } else if (exhibition.getPainting5()!=null &&exhibition.getPainting5().getId() == paintingId) {
+        } else if (exhibition.getPainting5() != null
+            && exhibition.getPainting5().getId() == paintingId) {
             exhibition.setPainting5(null);
-        } else if (exhibition.getPainting6()!=null &&exhibition.getPainting6().getId() == paintingId) {
+        } else if (exhibition.getPainting6() != null
+            && exhibition.getPainting6().getId() == paintingId) {
             exhibition.setPainting6(null);
-        } else if (exhibition.getPainting7()!=null &&exhibition.getPainting7().getId() == paintingId) {
+        } else if (exhibition.getPainting7() != null
+            && exhibition.getPainting7().getId() == paintingId) {
             exhibition.setPainting7(null);
-        } else if (exhibition.getPainting8()!=null &&exhibition.getPainting8().getId() == paintingId) {
+        } else if (exhibition.getPainting8() != null
+            && exhibition.getPainting8().getId() == paintingId) {
             exhibition.setPainting8(null);
-        } else if (exhibition.getPainting9()!=null &&exhibition.getPainting9().getId() == paintingId) {
+        } else if (exhibition.getPainting9() != null
+            && exhibition.getPainting9().getId() == paintingId) {
             exhibition.setPainting9(null);
-        } else if (exhibition.getPainting10()!=null &&exhibition.getPainting10().getId() == paintingId) {
+        } else if (exhibition.getPainting10() != null
+            && exhibition.getPainting10().getId() == paintingId) {
             exhibition.setPainting10(null);
         } else {
             flag = 1;
         }
 
-        if(flag == 0){
+        if (flag == 0) {
             exhibitionRepository.save(exhibition);
         }
         return flag;

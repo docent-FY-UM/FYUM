@@ -1,6 +1,5 @@
 package com.example.fyum.config;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
@@ -12,16 +11,20 @@ public class KakaoProfile {
     public KakaoAccount kakao_account;
 
     @Data
-    public class Properties { //(1)
+    public class Properties {
+
         public String nickname;
     }
 
     @Data
-    public class KakaoAccount { //(2)
+    public class KakaoAccount {
+
         public Boolean profile_nickname_needs_agreement;
         public Profile profile;
+
         @Data
         public class Profile {
+
             public String nickname;
         }
     }

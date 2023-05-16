@@ -73,7 +73,6 @@ public class CurationService {
 
         String endpoint_url = "https://api.imagga.com/v2/tags";
 
-
         String url = endpoint_url + "?image_url=" + image_url;
         URL urlObject = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
@@ -82,17 +81,12 @@ public class CurationService {
 
         int responseCode = connection.getResponseCode();
 
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
-
         BufferedReader connectionInput = new BufferedReader(
             new InputStreamReader(connection.getInputStream()));
 
         String jsonResponse = connectionInput.readLine();
 
         connectionInput.close();
-
-        System.out.println(jsonResponse);
 
         JsonElement element = parser.parse(jsonResponse);
         JsonArray a = element.getAsJsonObject().get("result").getAsJsonObject().get("tags")
@@ -106,11 +100,9 @@ public class CurationService {
                     + "}, ");
         }
         sb.append("]");
-        System.out.println(sb.toString());
 
         String curation = gptgo(description + sb.toString());
 
-        // 저장
         if (dtype.equals("MD")) {
             myDrawing.setCuration(curation);
             myDrawingRepository.save(myDrawing);
@@ -123,7 +115,6 @@ public class CurationService {
 
 
     String gptgo(String gogogo) {
-        System.out.println(gogogo);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -145,20 +136,16 @@ public class CurationService {
         ArrayList al = (ArrayList) response.getBody().get("choices");
         LinkedHashMap<String, String> lhm = (LinkedHashMap<String, String>) al.get(0);
         String tt = lhm.get("text");
-        System.out.println(lhm.get("text"));
 
         String apiKey = googleKey;
-        // Translate 인스턴스를 만듭니다.
+
         Translate translate = TranslateOptions.newBuilder().setApiKey(apiKey).build().getService();
 
-        // 번역할 텍스트를 지정합니다.
         String text = tt;
 
-        // 번역할 언어와 번역될 언어를 지정합니다.
         String sourceLanguage = "en";
         String targetLanguage = "ko";
 
-        // Translation 객체를 만들어서 번역을 실행합니다.
         Translation translation = translate.translate(text,
             Translate.TranslateOption.sourceLanguage(sourceLanguage),
             Translate.TranslateOption.targetLanguage(targetLanguage));
@@ -166,7 +153,7 @@ public class CurationService {
         String resultText = translation.getTranslatedText();
         resultText = resultText.replace("&quot;", "");
         resultText = resultText.replace("&#39;", "");
-        // 번역된 결과를 출력합니다.
+
         return resultText;
     }
 

@@ -15,24 +15,32 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/exhibitions")
 public class ExhibitionController {
+
     private final ExhibitionService exhibitionService;
+
     @PostMapping("")
-    public ResponseEntity<Integer> postExhibitions(@RequestBody ExhibitionRequestDto dto, Authentication authentication){
-        return ResponseEntity.ok(exhibitionService.postExhibition(authentication.getName(),dto.getPaintingId()));
+    public ResponseEntity<Integer> postExhibitions(@RequestBody ExhibitionRequestDto dto,
+        Authentication authentication) {
+        return ResponseEntity.ok(
+            exhibitionService.postExhibition(authentication.getName(), dto.getPaintingId()));
     }
+
     @PutMapping("")
-    public ResponseEntity outExhibitions(@RequestBody ExhibitionRequestDto dto, Authentication authentication){
+    public ResponseEntity outExhibitions(@RequestBody ExhibitionRequestDto dto,
+        Authentication authentication) {
         exhibitionService.outExhi(dto.getPaintingId(), authentication.getName());
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ExhibitionResponseDto>> getExhibition(Authentication authentication){
+    public ResponseEntity<List<ExhibitionResponseDto>> getExhibition(
+        Authentication authentication) {
         return ResponseEntity.ok(exhibitionService.getExhi(authentication.getName()));
     }
 
     @GetMapping("/Other/{roomCode}")
-    public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(@PathVariable String roomCode){
+    public ResponseEntity<List<ExhibitionResponseDto>> getOtherExhibition(
+        @PathVariable String roomCode) {
         return ResponseEntity.ok(exhibitionService.getOtherExhi(roomCode));
     }
 

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Wishlist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")
@@ -24,11 +25,11 @@ public class Wishlist {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="painting_id")
+    @JoinColumn(name = "painting_id")
     private Masterpiece masterpiece;
 
     @Builder
-    public Wishlist(Member member , Masterpiece masterpiece) {
+    public Wishlist(Member member, Masterpiece masterpiece) {
         this.member = member;
         this.masterpiece = masterpiece;
     }

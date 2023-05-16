@@ -18,19 +18,20 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Getter
 public class MyDrawing extends Painting {
+
     private String title;
     private String curation;
     private String description;
 
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
 
     @Builder
-    public MyDrawing(Member member, String title, String description, String curation){
+    public MyDrawing(Member member, String title, String description, String curation) {
         this.member = member;
-        this.title =title;
+        this.title = title;
         this.description = description;
         this.curation = curation;
     }

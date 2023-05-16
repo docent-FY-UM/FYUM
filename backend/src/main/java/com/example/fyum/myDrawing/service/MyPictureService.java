@@ -12,7 +12,6 @@ import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.myDrawing.dto.MyDrawingDetailDto;
 import com.example.fyum.myDrawing.dto.MyDrawingRequestDto;
 import com.example.fyum.myDrawing.dto.MyDrawingResponseDto;
-import com.example.fyum.myDrawing.entity.MyDrawing;
 import com.example.fyum.myDrawing.entity.MyPicture;
 import com.example.fyum.myDrawing.repository.MyDrawingRepository;
 import com.example.fyum.myDrawing.repository.MyPictureRepository;
@@ -26,6 +25,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class MyPictureService {
+
     private final MyDrawingRepository myDrawingRepository;
 
     private final MyPictureRepository myPictureRepository;
@@ -46,36 +46,30 @@ public class MyPictureService {
     @Value("${perfixS3}")
     private String perfix;
 
-    public MyDrawingResponseDto saveMyPicture(MyDrawingRequestDto dto, String kakaoId){
+    public MyDrawingResponseDto saveMyPicture(MyDrawingRequestDto dto, String kakaoId) {
 
         Member member = memberRepository.findByKakaoId(kakaoId);
 
-
         MyPicture myPicture = MyPicture.builder()
-                .title(dto.getTitle())
-                .description(dto.getDescription())
-                .member(member)
-                .build();
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .member(member)
+            .build();
 
-
-        // base64 문자열로부터 이미지 데이터 디코딩
         byte[] imageBytes = Base64.getDecoder().decode(dto.getImg());
 
-        // S3 객체 메타 데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("image/png"); // 이미지 타입 설정
+        metadata.setContentType("image/png");
         metadata.setContentLength(imageBytes.length);
 
+        String filename = UUID.randomUUID().toString() + ".png";
 
-        String filename = UUID.randomUUID().toString()+".png";
-        // S3 객체 업로드 요청 생성
-        PutObjectRequest request = new PutObjectRequest(bucket, filename, new ByteArrayInputStream(imageBytes), metadata);
+        PutObjectRequest request = new PutObjectRequest(bucket, filename,
+            new ByteArrayInputStream(imageBytes), metadata);
 
-        // S3 객체 업로드 요청 전송
         amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
-
-        myPicture.setImgSrc(perfix+filename);
+        myPicture.setImgSrc(perfix + filename);
         int pId = myPictureRepository.save(myPicture).getId();
 
         new Thread(() -> {
@@ -86,26 +80,23 @@ public class MyPictureService {
             }
         }).start();
 
-
         MyDrawingResponseDto resdto = new MyDrawingResponseDto();
         resdto.setPaintingId(pId);
-        resdto.setImgSrc(perfix+filename);
+        resdto.setImgSrc(perfix + filename);
 
-
-        //사진은 저장하자마자 전시회 등록
-        exhibitionService.postExhibition(kakaoId,pId);
+        exhibitionService.postExhibition(kakaoId, pId);
 
         return resdto;
 
     }
 
-    public List<MyDrawingResponseDto> getMyPicture(String kakaoId){
+    public List<MyDrawingResponseDto> getMyPicture(String kakaoId) {
         Member member = memberRepository.findByKakaoId(kakaoId);
 
         List<MyPicture> temp = myPictureRepository.findByMember(member);
 
         List<MyDrawingResponseDto> res = new ArrayList<>();
-        for(int i = 0; i< temp.size(); i++){
+        for (int i = 0; i < temp.size(); i++) {
             MyPicture md = temp.get(i);
             MyDrawingResponseDto dto = new MyDrawingResponseDto();
             dto.setImgSrc(md.getImgSrc());
@@ -116,11 +107,11 @@ public class MyPictureService {
         return res;
     }
 
-    public MyDrawingDetailDto getDetail(int paintingId, String kakaoId){
+    public MyDrawingDetailDto getDetail(int paintingId, String kakaoId) {
 
-        Member member =memberRepository.findByKakaoId(kakaoId);
+        Member member = memberRepository.findByKakaoId(kakaoId);
 
-        MyPicture temp =myPictureRepository.findByMemberAndId(member,paintingId);
+        MyPicture temp = myPictureRepository.findByMemberAndId(member, paintingId);
 
         MyDrawingDetailDto res = new MyDrawingDetailDto();
         res.setImgSrc(temp.getImgSrc());
@@ -128,28 +119,23 @@ public class MyPictureService {
         res.setTitle(temp.getTitle());
         res.setDiscription(temp.getDescription());
         res.setCuration(temp.getCuration());
-        res.setExhibitionStatus(exhibitionRepository.existsByMemberIdAndMyPictureIdx(member,temp));
-
+        res.setExhibitionStatus(exhibitionRepository.existsByMemberIdAndMyPictureIdx(member, temp));
 
         return res;
 
     }
 
-    public void deleteMyPicture(int paintingId, String kakaoId){
-        Member member =memberRepository.findByKakaoId(kakaoId);
+    public void deleteMyPicture(int paintingId, String kakaoId) {
+        Member member = memberRepository.findByKakaoId(kakaoId);
 
-        //전시회에서 내리기
         exhibitionService.outExhi(paintingId, kakaoId);
-        //목록에서 지우기
+
         Optional<MyPicture> temp = myPictureRepository.findById(paintingId);
         String fileNameArr = temp.get().getImgSrc();
-        String [] arr = fileNameArr.split("/");
+        String[] arr = fileNameArr.split("/");
         String fileName = arr[3];
 
-
         myPictureRepository.deleteById(paintingId);
-        //이미지도 삭제
-
 
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
 

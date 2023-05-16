@@ -27,30 +27,31 @@ public class SecurityConfig {
     private String key;
 
     private final ObjectMapper objectMapper;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .httpBasic().disable()
-                .csrf().disable()
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
-                .authorizeRequests()
-//                .antMatchers("/**").permitAll()
-                .antMatchers("/members/oauth/token").permitAll()
-                .anyRequest().authenticated()
+            .httpBasic().disable()
+            .csrf().disable()
+            .cors().configurationSource(corsConfigurationSource())
+            .and()
+            .authorizeRequests()
+            .antMatchers("/members/oauth/token").permitAll()
+            .anyRequest().authenticated()
 
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                .and()
-                .addFilterBefore(new JwtFilter(memberService, key), UsernamePasswordAuthenticationFilter.class)
+            .and()
+            .addFilterBefore(new JwtFilter(memberService, key),
+                UsernamePasswordAuthenticationFilter.class)
 
-                .build();
+            .build();
     }
 
     @Bean

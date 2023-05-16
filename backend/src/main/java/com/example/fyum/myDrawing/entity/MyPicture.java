@@ -25,14 +25,14 @@ public class MyPicture extends Painting {
     private String description;
 
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
 
     @Builder
-    public MyPicture(Member member, String title, String description, String curation){
+    public MyPicture(Member member, String title, String description, String curation) {
         this.member = member;
-        this.title =title;
+        this.title = title;
         this.description = description;
         this.curation = curation;
     }

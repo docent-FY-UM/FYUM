@@ -55,21 +55,17 @@ public class MyDrawingService {
             .member(member)
             .build();
 
-        // base64 문자열로부터 이미지 데이터 디코딩
         byte[] imageBytes = Base64.getDecoder().decode(dto.getImg());
 
-        // S3 객체 메타 데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("image/png"); // 이미지 타입 설정
         metadata.setContentLength(imageBytes.length);
 
         String filename = UUID.randomUUID().toString() + ".png";
-        // S3 객체 업로드 요청 생성
+
         PutObjectRequest request = new PutObjectRequest(bucket, filename,
             new ByteArrayInputStream(imageBytes), metadata);
 
-
-        // S3 객체 업로드 요청 전송
         amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
         myDrawing.setImgSrc(perfix + filename);
@@ -129,16 +125,14 @@ public class MyDrawingService {
     public void deleteMyDrawing(int paintingId, String kakaoId) {
         Member member = memberRepository.findByKakaoId(kakaoId);
 
-        //전시회에서 내리기
         exhibitionService.outExhi(paintingId, kakaoId);
-        //목록에서 지우기
+
         Optional<MyDrawing> temp = myDrawingRepository.findById(paintingId);
         String fileNameArr = temp.get().getImgSrc();
         String[] arr = fileNameArr.split("/");
         String fileName = arr[3];
 
         myDrawingRepository.deleteById(paintingId);
-        //이미지도 삭제
 
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
 
@@ -150,26 +144,21 @@ public class MyDrawingService {
         Member member = memberRepository.findByKakaoId(kakaoId);
 
         MyDrawing myDrawing = MyDrawing.builder()
-                .title("같이 그린 그림")
-                .description("모두가 함꼐 그린 그림이에요")
-                .member(member)
-                .build();
+            .title("같이 그린 그림")
+            .description("모두가 함꼐 그린 그림이에요")
+            .member(member)
+            .build();
 
-        // base64 문자열로부터 이미지 데이터 디코딩
         byte[] imageBytes = Base64.getDecoder().decode(base64);
 
-        // S3 객체 메타 데이터 설정
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("image/png"); // 이미지 타입 설정
+        metadata.setContentType("image/png");
         metadata.setContentLength(imageBytes.length);
 
         String filename = UUID.randomUUID().toString() + ".png";
-        // S3 객체 업로드 요청 생성
         PutObjectRequest request = new PutObjectRequest(bucket, filename,
-                new ByteArrayInputStream(imageBytes), metadata);
+            new ByteArrayInputStream(imageBytes), metadata);
 
-
-        // S3 객체 업로드 요청 전송
         amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
 
         myDrawing.setImgSrc(perfix + filename);
@@ -187,9 +176,7 @@ public class MyDrawingService {
         resdto.setPaintingId(pId);
         resdto.setImgSrc(perfix + filename);
 
-        exhibitionService.postExhibitionTen(kakaoId,pId);
-
-
+        exhibitionService.postExhibitionTen(kakaoId, pId);
 
         return resdto;
 

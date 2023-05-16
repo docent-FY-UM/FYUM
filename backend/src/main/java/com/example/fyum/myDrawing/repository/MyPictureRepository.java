@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface MyPictureRepository extends JpaRepository<MyPicture, Integer> {
+
     List<MyPicture> findByMember(Member member);
-    MyPicture findByMemberAndId(Member member,int Id);
+
+    MyPicture findByMemberAndId(Member member, int Id);
 }

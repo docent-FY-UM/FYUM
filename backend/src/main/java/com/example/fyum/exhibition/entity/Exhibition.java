@@ -22,6 +22,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Exhibition extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")

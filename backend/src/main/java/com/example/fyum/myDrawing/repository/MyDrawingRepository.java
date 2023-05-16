@@ -11,5 +11,6 @@ import java.util.List;
 public interface MyDrawingRepository extends JpaRepository<MyDrawing, Integer> {
 
     List<MyDrawing> findByMember(Member member);
-    MyDrawing findByMemberAndId(Member member,int Id);
+
+    MyDrawing findByMemberAndId(Member member, int Id);
 }

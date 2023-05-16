@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 @Data
 @NoArgsConstructor
 public class PainterListDto {
+
     private int id;
     private String painterKr;
     private String painterOrigin;

@@ -1,7 +1,7 @@
 package com.example.fyum.wishlist.service;
 
 
-import com.example.fyum.config.Painting;
+
 import com.example.fyum.masterpiece.entity.Masterpiece;
 import com.example.fyum.masterpiece.repository.MasterpieceRepository;
 import com.example.fyum.masterpiece.repository.PaintingRepository;
@@ -29,31 +29,30 @@ public class WishlistService {
     private final WishlistRepository wishlistRepository;
     private final PaintingRepository paintingRepository;
 
-    public void postWishlist(int paintingId, String kakaoId){
+    public void postWishlist(int paintingId, String kakaoId) {
 
         Member member = memberRepository.findByKakaoId(kakaoId);
 
         Optional<Masterpiece> masterpiece = masterpieceRepository.findById(paintingId);
 
         Wishlist wishlist = Wishlist.builder()
-                            .member(member)
-                            .masterpiece(masterpiece.get())
-                            .build();
+            .member(member)
+            .masterpiece(masterpiece.get())
+            .build();
         wishlistRepository.save(wishlist);
     }
 
-    public void deleteWishlist(int paintingId, String kakaoId){
+    public void deleteWishlist(int paintingId, String kakaoId) {
 
         Member member = memberRepository.findByKakaoId(kakaoId);
         Optional<Masterpiece> masterpieceOptional = masterpieceRepository.findById(paintingId);
         Masterpiece masterpiece = masterpieceOptional.get();
 
-
-        wishlistRepository.deleteByMemberAndMasterpiece(member,masterpiece);
+        wishlistRepository.deleteByMemberAndMasterpiece(member, masterpiece);
 
     }
 
-    public List<WishlistResponseDto> getWishList (String kakaoId){
+    public List<WishlistResponseDto> getWishList(String kakaoId) {
 
         List<WishlistResponseDto> res = new ArrayList<>();
 
@@ -61,13 +60,13 @@ public class WishlistService {
 
         List<Wishlist> temp = wishlistRepository.findByMember(member);
 
-        for(int i = 0; i < temp.size(); i++){
+        for (int i = 0; i < temp.size(); i++) {
             WishlistResponseDto dto = new WishlistResponseDto();
             Masterpiece Ent = temp.get(i).getMasterpiece();
             dto.setPaintingId(Ent.getId());
-            if(Ent.getTitleOrigin() == null){
+            if (Ent.getTitleOrigin() == null) {
                 dto.setTitle(Ent.getTitleKr());
-            }else {
+            } else {
                 dto.setTitle(Ent.getTitleOrigin());
             }
             dto.setImgSrc(Ent.getImgSrc());
@@ -78,7 +77,6 @@ public class WishlistService {
         return res;
 
     }
-
 
 
 }

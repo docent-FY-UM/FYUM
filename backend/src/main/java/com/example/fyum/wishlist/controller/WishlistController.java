@@ -18,19 +18,21 @@ public class WishlistController {
     private final WishlistService wishlistService;
 
     @PostMapping("/{paintingId}")
-    public ResponseEntity postWishList(@PathVariable int paintingId, Authentication authentication){
-        wishlistService.postWishlist(paintingId,authentication.getName());
+    public ResponseEntity postWishList(@PathVariable int paintingId,
+        Authentication authentication) {
+        wishlistService.postWishlist(paintingId, authentication.getName());
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/{paintingId}")
-    public ResponseEntity deleteWishList(@PathVariable int paintingId, Authentication authentication){
-        wishlistService.deleteWishlist(paintingId,authentication.getName());
+    public ResponseEntity deleteWishList(@PathVariable int paintingId,
+        Authentication authentication) {
+        wishlistService.deleteWishlist(paintingId, authentication.getName());
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<WishlistResponseDto>> getWishList(Authentication authentication){
+    public ResponseEntity<List<WishlistResponseDto>> getWishList(Authentication authentication) {
         return ResponseEntity.ok(wishlistService.getWishList(authentication.getName()));
     }
 

@@ -2,11 +2,9 @@ package com.example.fyum.recommend.service;
 
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.recommend.dto.RecommendResponseDto;
-import com.example.fyum.recommend.dto.SurveyResopnseDto;
 import com.example.fyum.recommend.entity.Recommend;
 import com.example.fyum.recommend.repository.RecommendRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +14,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class RecommendService {
+
     private final RecommendRepository recommendRepository;
     private final MemberRepository memberRepository;
-    public List<RecommendResponseDto> getRecommends(String kakaoId){
+
+    public List<RecommendResponseDto> getRecommends(String kakaoId) {
         int id = memberRepository.findByKakaoId(kakaoId).getId();
         Optional<Recommend> temp = recommendRepository.findById(id);
         List<RecommendResponseDto> res = new ArrayList<>();

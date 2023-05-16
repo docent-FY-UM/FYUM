@@ -15,7 +15,8 @@ public class SurveyAnswerService {
     final private SurveyAnswerRepository surveyAnswerRepository;
 
     final private MemberRepository memberRepository;
-    public void postServeyAnswer(List<Integer> choosed,String kakaoid){
+
+    public void postServeyAnswer(List<Integer> choosed, String kakaoid) {
         SurveyAnswer temp = new SurveyAnswer();
         temp.setMember(memberRepository.findByKakaoId(kakaoid));
         temp.setRes1(choosed.get(0));

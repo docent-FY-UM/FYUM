@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class SurveyResopnseDto {
+
     private int paintingId;
 
     private String imgSrc;

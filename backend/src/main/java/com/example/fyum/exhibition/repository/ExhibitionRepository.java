@@ -15,17 +15,16 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
     Exhibition findByMember(Member member);
 
     @Query("SELECT count(e.id) > 0 FROM Exhibition e "
-            + "WHERE e.member = :member "
-            + "AND ((e.painting1 = :mydrawing) OR (e.painting2 = :mydrawing) "
-            + "OR (e.painting3 = :mydrawing) OR (e.painting4 = :mydrawing) "
-            + "OR (e.painting5 = :mydrawing) OR (e.painting6 = :mydrawing) "
-            + "OR (e.painting7 = :mydrawing) OR (e.painting8 = :mydrawing) "
-            + "OR (e.painting9 = :mydrawing) OR (e.painting10 = :mydrawing))")
+        + "WHERE e.member = :member "
+        + "AND ((e.painting1 = :mydrawing) OR (e.painting2 = :mydrawing) "
+        + "OR (e.painting3 = :mydrawing) OR (e.painting4 = :mydrawing) "
+        + "OR (e.painting5 = :mydrawing) OR (e.painting6 = :mydrawing) "
+        + "OR (e.painting7 = :mydrawing) OR (e.painting8 = :mydrawing) "
+        + "OR (e.painting9 = :mydrawing) OR (e.painting10 = :mydrawing))")
     Boolean existsByMemberIdAndMyDrawingIdx(Member member, MyDrawing mydrawing);
 
 
-
-     @Query("SELECT count(e.id) > 0 FROM Exhibition e "
+    @Query("SELECT count(e.id) > 0 FROM Exhibition e "
         + "WHERE e.member = :member "
         + "AND ((e.painting1 = :masterpiece) OR (e.painting2 = :masterpiece) "
         + "OR (e.painting3 = :masterpiece) OR (e.painting4 = :masterpiece) "
@@ -35,14 +34,13 @@ public interface ExhibitionRepository extends JpaRepository<Exhibition, Integer>
     Boolean existsByMemberIdAndPaintingIdx(Member member, Masterpiece masterpiece);
 
     @Query("SELECT count(e.id) > 0 FROM Exhibition e "
-            + "WHERE e.member = :member "
-            + "AND ((e.painting1 = :mypicture) OR (e.painting2 = :mypicture) "
-            + "OR (e.painting3 = :mypicture) OR (e.painting4 = :mypicture) "
-            + "OR (e.painting5 = :mypicture) OR (e.painting6 = :mypicture) "
-            + "OR (e.painting7 = :mypicture) OR (e.painting8 = :mypicture) "
-            + "OR (e.painting9 = :mypicture) OR (e.painting10 = :mypicture))")
+        + "WHERE e.member = :member "
+        + "AND ((e.painting1 = :mypicture) OR (e.painting2 = :mypicture) "
+        + "OR (e.painting3 = :mypicture) OR (e.painting4 = :mypicture) "
+        + "OR (e.painting5 = :mypicture) OR (e.painting6 = :mypicture) "
+        + "OR (e.painting7 = :mypicture) OR (e.painting8 = :mypicture) "
+        + "OR (e.painting9 = :mypicture) OR (e.painting10 = :mypicture))")
     Boolean existsByMemberIdAndMyPictureIdx(Member member, MyPicture mypicture);
-
 
 
 }

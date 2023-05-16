@@ -119,13 +119,16 @@ public class MasterpieceService {
         String dtype = paintingRepository.selectSQLById(paintingId);
         String description = null;
         if (dtype.equals("MP")) {
-            Masterpiece masterpiece = masterpieceRepository.findById(paintingId).get();
+            Masterpiece masterpiece = masterpieceRepository.findById(paintingId)
+                .orElseThrow(NullPointerException::new);
             description = getShortDescription(masterpiece.getDescription());
         } else if (dtype.equals("MD")) {
-            MyDrawing myDrawing = myDrawingRepository.findById(paintingId).get();
+            MyDrawing myDrawing = myDrawingRepository.findById(paintingId)
+                .orElseThrow(NullPointerException::new);
             description = getShortDescription(myDrawing.getCuration());
         } else {
-            MyPicture myPicture = myPictureRepository.findById(paintingId).get();
+            MyPicture myPicture = myPictureRepository.findById(paintingId)
+                .orElseThrow(NullPointerException::new);
             description = getShortDescription(myPicture.getCuration());
         }
 
@@ -165,7 +168,7 @@ public class MasterpieceService {
                 return Base64.getEncoder().encodeToString(bytesArr);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         return null;

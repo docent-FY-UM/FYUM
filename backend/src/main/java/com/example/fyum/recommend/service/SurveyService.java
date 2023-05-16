@@ -6,7 +6,6 @@ import com.example.fyum.recommend.dto.SurveyResopnseDto;
 import com.example.fyum.recommend.entity.Survey;
 import com.example.fyum.recommend.repository.SurveyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,10 +18,11 @@ public class SurveyService {
 
     private final SurveyRepository surveyRepository;
     private final MasterpieceRepository masterpieceRepository;
-    public List<SurveyResopnseDto> getSurvey(){
+
+    public List<SurveyResopnseDto> getSurvey() {
         List<Survey> rlist = surveyRepository.findAll();
         List<SurveyResopnseDto> list = new ArrayList<>();
-        for(int i = 0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
             SurveyResopnseDto temp = new SurveyResopnseDto();
             Optional<Masterpiece> mp = masterpieceRepository.findById(rlist.get(i).getPainting());
             temp.setImgSrc(mp.get().getImgSrc());

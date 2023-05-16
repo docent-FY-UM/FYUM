@@ -94,15 +94,13 @@ public class MemberService {
         HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest =
                 new HttpEntity<>(headers);
 
-        // Http 요청 (POST 방식) 후, response 변수에 응답을 받음
+
         ResponseEntity<String> kakaoProfileResponse = rt.exchange(
                 "https://kapi.kakao.com/v2/user/me",
                 HttpMethod.POST,
                 kakaoProfileRequest,
                 String.class
         );
-
-        System.out.println(kakaoProfileResponse.getBody());///
 
         ObjectMapper objectMapper = new ObjectMapper();
         KakaoProfile kakaoProfile = null;
@@ -116,7 +114,7 @@ public class MemberService {
         return kakaoProfile;
     }
 
-    //맴버 저장하고 jwt 토큰 생성
+
     public String saveMemberAndGetToken(String token) {
         KakaoProfile profile = showprofile(token);
 
