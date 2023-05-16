@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { RootState } from "../../store";
 import { surveySubmitApi } from "../../store/api";
 import { changeSurvey } from "../../store/userSlice";
+
 import {
   BackgroundContainer,
   SurveyContainer,
@@ -13,6 +16,7 @@ import {
   NextText,
   RightArrowIcStyle,
 } from "./styles";
+
 import art_1 from "../../assets/images/survey/1.jpg";
 import art_2 from "../../assets/images/survey/2.jpg";
 import art_3 from "../../assets/images/survey/3.jpg";
@@ -28,7 +32,15 @@ const SurveyPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { survey } = useSelector((state: RootState) => state.user);
   const [choosed, setChoosed] = useState<number[]>([]);
+
+  // 설문조사가 완료된 경우 Recommendation으로 이동시키기
+  useEffect(() => {
+    if (survey) {
+      navigate("/recommend");
+    }
+  }, []);
 
   const handleClick = (artworkNum: number) => {
     if (choosed.length < 2) {

@@ -67,7 +67,6 @@ const ExhibitionList = () => {
     });
   };
 
-
   return (
     <>
       <ImageContainer className="artlist exhibition-list" ref={scrollRef}>

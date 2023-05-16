@@ -45,10 +45,10 @@ const Modal = () => {
               <span>{content}</span>
             </ModalContents>
             <ModalFooter>
-              <ModalBtn onClick={closeModal}>
-                <span>취소</span>
+              <ModalBtn onClick={callback}>
+                <span>돌아가기</span>
               </ModalBtn>
-              <ModalYesBtn onClick={callback}>
+              <ModalYesBtn onClick={closeModal}>
                 <span>확인</span>
               </ModalYesBtn>
             </ModalFooter>

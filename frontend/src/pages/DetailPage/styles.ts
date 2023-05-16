@@ -201,30 +201,29 @@ export const MuteIcStyle = styled(MuteIc)`
 
 export const DescriptionBtn = styled.div`
   position: absolute;
-  bottom: 1vw;
-  left: 2vw;
+  bottom: 10px;
+  left: 30px;
 
   &:hover {
     cursor: pointer;
-  }
-
-  @media (max-width: 768px) {
-    left: 7vw;
-    bottom: 1.5vh;
   }
 `;
 
 export const DescriptionP = styled.p<{ info?: boolean }>`
   color: ${(props) => (props.info ? `${black}` : `${white}`)};
   font-family: "SUIT";
-  font-size: 1.5vw;
+  font-size: 21px;
   font-weight: 800;
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const MarkContainer = styled.div`
   position: absolute;
-  bottom: 1vw;
-  right: 2.6vw;
+  bottom: 20px;
+  right: 30px;
   display: flex;
   align-items: start;
 
@@ -232,15 +231,10 @@ export const MarkContainer = styled.div`
     display: flex;
     align-items: center;
   }
-
-  @media (max-width: 768px) {
-    bottom: 0.5vh;
-    right: 7vw;
-  }
 `;
 
 export const EmptyFrameIcStyle = styled(EmptyFrame)<{ locate?: string }>`
-  width: 1.5vw;
+  width: 25px;
   fill: ${white};
   margin-right: 10px;
   cursor: pointer;
@@ -249,46 +243,43 @@ export const EmptyFrameIcStyle = styled(EmptyFrame)<{ locate?: string }>`
   position: relative;
 
   @media (max-width: 768px) {
-    width: 3vw;
-    margin-right: 2vw;
+    width: 20px;
   }
 `;
 
 export const FullFrameIcStyle = styled(FullFrame)<{ locate?: string }>`
-  width: 1.5vw;
+  width: 25px;
   margin-right: 10px;
   cursor: pointer;
   visibility: ${(props) => (props.locate === "picture" ? "hidden" : "")};
 
   @media (max-width: 768px) {
-    width: 3vw;
-    margin-right: 2vw;
+    width: 20px;
   }
 `;
 
 export const EmptyHeartIcStyle = styled(EmptyHeart)`
-  width: 1.8vw;
-  height: 2.7vw;
+  width: 27px;
+  height: 27px;
   fill: ${white};
   cursor: pointer;
   align-self: center;
 
   @media (max-width: 768px) {
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 22px;
+    height: 22px;
   }
 `;
 
 export const FullHeartIcStyle = styled(FullHeart)`
-  width: 1.8vw;
-  height: 2.7vw;
+  width: 27px;
+  height: 27px;
   cursor: pointer;
   align-self: center;
 
   @media (max-width: 768px) {
-    width: 3.5vw;
-    height: 3.5vw;
-    margin-bottom: 2.6vw;
+    width: 22px;
+    height: 22px;
   }
 `;
 
