@@ -70,6 +70,13 @@ public class MemberController {
         return new ResponseEntity<>(roomCode,HttpStatus.OK);
     }
 
+    @PostMapping("/tokennum")
+    public ResponseEntity<Boolean> getIfRoomCodeSameToken(@RequestParam("num") String roomCode, @RequestParam("token") String token){
+        Boolean temp = memberService.ifRoomCodeSameTocken(roomCode,token);
+        return ResponseEntity.ok(temp);
+    }
+
+
 }
 
 

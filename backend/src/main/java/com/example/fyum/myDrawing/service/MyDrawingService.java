@@ -145,4 +145,54 @@ public class MyDrawingService {
 
     }
 
+    public MyDrawingResponseDto saveOurDrawing(String base64, String kakaoId) {
+
+        Member member = memberRepository.findByKakaoId(kakaoId);
+
+        MyDrawing myDrawing = MyDrawing.builder()
+                .title("같이 그린 그림")
+                .description("모두가 함꼐 그린 그림이에요")
+                .member(member)
+                .build();
+
+        // base64 문자열로부터 이미지 데이터 디코딩
+        byte[] imageBytes = Base64.getDecoder().decode(base64);
+
+        // S3 객체 메타 데이터 설정
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentType("image/png"); // 이미지 타입 설정
+        metadata.setContentLength(imageBytes.length);
+
+        String filename = UUID.randomUUID().toString() + ".png";
+        // S3 객체 업로드 요청 생성
+        PutObjectRequest request = new PutObjectRequest(bucket, filename,
+                new ByteArrayInputStream(imageBytes), metadata);
+
+
+        // S3 객체 업로드 요청 전송
+        amazonS3.putObject(request.withCannedAcl(CannedAccessControlList.PublicRead));
+
+        myDrawing.setImgSrc(perfix + filename);
+        int pId = myDrawingRepository.save(myDrawing).getId();
+
+        new Thread(() -> {
+            try {
+                curationService.getImagga(pId, "MD");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        MyDrawingResponseDto resdto = new MyDrawingResponseDto();
+        resdto.setPaintingId(pId);
+        resdto.setImgSrc(perfix + filename);
+
+        exhibitionService.postExhibitionTen(kakaoId,pId);
+
+
+
+        return resdto;
+
+    }
+
 }
