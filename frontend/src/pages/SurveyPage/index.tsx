@@ -87,52 +87,52 @@ const SurveyPage = () => {
         </SurveyTitle>
         <GridContainer>
           <ArtworkImg
-            src={art_1}
+            src={art_3}
             onClick={() => handleClick(1)}
             choosed={choosed.includes(1)}
           />
           <ArtworkImg
-            src={art_2}
+            src={art_238}
             onClick={() => handleClick(2)}
             choosed={choosed.includes(2)}
           />
           <ArtworkImg
-            src={art_3}
+            src={art_2}
             onClick={() => handleClick(3)}
             choosed={choosed.includes(3)}
           />
           <ArtworkImg
-            src={art_20}
+            src={art_225}
             onClick={() => handleClick(20)}
             choosed={choosed.includes(20)}
           />
           <ArtworkImg
-            src={art_53}
+            src={art_1}
             onClick={() => handleClick(53)}
             choosed={choosed.includes(53)}
           />
           <ArtworkImg
-            src={art_54}
+            src={art_53}
             onClick={() => handleClick(54)}
             choosed={choosed.includes(54)}
           />
           <ArtworkImg
-            src={art_147}
+            src={art_20}
             onClick={() => handleClick(147)}
             choosed={choosed.includes(147)}
           />
           <ArtworkImg
-            src={art_174}
+            src={art_147}
             onClick={() => handleClick(174)}
             choosed={choosed.includes(174)}
           />
           <ArtworkImg
-            src={art_225}
+            src={art_54}
             onClick={() => handleClick(225)}
             choosed={choosed.includes(225)}
           />
           <ArtworkImg
-            src={art_238}
+            src={art_174}
             onClick={() => handleClick(238)}
             choosed={choosed.includes(238)}
           />
