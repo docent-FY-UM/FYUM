@@ -137,8 +137,8 @@ const SurveyPage = () => {
             choosed={choosed.includes(238)}
           />
         </GridContainer>
-        <NextContainer>
-          <NextText onClick={sendSurvey}>Submit&nbsp;&nbsp;</NextText>
+        <NextContainer onClick={sendSurvey}>
+          <NextText>Submit&nbsp;&nbsp;</NextText>
           <RightArrowIcStyle />
         </NextContainer>
       </SurveyContainer>
