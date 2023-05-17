@@ -10,7 +10,6 @@ export const BackgroundContainer = styled.div`
   height: 100%;
   background-color: ${black};
   position: relative;
-  overflow-y: hidden;
 `;
 
 export const SurveyContainer = styled.div`
