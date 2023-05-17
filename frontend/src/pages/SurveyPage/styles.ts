@@ -6,7 +6,7 @@ interface artworkImgInfo {
   choosed: boolean;
 }
 export const BackgroundContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background-color: ${black};
   position: relative;
@@ -85,7 +85,7 @@ export const NextContainer = styled.div`
   justify-content: end;
   align-items: center;
   margin-left: 10%;
-  cursor: pointer;
+  background-color: ${black};
 
   @media (max-width: 768px) {
     margin-left: 8%;
@@ -96,6 +96,7 @@ export const NextContainer = styled.div`
 export const NextText = styled.p`
   color: ${white};
   font-size: 28px;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     font-size: 20px;
