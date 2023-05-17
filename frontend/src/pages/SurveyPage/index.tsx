@@ -12,7 +12,6 @@ import {
   SurveyTitle,
   GridContainer,
   ArtworkImg,
-  NextBackground,
   NextContainer,
   NextText,
   RightArrowIcStyle,
@@ -81,7 +80,6 @@ const SurveyPage = () => {
   };
 
   return (
-    <>
       <BackgroundContainer>
         <SurveyContainer>
           <SurveyTitle>
@@ -139,15 +137,12 @@ const SurveyPage = () => {
               choosed={choosed.includes(238)}
             />
           </GridContainer>
+          <NextContainer>
+            <NextText onClick={sendSurvey}>Submit&nbsp;&nbsp;</NextText>
+            <RightArrowIcStyle />
+          </NextContainer>
         </SurveyContainer>
       </BackgroundContainer>
-      <NextBackground>
-        <NextContainer>
-          <NextText onClick={sendSurvey}>Submit&nbsp;&nbsp;</NextText>
-          <RightArrowIcStyle />
-        </NextContainer>
-      </NextBackground>
-    </>
   );
 };
 

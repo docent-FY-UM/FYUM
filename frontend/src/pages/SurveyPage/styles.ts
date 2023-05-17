@@ -90,12 +90,19 @@ export const NextBackground = styled.div`
 `;
 
 export const NextContainer = styled.div`
+  margin-top: 30vh;
   width: 100%;
   display: flex;
   justify-content: end;
   align-items: center;
-`;
+  margin-left: 10%;
+  background-color: ${black};
 
+  @media (max-width: 768px) {
+    margin-left: 8%;
+    margin-top: 50vh;
+  }
+`;
 export const NextText = styled.p`
   color: ${white};
   font-size: 28px;
@@ -109,6 +116,8 @@ export const NextText = styled.p`
 export const RightArrowIcStyle = styled(RightArrowIc)`
   fill: ${white};
   width: 40px;
+  margin-left: -7px;
+  padding-top: 3px;
 
   @media (max-width: 768px) {
     margin-left: -5px;
