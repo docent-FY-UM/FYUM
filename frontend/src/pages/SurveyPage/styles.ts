@@ -10,6 +10,7 @@ export const BackgroundContainer = styled.div`
   height: 100%;
   background-color: ${black};
   position: relative;
+  overflow-y: hidden;
 `;
 
 export const SurveyContainer = styled.div`
@@ -22,6 +23,7 @@ export const SurveyContainer = styled.div`
 
   @media (max-width: 768px) {
     top: 11vh;
+    height: 65vh;
   }
 `;
 
@@ -78,31 +80,37 @@ export const ArtworkImg = styled.img<artworkImgInfo>`
 `;
 
 export const NextContainer = styled.div`
-  position: absolute;
+  margin-top: 30vh;
+  width: 100%;
   display: flex;
-  bottom: -5%;
-  right: -9%;
+  justify-content: end;
+  align-items: center;
+  margin-left: 10%;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    bottom: -20%;
-    right: -8%;
+    margin-left: 8%;
+    margin-top: 50vh;
   }
 `;
 
 export const NextText = styled.p`
-  margin: 0;
   color: ${white};
-  font-size: 2vw;
+  font-size: 28px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const RightArrowIcStyle = styled(RightArrowIc)`
   fill: ${white};
-  width: 3vw;
-  padding-top: 1vh;
+  width: 40px;
+  margin-left: -7px;
+  padding-top: 3px;
 
   @media (max-width: 768px) {
-    padding-top: 0;
-    width: 5vw;
+    margin-left: -5px;
+    width: 30px;
   }
 `;
