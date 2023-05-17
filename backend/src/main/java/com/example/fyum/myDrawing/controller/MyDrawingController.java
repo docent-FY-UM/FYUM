@@ -75,8 +75,8 @@ public class MyDrawingController {
 
     @PostMapping("/saveTen")
     public ResponseEntity<MyDrawingResponseDto> saveMyDrawingTen(
-        @RequestParam("base64") String base64, Authentication authentication) {
-        myDrawingService.saveOurDrawing(base64, authentication.getName());
+        @RequestParam("base64") String base64, @RequestParam("num") String roomCode) {
+        myDrawingService.saveOurDrawing(base64, roomCode);
         return new ResponseEntity(HttpStatus.OK);
     }
 

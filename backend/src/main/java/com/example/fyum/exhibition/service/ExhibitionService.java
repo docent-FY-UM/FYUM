@@ -257,7 +257,7 @@ public class ExhibitionService {
 
         Exhibition exhibition = exhibitionRepository.findByMember(member);
         int flag = 0;
-        exhibition.setPainting10(getEx(paintingId));
+        exhibition.setPainting9(getEx(paintingId));
         exhibitionRepository.save(exhibition);
         return flag;
 
