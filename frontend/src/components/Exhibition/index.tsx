@@ -26,7 +26,7 @@ const Exhibition = () => {
     galleryCode: state.user.id,
     userToken: state.user.accessToken,
   }));
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -34,6 +34,7 @@ const Exhibition = () => {
 
   const isClicked = () => {
     goMyGallery(Number(search), galleryCode.userToken);
+    closeModal();
   };
 
   const getIsRoomCode = async (search: string) => {
