@@ -5,8 +5,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.fyum.config.JwtProperties;
 import com.example.fyum.config.KakaoProfile;
 import com.example.fyum.config.OauthToken;
+import com.example.fyum.config.Painting;
 import com.example.fyum.exhibition.entity.Exhibition;
 import com.example.fyum.exhibition.repository.ExhibitionRepository;
+import com.example.fyum.masterpiece.repository.PaintingRepository;
 import com.example.fyum.member.entity.Member;
 import com.example.fyum.member.repository.MemberRepository;
 import com.example.fyum.recommend.entity.Recommend;
@@ -129,6 +131,9 @@ public class MemberService {
             Exhibition exhibition = Exhibition.builder()
                     .member(member)
                     .build();
+            Painting painting = new Painting();
+            painting.setImgSrc("https://raw.githubusercontent.com/okanekudasai/jarArchive/master/backji.png");
+            exhibition.setPainting1(painting);
             exhibitionRepository.save(exhibition);
 
             Recommend recommend = Recommend.builder()
