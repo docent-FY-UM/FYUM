@@ -131,9 +131,7 @@ public class MemberService {
             Exhibition exhibition = Exhibition.builder()
                     .member(member)
                     .build();
-            Painting painting = new Painting();
-            painting.setImgSrc("https://raw.githubusercontent.com/okanekudasai/jarArchive/master/backji.png");
-            exhibition.setPainting1(painting);
+            
             exhibitionRepository.save(exhibition);
 
             Recommend recommend = Recommend.builder()
