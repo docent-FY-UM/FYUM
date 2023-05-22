@@ -78,6 +78,17 @@ export const ArtworkImg = styled.img<artworkImgInfo>`
   }
 `;
 
+export const NextBackground = styled.div`
+  position: absolute;
+  bottom: 90px;
+  right: 7%;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    bottom: 10px;
+  }
+`;
+
 export const NextContainer = styled.div`
   margin-top: 30vh;
   width: 100%;
@@ -92,7 +103,6 @@ export const NextContainer = styled.div`
     margin-top: 50vh;
   }
 `;
-
 export const NextText = styled.p`
   color: ${white};
   font-size: 28px;
