@@ -43,9 +43,12 @@ export const emptyBookmarkApi = async (paintingId: string) => {
 
 // survey 결과 전송
 export const surveySubmitApi = async (choosed: number[]) =>
-  await djangoAxios.post("/recomm/recom/", {
+  await djangoAxios.post("/djangoApi/recom/", {
     choosed: choosed,
   });
+
+// 찜하기 이후에 추천결과 반영하기
+export const addLikedApi = async () => await djangoAxios.get("/djangoApi/test");
 
 // 추천 결과 받아오기
 export const getRecommendApi = async () =>
@@ -131,6 +134,3 @@ export const getArtListApi = async ({
 // 사용자 gallery 검색 api
 export const getGalleryCodeApi = async (galleryCode: string) =>
   await customAxios.get(`members/roomcode/${galleryCode}`);
-
-// 찜하기 이후에 추천결과 반영하기
-export const addLikedApi = async () => await djangoAxios.get("/recomm/test");

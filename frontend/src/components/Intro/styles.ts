@@ -16,7 +16,7 @@ const fadeIn = keyframes`
 `;
 
 export const IntroDiv = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -28,7 +28,6 @@ export const IntroVideo = styled.video`
   height: 100%;
   width: 100%;
   object-fit: fill;
-  position: absolute;
   z-index: -1;
 
   @media (max-width: 768px) {

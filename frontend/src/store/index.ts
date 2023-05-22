@@ -8,6 +8,7 @@ import userReducer from "./userSlice";
 import registerReducer from "./registerSlice";
 import exhibitionListReducer from "./exhibitionListSlice";
 import sideBarReducer from "./sideBarSlice";
+import exhibitionModalReducer from "./exhibitonModalSlice";
 
 // Redux - Persist
 import { persistReducer } from "redux-persist";
@@ -25,13 +26,14 @@ const rootReducers = combineReducers({
   register: registerReducer,
   exhibitionList: exhibitionListReducer,
   sideBar: sideBarReducer,
+  exhibitionModal: exhibitionModalReducer,
 });
 
 // 새로운 persist 선언
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["user","sideBar"],
+  whitelist: ["user", "sideBar", "exhibitionModal"],
 };
 
 // persist + rootReducer

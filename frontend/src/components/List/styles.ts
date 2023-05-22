@@ -32,9 +32,6 @@ export const ListContainer = styled.div<{ add: string }>`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-
-  @media screen and (max-width: 768px) {
-  }
 `;
 
 export const ImageStyle = styled.div`

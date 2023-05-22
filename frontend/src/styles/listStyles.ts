@@ -40,6 +40,7 @@ export const ListTitleContainer = styled.div`
     padding-top: 70px;
   }
 `;
+
 export const ImageContainer = styled.div<{ ref: any }>`
   display: flex;
   height: 65%;
@@ -74,6 +75,7 @@ export const ImageContainer = styled.div<{ ref: any }>`
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    overflow-x: hidden;
     gap: 100px;
     padding-right: 0px;
 
@@ -98,7 +100,6 @@ export const ImageStyle = styled.div`
   height: 330px;
   display: flex;
   cursor: pointer;
-  box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
   position: relative;
 
   &.artlist {
@@ -110,6 +111,7 @@ export const ImageStyle = styled.div`
   }
 
   @media (max-width: 768px) {
+    justify-content: center;
     height: 90%;
     width: 95%;
     margin-top: 20px;
@@ -121,6 +123,7 @@ export const ImgSrcStyle = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: fill;
+  box-shadow: 20px 20px 10px 5px rgba(0, 0, 0, 0.25);
 `;
 
 export const ImgtitleContainer = styled.div`

@@ -27,6 +27,10 @@ export const MyGalleryContainer = styled.div`
   &:hover {
     filter: brightness(100%);
   }
+
+  @media screen and (max-width: 768px) {
+    filter: brightness(100%);
+  }
 `;
 
 export const MyGalleryImgStyle = styled.img.attrs({
@@ -84,6 +88,10 @@ export const OtherGalleryContainer = styled.div`
   &:hover {
     filter: brightness(100%);
   }
+
+  @media screen and (max-width: 768px) {
+    filter: brightness(100%);
+  }
 `;
 
 export const OtherGalleryImgStyle = styled.img.attrs({
@@ -134,7 +142,7 @@ export const SearchIcContainer = styled(SearchIc)`
   bottom: 5.1%;
   left: 33%;
   cursor: pointer;
-  
+
   @media (max-width: 768px) {
     left: 29%;
     bottom: 5.5%;
